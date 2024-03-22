@@ -71,7 +71,7 @@ export const Login = () => {
                             <LockOutlinedIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            e-Health
+                            Sign in
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                             <TextField
@@ -108,7 +108,7 @@ export const Login = () => {
                             </Button>
                             <Grid container>
                                 <Grid item xs>
-                                    <Link href="#" variant="body2">
+                                    <Link href="/home" variant="body2">
                                         Forgot password?
                                     </Link>
                                 </Grid>
