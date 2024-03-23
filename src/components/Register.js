@@ -11,13 +11,27 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import {FormControl, InputLabel, MenuItem, Popover, Popper, Select} from "@mui/material";
+import {
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Popover,
+    Select, styled
+} from "@mui/material";
 import {LocalizationProvider} from '@mui/x-date-pickers';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFnsV3";
 import {enGB} from "date-fns/locale/en-GB";
 import RegisterValidation from './RegisterValidation'
-
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import ErrorIcon from '@mui/icons-material/Error';
+import {red} from "@mui/material/colors";
+import CircularProgress from '@mui/joy/CircularProgress';
 
 function Copyright(props) {
     return (
@@ -34,14 +48,14 @@ function Copyright(props) {
 
 export const Register = () => {
     const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
+    const openPopUp = Boolean(anchorEl);
+    const id = openPopUp ? 'simple-popover' : undefined;
+    const [openProgress, setProgress] = useState(false);
+    const [openFailDialog, setFailDialog] = useState(false);
+    const [openSuccessDialog, setSuccessDialog] = useState(false);
+    const [accountErrors, setAccountErrors] = useState('');
+    const [apiError, setApiError] = useState('');
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const [errors, setErrors] = useState('')
     const [values, setValues] = useState({
         firstName: '',
         lastName: '',
@@ -50,8 +64,26 @@ export const Register = () => {
         birthday: '',
         gender: '',
         password: '',
-        repassword:''
+        repassword: ''
     });
+
+    const errorApiMessages = new Map([
+        ['serviceUnavailable', 'Service is currently unavailable. Please try again later.'],
+        ['accountExists', 'Account already exists. Please login directly.'],
+        ['unknownError', 'An unknown error occurred. Please contact the administrator.']
+    ]);
+
+    const handleFailDialogClose = () => {
+        setFailDialog(false);
+    };
+
+    const handleSuccessDialogClose = () => {
+        setSuccessDialog(false);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     const handleInput = (event) => {
         setValues(prev => ({...prev, [event.target.name]: [event.target.value]}))
@@ -65,33 +97,35 @@ export const Register = () => {
     }
 
     const handleRegister = () => {
-        const { repassword, ...filteredValues } = values;
+        const {repassword, ...filteredValues} = values;
         const stringValues = Object.fromEntries(
             Object.entries(filteredValues).map(([key, value]) => [key, String(value)])
         );
 
-        fetch("https://127.0.0.1:9090/user/add", {
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify(stringValues)
+        setProgress(true);
+        fetch("https://127.0.0.1:9090/user/signup", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(stringValues)
         }).then(() => {
-            console.log("New User Register")
+            setProgress(false);
         }).catch(error => {
+            setProgress(false);
+            setApiError(errorApiMessages.get('serviceUnavailable'));
+            setFailDialog(true);
             console.log(JSON.stringify(stringValues));  // TODO
-            console.error("Failed to register new user:", error);
         });
     }
 
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        let errorMessage;
-        errorMessage = RegisterValidation(values);
+        let errorMessage = RegisterValidation(values);
 
         if (!String(errorMessage).trim()) {
             handleRegister();
         } else {
-            setErrors(RegisterValidation(values))
+            setAccountErrors(errorMessage);
             setAnchorEl(event.currentTarget);
         }
     };
@@ -158,7 +192,7 @@ export const Register = () => {
                         <Grid item xs={12} sm={7}>
                             <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enGB}>
                                 <DatePicker
-                                    label="Birthday"
+                                    label="Birthday *"
                                     renderInput={(params) => <TextField {...params} />}
                                     onChange={(newValue) => handleBirthday(newValue.toDateString())}
                                 />
@@ -166,7 +200,7 @@ export const Register = () => {
                         </Grid>
                         <Grid item xs={12} sm={5}>
                             <FormControl sx={{minWidth: 155}}>
-                                <InputLabel id="gender-select-label">Gender</InputLabel>
+                                <InputLabel id="gender-select-label">Gender *</InputLabel>
                                 <Select
                                     labelId="gender-select-label"
                                     id="gender-select"
@@ -221,7 +255,7 @@ export const Register = () => {
                     </Button>
                     <Popover
                         id={id}
-                        open={open}
+                        open={openPopUp}
                         anchorEl={anchorEl}
                         onClose={handleClose}
                         anchorOrigin={{
@@ -239,9 +273,58 @@ export const Register = () => {
                             fontSize: '14px',
                             color: '#ff0000',
                         }}>
-                            {errors}
+                            {accountErrors}
                         </div>
                     </Popover>
+                    <React.Fragment>
+                        <Dialog
+                            style={{backgroundColor: 'transparent'}}
+                            open={openProgress}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <CircularProgress />
+                        </Dialog>
+                        <Dialog
+                            open={openFailDialog}
+                            onClose={handleFailDialogClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <DialogTitle id="alert-dialog-title">
+                                <ErrorIcon sx={{ color: red[500] }} />
+                                {"   Sign Up Failed!"}
+                            </DialogTitle>
+                            <DialogContent>
+                                <DialogContentText id="alert-dialog-description">
+                                    {apiError}
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleFailDialogClose}>OK</Button>
+                            </DialogActions>
+                        </Dialog>
+                        <Dialog
+                            open={openSuccessDialog}
+                            onClose={handleSuccessDialogClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <DialogTitle id="alert-dialog-title">
+                                <DoneAllIcon color="success" />
+                                {"   Sign Up Successfully!"}
+                            </DialogTitle>
+                            <DialogContent>
+                                <DialogContentText id="alert-dialog-description">
+                                    This account has been successfully registered, you can sign in now!
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button href="/login" >Sign in</Button>
+                                <Button onClick={handleSuccessDialogClose}>OK</Button>
+                            </DialogActions>
+                        </Dialog>
+                    </React.Fragment>
                     <Grid container justifyContent="flex-end">
                         <Grid item>
                             <Link href="/login" variant="body2">

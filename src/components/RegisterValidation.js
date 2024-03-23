@@ -4,13 +4,11 @@ const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9._#]{8,}$/;
 const postcodeRegex = /^[A-Z]{1,2}[0-9][0-9A-Z]? [0-9][A-Z]{2}$/i;
 
 function isValidDate(dateString) {
-    // 验证日期是否合法
     const date = new Date(dateString);
     if (isNaN(date.getTime())) {
         return false;
     }
 
-    // 验证日期是否早于今天
     const today = new Date();
     return date < today;
 }
@@ -59,7 +57,7 @@ function RegisterValidation(values) {
     if (!(String(values.password).trim())) {
         errorMessage += '・Password is required.\n';
     } else if (!passwordRegex.test(String(values.password))) {
-        errorMessage += '・Password must be at least 8 characters long and contain at least one number, one uppercase letter, one lowercase letter, and one of the following special characters: ., _, #.\n';
+        errorMessage += '・Password must be at least 8 characters long and contain at least one number, one uppercase letter, one lowercase letter. You only can use the following special characters . _ #\n';
     }
 
     if (!(String(values.repassword).trim())) {

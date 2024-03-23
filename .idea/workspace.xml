@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d754114-e960-4865-a4a0-716461d952cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/RegisterValidation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegisterValidation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegisterValidation.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +78,8 @@
       <workItem from="1710446258996" duration="12193000" />
       <workItem from="1710509543174" duration="25000" />
       <workItem from="1711023484278" duration="5292000" />
-      <workItem from="1711125435284" duration="22707000" />
+      <workItem from="1711125435284" duration="23210000" />
+      <workItem from="1711215959836" duration="11156000" />
     </task>
     <servers />
   </component>
