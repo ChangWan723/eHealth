@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -20,27 +21,15 @@ import DialogTitle from '@mui/material/DialogTitle';
 import ErrorIcon from '@mui/icons-material/Error';
 import {red} from "@mui/material/colors";
 import CircularProgress from '@mui/joy/CircularProgress';
-
-function Copyright(props) {
-    return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="https://www.southampton.ac.uk/">
-                University of Southampton
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
+import Copyright from "./Copyright";
 
 export const Login = () => {
+    const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState(null);
     const openPopUp = Boolean(anchorEl);
     const id = openPopUp ? 'simple-popover' : undefined;
     const [openProgress, setProgress] = useState(false);
     const [openFailDialog, setFailDialog] = useState(false);
-    const [openSuccessDialog, setSuccessDialog] = useState(false);
     const [accountErrors, setAccountErrors] = useState('');
     const [apiError, setApiError] = useState('');
     const [values, setValues] = useState({
@@ -58,10 +47,6 @@ export const Login = () => {
         setFailDialog(false);
     };
 
-    const handleSuccessDialogClose = () => {
-        setSuccessDialog(false);
-    };
-
     const handleInput = (event) => {
         setValues(prev => ({...prev, [event.target.name]: [event.target.value]}))
     }
@@ -77,18 +62,27 @@ export const Login = () => {
             Object.entries(values).map(([key, value]) => [key, String(value)])
         );
 
-        const params = new URLSearchParams();
-        params.append('email', values.email);
-        params.append('password', values.password);
-        const url = 'https://127.0.0.1:9090/user/signin?' + params.toString();
-
-        fetch(url).then(() => {
+        const url = process.env.REACT_APP_API_PATH + "/users/signin";
+        fetch(url, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(stringValues)
+        }).then(response => {
             setProgress(false);
-        }).catch(error => {
+            if (response.status === 200) {
+                navigate('/home');
+                return;
+            }
+            if (response.status === 401) {
+                setApiError(errorApiMessages.get('infoIncorrect'));
+            } else {
+                setApiError(errorApiMessages.get('unknownError'));
+            }
+            setFailDialog(true);
+        }).catch(() => {
             setProgress(false);
             setApiError(errorApiMessages.get('serviceUnavailable'));
             setFailDialog(true);
-            console.log(JSON.stringify(stringValues));  // TODO
         });
     }
 

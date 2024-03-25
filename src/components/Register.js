@@ -16,7 +16,7 @@ import {
     InputLabel,
     MenuItem,
     Popover,
-    Select, styled
+    Select,
 } from "@mui/material";
 import {LocalizationProvider} from '@mui/x-date-pickers';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
@@ -32,19 +32,7 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
 import ErrorIcon from '@mui/icons-material/Error';
 import {red} from "@mui/material/colors";
 import CircularProgress from '@mui/joy/CircularProgress';
-
-function Copyright(props) {
-    return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="https://www.southampton.ac.uk/">
-                University of Southampton
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
+import Copyright from "./Copyright";
 
 export const Register = () => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -70,7 +58,7 @@ export const Register = () => {
     const errorApiMessages = new Map([
         ['serviceUnavailable', 'Service is currently unavailable. Please try again later.'],
         ['accountExists', 'Account already exists. Please login directly.'],
-        ['unknownError', 'An unknown error occurred. Please contact the administrator.']
+        ['unknownError', 'An unknown error occurred. ']
     ]);
 
     const handleFailDialogClose = () => {
@@ -97,23 +85,34 @@ export const Register = () => {
     }
 
     const handleRegister = () => {
+        setProgress(true);
+
         const {repassword, ...filteredValues} = values;
         const stringValues = Object.fromEntries(
             Object.entries(filteredValues).map(([key, value]) => [key, String(value)])
         );
 
-        setProgress(true);
-        fetch("https://127.0.0.1:9090/user/signup", {
+        const url = process.env.REACT_APP_API_PATH + "/users/signup";
+        fetch(url, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(stringValues)
-        }).then(() => {
+        }).then(response => {
             setProgress(false);
-        }).catch(error => {
+            if (response.status === 201) {
+                setSuccessDialog(true);
+                return;
+            }
+            if (response.status === 409) {
+                setApiError(errorApiMessages.get('accountExists'));
+            } else {
+                setApiError(errorApiMessages.get('unknownError'));
+            }
+            setFailDialog(true);
+        }).catch(() => {
             setProgress(false);
             setApiError(errorApiMessages.get('serviceUnavailable'));
             setFailDialog(true);
-            console.log(JSON.stringify(stringValues));  // TODO
         });
     }
 
