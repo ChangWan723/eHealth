@@ -57,6 +57,7 @@ export const Register = () => {
 
     const errorApiMessages = new Map([
         ['serviceUnavailable', 'Service is currently unavailable. Please try again later.'],
+        ['InputsError', 'Some of the information you input may be out of specification.'],
         ['accountExists', 'Account already exists. Please login directly.'],
         ['unknownError', 'An unknown error occurred. ']
     ]);
@@ -105,6 +106,12 @@ export const Register = () => {
             }
             if (response.status === 409) {
                 setApiError(errorApiMessages.get('accountExists'));
+            } else if (response.status === 400) {
+                response.json().then(data => {
+                    setApiError(errorApiMessages.get('InputsError') + '\n\n' + data.message);
+                }).catch(error => {
+                    setApiError(errorApiMessages.get('InputsError'));
+                });
             } else {
                 setApiError(errorApiMessages.get('unknownError'));
             }
@@ -282,7 +289,7 @@ export const Register = () => {
                             aria-labelledby="alert-dialog-title"
                             aria-describedby="alert-dialog-description"
                         >
-                            <CircularProgress />
+                            <CircularProgress/>
                         </Dialog>
                         <Dialog
                             open={openFailDialog}
@@ -291,11 +298,11 @@ export const Register = () => {
                             aria-describedby="alert-dialog-description"
                         >
                             <DialogTitle id="alert-dialog-title">
-                                <ErrorIcon sx={{ color: red[500] }} />
+                                <ErrorIcon sx={{color: red[500]}}/>
                                 {"   Sign Up Failed!"}
                             </DialogTitle>
                             <DialogContent>
-                                <DialogContentText id="alert-dialog-description">
+                                <DialogContentText id="alert-dialog-description" style={{whiteSpace: 'pre-wrap'}}>
                                     {apiError}
                                 </DialogContentText>
                             </DialogContent>
@@ -310,7 +317,7 @@ export const Register = () => {
                             aria-describedby="alert-dialog-description"
                         >
                             <DialogTitle id="alert-dialog-title">
-                                <DoneAllIcon color="success" />
+                                <DoneAllIcon color="success"/>
                                 {"   Sign Up Successfully!"}
                             </DialogTitle>
                             <DialogContent>
@@ -319,7 +326,7 @@ export const Register = () => {
                                 </DialogContentText>
                             </DialogContent>
                             <DialogActions>
-                                <Button href="/login" >Sign in</Button>
+                                <Button href="/login">Sign in</Button>
                                 <Button onClick={handleSuccessDialogClose}>OK</Button>
                             </DialogActions>
                         </Dialog>

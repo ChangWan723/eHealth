@@ -5,21 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d754114-e960-4865-a4a0-716461d952cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Copyright.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/dashboard/Chart.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/dashboard/Deposits.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/dashboard/Home.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/dashboard/ListItems.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/dashboard/Orders.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/dashboard/Title.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Home.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dashboard/Chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dashboard/Chart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dashboard/Deposits.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dashboard/Deposits.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +81,9 @@
       <workItem from="1711232083610" duration="632000" />
       <workItem from="1711301891891" duration="9000" />
       <workItem from="1711383193720" duration="3078000" />
-      <workItem from="1711386976337" duration="6407000" />
+      <workItem from="1711386976337" duration="7936000" />
+      <workItem from="1711490869235" duration="805000" />
+      <workItem from="1711544682992" duration="14000" />
     </task>
     <servers />
   </component>
