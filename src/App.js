@@ -1,18 +1,20 @@
-import {Login} from "./components/Login";
-import {Routes, Route} from 'react-router-dom'
-import {Register} from "./components/Register";
-import {Home} from "./components/dashboard/Home";
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { useRoutes } from 'react-router-dom';
+import Router from './routes/Router';
 
+import { baselightTheme } from "./theme/DefaultColors";
 
 function App() {
+    const routing = useRoutes(Router);
+    const theme = baselightTheme;
     return (
-        <Routes>
-            <Route path='/' element={<Login/>}></Route>
-            <Route path='/register' element={<Register/>}></Route>
-            <Route path='/login' element={<Login/>}></Route>
-            <Route path='/home' element={<Home/>}></Route>
-        </Routes>
-    )
+        <ThemeProvider theme={theme}>
+
+            <CssBaseline />
+            {routing}
+
+        </ThemeProvider>
+    );
 }
 
-export default App
+export default App;

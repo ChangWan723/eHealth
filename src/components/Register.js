@@ -31,7 +31,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import ErrorIcon from '@mui/icons-material/Error';
 import {red} from "@mui/material/colors";
-import CircularProgress from '@mui/joy/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 import Copyright from "./Copyright";
 
 export const Register = () => {
@@ -283,13 +283,16 @@ export const Register = () => {
                         </div>
                     </Popover>
                     <React.Fragment>
-                        <Dialog
-                            style={{backgroundColor: 'transparent'}}
-                            open={openProgress}
-                            aria-labelledby="alert-dialog-title"
-                            aria-describedby="alert-dialog-description"
-                        >
-                            <CircularProgress/>
+                        <Dialog open={openProgress}>
+                            <div style={{
+                                height: "60px",
+                                width: "60px",
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                            }}>
+                                <CircularProgress/>
+                            </div>
                         </Dialog>
                         <Dialog
                             open={openFailDialog}
@@ -326,7 +329,7 @@ export const Register = () => {
                                 </DialogContentText>
                             </DialogContent>
                             <DialogActions>
-                                <Button href="/login">Sign in</Button>
+                                <Button href="/auth/login">Sign in</Button>
                                 <Button onClick={handleSuccessDialogClose}>OK</Button>
                             </DialogActions>
                         </Dialog>

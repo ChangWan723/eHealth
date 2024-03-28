@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,7 +12,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import {Popover} from "@mui/material";
+import {Fade, Popover, Stack} from "@mui/material";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -20,7 +20,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ErrorIcon from '@mui/icons-material/Error';
 import {red} from "@mui/material/colors";
-import CircularProgress from '@mui/joy/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 import Copyright from "./Copyright";
 
 export const Login = () => {
@@ -70,10 +70,8 @@ export const Login = () => {
         }).then(response => {
             setProgress(false);
             if (response.status === 200) {
-                navigate('/home');
-                return;
-            }
-            if (response.status === 401) {
+                navigate('/dashboard');
+            } else if (response.status === 401) {
                 setApiError(errorApiMessages.get('infoIncorrect'));
             } else {
                 setApiError(errorApiMessages.get('unknownError'));
@@ -204,13 +202,16 @@ export const Login = () => {
                             </div>
                         </Popover>
                         <React.Fragment>
-                            <Dialog
-                                style={{backgroundColor: 'transparent'}}
-                                open={openProgress}
-                                aria-labelledby="alert-dialog-title"
-                                aria-describedby="alert-dialog-description"
-                            >
-                                <CircularProgress/>
+                            <Dialog open={openProgress}>
+                                <div style={{
+                                    height: "60px",
+                                    width: "60px",
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>
+                                    <CircularProgress/>
+                                </div>
                             </Dialog>
                             <Dialog
                                 open={openFailDialog}
