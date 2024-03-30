@@ -16,7 +16,8 @@ const Medical = () => {
     // Assume this state is fetched from an API
     const [patientData, setPatientData] = useState({
         patientId: '123456789',
-        name: 'Jane Doe',
+        firstName: 'Jane',
+        lastName: 'Doe',
         email: 'jane.doe@example.com',
         gender: 'Female',
     });
@@ -97,8 +98,18 @@ const Medical = () => {
                 variant="filled"
             />
             <TextField
-                label="Patient Name"
-                value={patientData.name}
+                label="Patient First Name"
+                value={patientData.firstName}
+                margin="normal"
+                fullWidth
+                InputProps={{
+                    readOnly: true,
+                }}
+                variant="filled"
+            />
+            <TextField
+                label="Patient Last Name"
+                value={patientData.lastName}
                 margin="normal"
                 fullWidth
                 InputProps={{
@@ -154,6 +165,15 @@ const Medical = () => {
                 fullWidth
             />
 
+            <TextField
+                label="Other description"
+                name="otherNotes"
+                value={medicalHistory.otherNotes}
+                onChange={handleInputChange}
+                margin="normal"
+                fullWidth
+            />
+
             {/* Binary questions */}
             <FormGroup>
                 <FormControlLabel
@@ -193,18 +213,6 @@ const Medical = () => {
                     <FormControlLabel value="Every day" control={<Radio />} label="Every day" />
                 </RadioGroup>
             </FormControl>
-
-
-            {/* Other notes */}
-            <TextField
-                label="Other notes"
-                name="otherNotes"
-                value={medicalHistory.otherNotes}
-                onChange={handleInputChange}
-                margin="normal"
-                fullWidth
-                multiline
-            />
 
             <Box sx={{ mt: 2 }}>
                 <Button variant="contained" color="primary" onClick={handleUpdate}>

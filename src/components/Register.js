@@ -49,6 +49,7 @@ export const Register = () => {
         lastName: '',
         email: '',
         postcode: '',
+        address: '',
         birthday: '',
         gender: '',
         password: '',
@@ -192,6 +193,16 @@ export const Register = () => {
                                 id="postcode"
                                 label="Postcode"
                                 name="postcode"
+                                onChange={handleInput}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                fullWidth
+                                id="address"
+                                label="Address"
+                                name="address"
                                 onChange={handleInput}
                             />
                         </Grid>

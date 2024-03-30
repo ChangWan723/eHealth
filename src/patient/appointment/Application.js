@@ -190,7 +190,7 @@ const Application = () => {
                             </Typography>
                         </Paper>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
                         <Button type="submit" variant="contained" color="primary" disabled={!isFormValid()}>
                             Book Appointment
                         </Button>

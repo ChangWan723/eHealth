@@ -46,7 +46,7 @@ const getStatusStyle = (status) => {
     }
 };
 
-const Records = () => {
+const Application = () => {
 
     const appointmentRecords = [
         {
@@ -180,4 +180,4 @@ const Records = () => {
     );
 };
 
-export default Records;
+export default Application;

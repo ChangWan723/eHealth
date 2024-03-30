@@ -34,19 +34,19 @@ const Menuitems = [
     id: uniqueId(),
     title: 'Appointment Records',
     icon: IconTypography,
-    href: '/patient/appointment/records',
+    href: '/patient/records/appointment',
   },
   {
     id: uniqueId(),
-    title: 'Prescription History',
+    title: 'Prescription Records',
     icon: IconLogin,
-    href: '/patient/history/prescription',
+    href: '/patient/records/prescription',
   },
   {
     id: uniqueId(),
-    title: 'Health Test History',
+    title: 'Health Test Records',
     icon: IconUserPlus,
-    href: '/patient/history/healthtest',
+    href: '/patient/records/healthtest',
   },
   {
     navlabel: true,
@@ -56,12 +56,19 @@ const Menuitems = [
     id: uniqueId(),
     title: 'My Medical History',
     icon: IconLogin,
-    href: '/patient/history/medical',
+    href: '/patient/profile/medical',
   },
   {
     id: uniqueId(),
     title: 'My Account',
     icon: IconMoodHappy,
+    href: '/patient/profile/account',
+  },
+  {
+    id: uniqueId(),
+    title: 'Reset Password',
+    icon: IconMoodHappy,
+    href: '/patient/profile/resetpwd',
   },
 ];
 

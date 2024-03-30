@@ -16,6 +16,7 @@ function isValidDate(dateString) {
 function RegisterValidation(values) {
     let errorMessage = '';
     const nameRegex = /^.{1,50}$/;
+    const addressRegex = /^.{1,300}$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9._#]{8,}$/;
     const postcodeRegex = /^[A-Z]{1,2}[0-9][0-9A-Z]? [0-9][A-Z]{2}$/i;
@@ -44,6 +45,12 @@ function RegisterValidation(values) {
         errorMessage += '・Invalid postcode format.\n';
     }
 
+    if (!(String(values.address).trim())) {
+        errorMessage += '・Address is required.\n';
+    } else if (!addressRegex.test(String(values.postcode))) {
+        errorMessage += '・Address must not exceed 300 characters.\n';
+    }
+
     if (!(String(values.birthday).trim())) {
         errorMessage += '・Birthday is required.\n';
     } else if (!isValidDate(String(values.birthday))) {
@@ -57,7 +64,7 @@ function RegisterValidation(values) {
 /*    if (!(String(values.password).trim())) {
         errorMessage += '・Password is required.\n';
     } else if (!passwordRegex.test(String(values.password))) {
-        errorMessage += '・Password must be at least 8 characters long and contain at least one number, one uppercase letter, one lowercase letter. You only can use the following special characters . _ #\n';
+        errorMessage += '・Password must contain at least 8 characters, including 1 uppercase letter, 1 lowercase letter, and 1 number. You only can use the following special characters . _ #\n';
     }*/
 
     if (!(String(values.repassword).trim())) {

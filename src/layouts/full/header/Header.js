@@ -56,16 +56,10 @@ const Header = (props) => {
             }),
           }}
         >
-          <Badge variant="dot" color="primary">
-            <IconBellRinging size="21" stroke="1.5" />
-          </Badge>
 
         </IconButton>
         <Box flexGrow={1} />
         <Stack spacing={1} direction="row" alignItems="center">
-          <Button variant="contained" color="primary"  target="_blank" href="https://adminmart.com/product/modernize-react-mui-dashboard-template/">
-            Upgrade to Pro
-          </Button>
           <Profile />
         </Stack>
       </ToolbarStyled>
