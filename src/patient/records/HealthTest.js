@@ -41,7 +41,7 @@ const HealthTest = () => {
             id: 'HT001',
             appointmentId: 'AP001',
             testContent: 'Blood Work',
-            description: 'Complete blood count',
+            time: '2024-04-11 11:00',
             status: 'Pending',
             result: 'N/A',
         },
@@ -49,7 +49,7 @@ const HealthTest = () => {
             id: 'HT002',
             appointmentId: 'AP002',
             testContent: 'X-ray',
-            description: 'Chest X-ray',
+            time: '2024-04-11 11:00',
             status: 'Completed',
             result: 'No issues found',
         },
@@ -57,7 +57,7 @@ const HealthTest = () => {
             id: 'HT003',
             appointmentId: 'AP003',
             testContent: 'MRI',
-            description: 'Brain MRI',
+            time: '2024-04-11 11:00',
             status: 'Not Attended',
             result: 'N/A',
         },
@@ -65,7 +65,7 @@ const HealthTest = () => {
             id: 'HT004',
             appointmentId: 'AP002',
             testContent: 'X-ray',
-            description: 'Chest X-ray',
+            time: '2024-04-11 11:00',
             status: 'Completed',
             result: 'No issues found',
         },
@@ -73,7 +73,7 @@ const HealthTest = () => {
             id: 'HT005',
             appointmentId: 'AP002',
             testContent: 'X-ray',
-            description: 'Chest X-ray',
+            time: '2024-04-11 11:00',
             status: 'Completed',
             result: 'No issues found',
         },
@@ -81,7 +81,7 @@ const HealthTest = () => {
             id: 'HT006',
             appointmentId: 'AP002',
             testContent: 'X-ray',
-            description: 'Chest X-ray',
+            time: '2024-04-11 11:00',
             status: 'Completed',
             result: 'No issues found',
         },
@@ -108,14 +108,14 @@ const HealthTest = () => {
             <Typography variant="h4" gutterBottom>
                 Health Test Records
             </Typography>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} sx={{marginTop: 2}}>
                 <Table aria-label="health test records">
                     <TableHead>
                         <TableRow>
                             <HeaderCell>Health Test ID</HeaderCell>
-                            <HeaderCell>Related Appointment ID</HeaderCell>
+                            <HeaderCell>Appointment ID</HeaderCell>
                             <HeaderCell>Test Content</HeaderCell>
-                            <HeaderCell>Description</HeaderCell>
+                            <HeaderCell>Time</HeaderCell>
                             <HeaderCell>Status</HeaderCell>
                             <HeaderCell>Result</HeaderCell>
                         </TableRow>
@@ -126,7 +126,7 @@ const HealthTest = () => {
                                 <TableCell>{test.id}</TableCell>
                                 <TableCell>{test.appointmentId}</TableCell>
                                 <TableCell>{test.testContent}</TableCell>
-                                <TableCell>{test.description}</TableCell>
+                                <TableCell>{test.time}</TableCell>
                                 <TableCell align="left">
                                     <Box sx={getStatusStyle(test.status)}>
                                         {test.status}

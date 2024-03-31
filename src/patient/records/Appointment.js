@@ -128,7 +128,7 @@ const Appointment = () => {
 
     return (
         <Container maxWidth="md" sx={{mt: 4}}>
-            <Box sx={{padding: 3}}>
+            <Box>
                 <Typography variant="h4" gutterBottom>
                     Appointment Records
                 </Typography>
@@ -139,8 +139,7 @@ const Appointment = () => {
                         <TableRow>
                             <HeaderCell>Appointment ID</HeaderCell>
                             <HeaderCell align="left">Department</HeaderCell>
-                            <HeaderCell align="left">Doctor ID</HeaderCell>
-                            <HeaderCell align="left">Doctor Name</HeaderCell>
+                            <HeaderCell align="left">Doctor</HeaderCell>
                             <HeaderCell align="left">Appointment Time</HeaderCell>
                             <HeaderCell align="left">Description</HeaderCell>
                             <HeaderCell align="left">Status</HeaderCell>
@@ -150,10 +149,30 @@ const Appointment = () => {
                     <TableBody>
                         {filteredRecords.map((row) => (
                             <TableRow key={row.id} sx={{'&:last-child td, &:last-child th': {border: 0}}}>
-                                <TableCell component="th" scope="row">{row.id}</TableCell>
+                                <TableCell sx={{ width: '60px' }}>{row.id}</TableCell>
                                 <TableCell align="left">{row.department}</TableCell>
-                                <TableCell align="left">{row.doctorId}</TableCell>
-                                <TableCell align="left">{row.doctorName}</TableCell>
+                                <TableCell align="left" sx={{ width: '120px' }}>
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                        }}
+                                    >
+                                        <Box>
+                                            <Typography variant="subtitle2" fontWeight={600}>
+                                                {row.doctorName}
+                                            </Typography>
+                                            <Typography
+                                                color="textSecondary"
+                                                sx={{
+                                                    fontSize: "13px",
+                                                }}
+                                            >
+                                                {row.doctorId}
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+                                </TableCell>
                                 <TableCell align="left">{row.appointmentTime}</TableCell>
                                 <TableCell align="left">{row.description}</TableCell>
                                 <TableCell align="left">

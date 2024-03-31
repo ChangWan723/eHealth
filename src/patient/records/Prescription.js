@@ -32,6 +32,7 @@ const Prescription = () => {
             doctorId: 'D1001',
             doctorName: 'Dr. Smith',
             prescription: 'Paracetamol, Cough Syrup',
+            time: '2024-04-11 11:00',
         },
         {
             id: 'RX124',
@@ -40,6 +41,7 @@ const Prescription = () => {
             doctorId: 'D1001',
             doctorName: 'Dr. Smith',
             prescription: 'Paracetamol, Cough Syrup',
+            time: '2024-04-11 11:00',
         },
         {
             id: 'RX125',
@@ -48,6 +50,7 @@ const Prescription = () => {
             doctorId: 'D1001',
             doctorName: 'Dr. Smith',
             prescription: 'Paracetamol, Cough Syrup',
+            time: '2024-04-11 11:00',
         },
         {
             id: 'RX126',
@@ -56,6 +59,7 @@ const Prescription = () => {
             doctorId: 'D1001',
             doctorName: 'Dr. Smith',
             prescription: 'Paracetamol, Cough Syrup',
+            time: '2024-04-11 11:00',
         },
         {
             id: 'RX127',
@@ -64,6 +68,7 @@ const Prescription = () => {
             doctorId: 'D1001',
             doctorName: 'Dr. Smith',
             prescription: 'Paracetamol, Cough Syrup',
+            time: '2024-04-11 11:00',
         },
         {
             id: 'RX128',
@@ -72,6 +77,7 @@ const Prescription = () => {
             doctorId: 'D1001',
             doctorName: 'Dr. Smith',
             prescription: 'Paracetamol, Cough Syrup',
+            time: '2024-04-11 11:00',
         },
         // ... more records
     ];
@@ -93,20 +99,20 @@ const Prescription = () => {
 
     return (
         <Container maxWidth="md" sx={{mt: 4}}>
-            <Box sx={{mb: 2}}>
+            <Box>
                 <Typography variant="h4" gutterBottom>
-                    Prescription History
+                    Prescription Records
                 </Typography>
             </Box>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} sx={{marginTop: 2}}>
                 <Table aria-label="prescription history">
                     <TableHead>
                         <TableRow>
                             <HeaderCell>Prescription ID</HeaderCell>
-                            <HeaderCell>Related Appointment ID</HeaderCell>
+                            <HeaderCell>Appointment ID</HeaderCell>
+                            <HeaderCell>Doctor</HeaderCell>
+                            <HeaderCell>Time</HeaderCell>
                             <HeaderCell>Symptoms Description</HeaderCell>
-                            <HeaderCell>Prescribing Doctor ID</HeaderCell>
-                            <HeaderCell>Prescribing Doctor Name</HeaderCell>
                             <HeaderCell>Prescription Details</HeaderCell>
                         </TableRow>
                     </TableHead>
@@ -114,10 +120,31 @@ const Prescription = () => {
                         {currentRows.map((prescription) => (
                             <TableRow key={prescription.id}>
                                 <TableCell>{prescription.id}</TableCell>
-                                <TableCell>{prescription.appointmentId}</TableCell>
+                                <TableCell sx={{width: '60px'}}>{prescription.appointmentId}</TableCell>
+                                <TableCell align="left" sx={{width: '120px'}}>
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                        }}
+                                    >
+                                        <Box>
+                                            <Typography variant="subtitle2" fontWeight={600}>
+                                                {prescription.doctorName}
+                                            </Typography>
+                                            <Typography
+                                                color="textSecondary"
+                                                sx={{
+                                                    fontSize: "13px",
+                                                }}
+                                            >
+                                                {prescription.doctorId}
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+                                </TableCell>
+                                <TableCell>{prescription.time}</TableCell>
                                 <TableCell>{prescription.symptoms}</TableCell>
-                                <TableCell>{prescription.doctorId}</TableCell>
-                                <TableCell>{prescription.doctorName}</TableCell>
                                 <TableCell>{prescription.prescription}</TableCell>
                             </TableRow>
                         ))}

@@ -11,7 +11,7 @@ import {
     ListItemText
 } from '@mui/material';
 
-import {IconListCheck, IconMail, IconUser} from '@tabler/icons-react';
+import {IconClipboardHeart, IconListCheck, IconMail, IconReport, IconUser} from '@tabler/icons-react';
 
 import ProfileImg from 'src/assets/images/profile/user-1.jpg';
 
@@ -68,13 +68,13 @@ const Profile = () => {
 
                 <MenuItem button component={Link} to="/patient/records/appointment">
                     <ListItemIcon>
-                        <IconListCheck width={20}/>
+                        <IconReport width={20}/>
                     </ListItemIcon>
                     <ListItemText>My Appointments</ListItemText>
                 </MenuItem>
                 <MenuItem button component={Link} to="/patient/profile/medical">
                     <ListItemIcon>
-                        <IconUser width={20}/>
+                        <IconClipboardHeart width={20}/>
                     </ListItemIcon>
                     <ListItemText>My Medical History</ListItemText>
                 </MenuItem>

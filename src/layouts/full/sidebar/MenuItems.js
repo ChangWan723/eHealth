@@ -1,5 +1,13 @@
 import {
-  IconAperture, IconCopy, IconLayoutDashboard, IconLogin, IconMoodHappy, IconTypography, IconUserPlus
+  IconAperture,
+  IconCalendarClock, IconClipboardHeart,
+  IconCopy, IconFileInfo, IconFirstAidKit,
+  IconLayoutDashboard, IconLockOpen,
+  IconLogin, IconMail,
+  IconMoodHappy,
+  IconReport, IconStethoscope,
+  IconTypography,
+  IconUserPlus
 } from '@tabler/icons-react';
 
 import { uniqueId } from 'lodash';
@@ -23,7 +31,7 @@ const Menuitems = [
   {
     id: uniqueId(),
     title: 'Book an Appointment',
-    icon: IconTypography,
+    icon: IconCalendarClock,
     href: '/patient/appointment/application',
   },
   {
@@ -33,19 +41,19 @@ const Menuitems = [
   {
     id: uniqueId(),
     title: 'Appointment Records',
-    icon: IconTypography,
+    icon: IconReport,
     href: '/patient/records/appointment',
   },
   {
     id: uniqueId(),
     title: 'Prescription Records',
-    icon: IconLogin,
+    icon: IconFirstAidKit,
     href: '/patient/records/prescription',
   },
   {
     id: uniqueId(),
     title: 'Health Test Records',
-    icon: IconUserPlus,
+    icon: IconStethoscope,
     href: '/patient/records/healthtest',
   },
   {
@@ -55,19 +63,19 @@ const Menuitems = [
   {
     id: uniqueId(),
     title: 'My Medical History',
-    icon: IconLogin,
+    icon: IconClipboardHeart,
     href: '/patient/profile/medical',
   },
   {
     id: uniqueId(),
     title: 'My Account',
-    icon: IconMoodHappy,
+    icon: IconMail,
     href: '/patient/profile/account',
   },
   {
     id: uniqueId(),
     title: 'Reset Password',
-    icon: IconMoodHappy,
+    icon: IconLockOpen,
     href: '/patient/profile/resetpwd',
   },
 ];

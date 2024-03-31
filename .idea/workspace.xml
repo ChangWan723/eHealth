@@ -5,16 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d754114-e960-4865-a4a0-716461d952cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/patient/dashboard/components/RecentHealthTest.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layouts/full/header/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/full/header/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/full/header/data.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/patient/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/dashboard/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/patient/dashboard/components/DataOverview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/dashboard/components/DataOverview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/patient/dashboard/components/ProductPerformance.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/dashboard/components/RecentAppointment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/patient/dashboard/components/RecentTransactions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/patient/records/Application.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/records/Appointment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/full/sidebar/MenuItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/full/sidebar/MenuItems.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/patient/records/Appointment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/records/Appointment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/patient/records/HealthTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/records/HealthTest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/patient/records/Prescription.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/records/Prescription.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +101,7 @@
       <workItem from="1711726021339" duration="18392000" />
       <workItem from="1711827335912" duration="10088000" />
       <workItem from="1711839619764" duration="219000" />
-      <workItem from="1711906597420" duration="5046000" />
+      <workItem from="1711906597420" duration="6652000" />
     </task>
     <servers />
   </component>
