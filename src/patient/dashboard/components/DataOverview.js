@@ -79,11 +79,9 @@ const DataOverview = () => {
         },
     };
 
-    // Use state to dynamically change the series data based on the selected year
     const [seriescolumnchart, setSeriesColumnChart] = useState([]);
 
     useEffect(() => {
-        // Update series data when the selected year changes
         const newData = dataByYear[year];
         setSeriesColumnChart([
             {

@@ -6,102 +6,113 @@ import {
     TableCell,
     TableHead,
     TableRow,
-    Chip
+    Chip, Link
 } from '@mui/material';
 import DashboardCard from 'src/components/shared/DashboardCard';
 
-const products = [
+const appointmentRecords = [
     {
-        id: "1",
-        name: "Sunil Joshi",
-        post: "Web Designer",
-        pname: "Elite Admin",
-        priority: "Low",
-        pbg: "primary.main",
-        budget: "3.9",
+        id: 'A1',
+        department: 'General',
+        doctorId: 'D1',
+        doctorName: 'Dr. Smith',
+        appointmentTime: '2024-04-10 14:00',
+        description: 'Routine check-up',
+        status: 'Pending',
+        result: 'N/A'
     },
     {
-        id: "2",
-        name: "Andrew McDownland",
-        post: "Project Manager",
-        pname: "Real Homes WP Theme",
-        priority: "Medium",
-        pbg: "secondary.main",
-        budget: "24.5",
+        id: 'A2',
+        department: 'Pediatrics',
+        doctorId: 'D2',
+        doctorName: 'Dr. Johnson',
+        appointmentTime: '2024-04-11 11:00',
+        description: 'Regular vaccination',
+        status: 'Completed',
+        result: 'Vaccination completed successfully'
     },
     {
-        id: "3",
-        name: "Christopher Jamil",
-        post: "Project Manager",
-        pname: "MedicalPro WP Theme",
-        priority: "High",
-        pbg: "error.main",
-        budget: "12.8",
+        id: 'A3',
+        department: 'Obstetrics and Gynecology',
+        doctorId: 'D3',
+        doctorName: 'Dr. Williams',
+        appointmentTime: '2024-04-15 09:30',
+        description: 'Consultation',
+        status: 'Rejected',
+        result: 'Appointment rescheduled'
     },
     {
-        id: "4",
-        name: "Nirav Joshi",
-        post: "Frontend Engineer",
-        pname: "Hosting Press HTML",
-        priority: "Critical",
-        pbg: "success.main",
-        budget: "2.4",
+        id: 'A4',
+        department: 'Pediatrics',
+        doctorId: 'D2',
+        doctorName: 'Dr. Johnson',
+        appointmentTime: '2024-04-11 11:00',
+        description: 'Regular vaccination',
+        status: 'Completed',
+        result: 'Vaccination completed successfully'
     },
 ];
 
+const getStatusStyle = (status) => {
+    switch (status) {
+        case 'Pending':
+            return { backgroundColor: '#ffeb3b', borderRadius: '4px', padding: '3px 10px', display: 'inline-block' };
+        case 'Completed':
+            return { backgroundColor: '#4caf50', color: '#fff', borderRadius: '4px', padding: '3px 10px', display: 'inline-block' };
+        case 'Rejected':
+            return { backgroundColor: '#f44336', color: '#fff', borderRadius: '4px', padding: '3px 10px', display: 'inline-block' };
+        default:
+            return {};
+    }
+};
 
-const ProductPerformance = () => {
+const RecentAppointment = () => {
     return (
 
-        <DashboardCard title="Product Performance">
-            <Box sx={{ overflow: 'auto', width: { xs: '280px', sm: 'auto' } }}>
+        <DashboardCard title="Recent Appointment">
+            <Box sx={{ overflow: 'auto', width: { sm: 'auto' } }}>
                 <Table
                     aria-label="simple table"
                     sx={{
                         whiteSpace: "nowrap",
-                        mt: 2
+                        mt: 0
                     }}
                 >
                     <TableHead>
                         <TableRow>
                             <TableCell>
                                 <Typography variant="subtitle2" fontWeight={600}>
-                                    Id
+                                    Appointment ID
                                 </Typography>
                             </TableCell>
                             <TableCell>
                                 <Typography variant="subtitle2" fontWeight={600}>
-                                    Assigned
+                                    Doctor
                                 </Typography>
                             </TableCell>
                             <TableCell>
                                 <Typography variant="subtitle2" fontWeight={600}>
-                                    Name
+                                    Status
                                 </Typography>
                             </TableCell>
                             <TableCell>
                                 <Typography variant="subtitle2" fontWeight={600}>
-                                    Priority
-                                </Typography>
-                            </TableCell>
-                            <TableCell align="right">
-                                <Typography variant="subtitle2" fontWeight={600}>
-                                    Budget
+                                    Description
                                 </Typography>
                             </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {products.map((product) => (
-                            <TableRow key={product.name}>
+                        {appointmentRecords.map((record) => (
+                            <TableRow key={record.id}>
                                 <TableCell>
                                     <Typography
                                         sx={{
                                             fontSize: "15px",
-                                            fontWeight: "500",
+                                            fontWeight: "200",
                                         }}
                                     >
-                                        {product.id}
+                                        {record.id}
                                     </Typography>
                                 </TableCell>
                                 <TableCell>
@@ -113,7 +124,7 @@ const ProductPerformance = () => {
                                     >
                                         <Box>
                                             <Typography variant="subtitle2" fontWeight={600}>
-                                                {product.name}
+                                                {record.doctorName}
                                             </Typography>
                                             <Typography
                                                 color="textSecondary"
@@ -121,37 +132,31 @@ const ProductPerformance = () => {
                                                     fontSize: "13px",
                                                 }}
                                             >
-                                                {product.post}
+                                                {record.doctorId}
                                             </Typography>
                                         </Box>
                                     </Box>
                                 </TableCell>
                                 <TableCell>
-                                    <Typography color="textSecondary" variant="subtitle2" fontWeight={400}>
-                                        {product.pname}
-                                    </Typography>
+                                    <Box sx={getStatusStyle(record.status)}>
+                                        {record.status}
+                                    </Box>
                                 </TableCell>
                                 <TableCell>
-                                    <Chip
-                                        sx={{
-                                            px: "4px",
-                                            backgroundColor: product.pbg,
-                                            color: "#fff",
-                                        }}
-                                        size="small"
-                                        label={product.priority}
-                                    ></Chip>
-                                </TableCell>
-                                <TableCell align="right">
-                                    <Typography variant="h6">${product.budget}k</Typography>
+                                    <Typography color="textSecondary" variant="subtitle2" fontWeight={400}>
+                                        {record.description}
+                                    </Typography>
                                 </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </Box>
+            <Link color="primary" href="/patient/records/appointment">
+                See More Appointment
+            </Link>
         </DashboardCard>
     );
 };
 
-export default ProductPerformance;
+export default RecentAppointment;
