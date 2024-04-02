@@ -14,8 +14,8 @@ const appointmentRecords = [
     {
         id: 'A1',
         department: 'General',
-        doctorId: 'D1',
-        doctorName: 'Dr. Smith',
+        patientId: 'D1',
+        patientName: 'Smith',
         appointmentTime: '2024-04-10 14:00',
         description: 'Routine check-up',
         status: 'Pending',
@@ -24,8 +24,8 @@ const appointmentRecords = [
     {
         id: 'A2',
         department: 'Pediatrics',
-        doctorId: 'D2',
-        doctorName: 'Dr. Johnson',
+        patientId: 'D2',
+        patientName: 'Johnson',
         appointmentTime: '2024-04-11 11:00',
         description: 'Regular vaccination',
         status: 'Completed',
@@ -34,8 +34,8 @@ const appointmentRecords = [
     {
         id: 'A3',
         department: 'Obstetrics and Gynecology',
-        doctorId: 'D3',
-        doctorName: 'Dr. Williams',
+        patientId: 'D3',
+        patientName: 'Williams',
         appointmentTime: '2024-04-15 09:30',
         description: 'Consultation',
         status: 'Rejected',
@@ -44,8 +44,8 @@ const appointmentRecords = [
     {
         id: 'A4',
         department: 'Pediatrics',
-        doctorId: 'D2',
-        doctorName: 'Dr. Johnson',
+        patientId: 'D2',
+        patientName: 'Johnson',
         appointmentTime: '2024-04-11 11:00',
         description: 'Regular vaccination',
         status: 'Completed',
@@ -97,7 +97,7 @@ const RecentAppointment = () => {
                             </TableCell>
                             <TableCell>
                                 <Typography variant="subtitle2" fontWeight={600}>
-                                    Doctor
+                                    Patient
                                 </Typography>
                             </TableCell>
                             <TableCell>
@@ -130,7 +130,7 @@ const RecentAppointment = () => {
                                     >
                                         <Box>
                                             <Typography variant="subtitle2" fontWeight={600}>
-                                                {record.doctorName}
+                                                {record.patientName}
                                             </Typography>
                                             <Typography
                                                 color="textSecondary"
@@ -138,7 +138,7 @@ const RecentAppointment = () => {
                                                     fontSize: "13px",
                                                 }}
                                             >
-                                                {record.doctorId}
+                                                {record.patientId}
                                             </Typography>
                                         </Box>
                                     </Box>

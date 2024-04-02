@@ -39,8 +39,8 @@ const HealthTest = () => {
     const healthTests = [
         {
             id: 'HT001',
-            doctorId: 'D2',
-            doctorName: 'Dr. Johnson',
+            patientId: 'D2',
+            patientName: 'Dr. Johnson',
             appointmentId: 'AP001',
             testContent: 'Blood Work',
             time: '2024-04-11 11:00',
@@ -49,8 +49,8 @@ const HealthTest = () => {
         },
         {
             id: 'HT002',
-            doctorId: 'D2',
-            doctorName: 'Dr. Johnson',
+            patientId: 'D2',
+            patientName: 'Dr. Johnson',
             appointmentId: 'AP002',
             testContent: 'X-ray',
             time: '2024-04-11 11:00',
@@ -59,8 +59,8 @@ const HealthTest = () => {
         },
         {
             id: 'HT003',
-            doctorId: 'D2',
-            doctorName: 'Dr. Johnson',
+            patientId: 'D2',
+            patientName: 'Dr. Johnson',
             appointmentId: 'AP003',
             testContent: 'MRI',
             time: '2024-04-11 11:00',
@@ -69,8 +69,8 @@ const HealthTest = () => {
         },
         {
             id: 'HT004',
-            doctorId: 'D2',
-            doctorName: 'Dr. Johnson',
+            patientId: 'D2',
+            patientName: 'Dr. Johnson',
             appointmentId: 'AP002',
             testContent: 'X-ray',
             time: '2024-04-11 11:00',
@@ -79,8 +79,8 @@ const HealthTest = () => {
         },
         {
             id: 'HT005',
-            doctorId: 'D2',
-            doctorName: 'Dr. Johnson',
+            patientId: 'D2',
+            patientName: 'Dr. Johnson',
             appointmentId: 'AP002',
             testContent: 'X-ray',
             time: '2024-04-11 11:00',
@@ -89,8 +89,8 @@ const HealthTest = () => {
         },
         {
             id: 'HT006',
-            doctorId: 'D2',
-            doctorName: 'Dr. Johnson',
+            patientId: 'D2',
+            patientName: 'Dr. Johnson',
             appointmentId: 'AP002',
             testContent: 'X-ray',
             time: '2024-04-11 11:00',
@@ -126,7 +126,7 @@ const HealthTest = () => {
                         <TableRow>
                             <HeaderCell>Health Test ID</HeaderCell>
                             <HeaderCell>Appointment ID</HeaderCell>
-                            <HeaderCell>Doctor</HeaderCell>
+                            <HeaderCell>patient</HeaderCell>
                             <HeaderCell>Test Content</HeaderCell>
                             <HeaderCell>Time</HeaderCell>
                             <HeaderCell>Status</HeaderCell>
@@ -147,7 +147,7 @@ const HealthTest = () => {
                                     >
                                         <Box>
                                             <Typography variant="subtitle2" fontWeight={600}>
-                                                {test.doctorName}
+                                                {test.patientName}
                                             </Typography>
                                             <Typography
                                                 color="textSecondary"
@@ -155,7 +155,7 @@ const HealthTest = () => {
                                                     fontSize: "13px",
                                                 }}
                                             >
-                                                {test.doctorId}
+                                                {test.patientId}
                                             </Typography>
                                         </Box>
                                     </Box>
