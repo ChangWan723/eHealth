@@ -53,7 +53,7 @@ const Appointment = () => {
             id: 'A1',
             department: 'General',
             patientId: 'D1',
-            patientName: 'Dr. Smith',
+            patientName: 'Smith',
             appointmentTime: '2024-04-10 14:00',
             description: 'Routine check-up',
             status: 'Pending',
@@ -63,7 +63,7 @@ const Appointment = () => {
             id: 'A2',
             department: 'Pediatrics',
             patientId: 'D2',
-            patientName: 'Dr. Johnson',
+            patientName: 'Johnson',
             appointmentTime: '2024-04-11 11:00',
             description: 'Regular vaccination',
             status: 'Completed',
@@ -73,7 +73,7 @@ const Appointment = () => {
             id: 'A3',
             department: 'Obstetrics and Gynecology',
             patientId: 'D3',
-            patientName: 'Dr. Williams',
+            patientName: 'Williams',
             appointmentTime: '2024-04-15 09:30',
             description: 'Consultation',
             status: 'Rejected',
@@ -83,7 +83,7 @@ const Appointment = () => {
             id: 'A4',
             department: 'Pediatrics',
             patientId: 'D2',
-            patientName: 'Dr. Johnson',
+            patientName: 'Johnson',
             appointmentTime: '2024-04-11 11:00',
             description: 'Regular vaccination',
             status: 'Completed',
@@ -93,7 +93,7 @@ const Appointment = () => {
             id: 'A5',
             department: 'Pediatrics',
             patientId: 'D2',
-            patientName: 'Dr. Johnson',
+            patientName: 'Johnson',
             appointmentTime: '2024-04-11 11:00',
             description: 'Regular vaccination',
             status: 'Completed',
@@ -103,7 +103,7 @@ const Appointment = () => {
             id: 'A6',
             department: 'Pediatrics',
             patientId: 'D2',
-            patientName: 'Dr. Johnson',
+            patientName: 'Johnson',
             appointmentTime: '2024-04-11 11:00',
             description: 'Regular vaccination',
             status: 'Completed',
@@ -139,7 +139,7 @@ const Appointment = () => {
                         <TableRow>
                             <HeaderCell>Appointment ID</HeaderCell>
                             <HeaderCell align="left">Department</HeaderCell>
-                            <HeaderCell align="left">patient</HeaderCell>
+                            <HeaderCell align="left">Patient</HeaderCell>
                             <HeaderCell align="left">Appointment Time</HeaderCell>
                             <HeaderCell align="left">Description</HeaderCell>
                             <HeaderCell align="left">Status</HeaderCell>

@@ -17,11 +17,13 @@ const Account = Loadable(lazy(() => import('./patient/profile/Account')))
 const ResetPwd = Loadable(lazy(() => import('./patient/profile/ResetPwd')))
 
 const DocDashboard = Loadable(lazy(() => import('./doctor/dashboard/Dashboard')))
-const DocAppointments = Loadable(lazy(() => import('./patient/records/Appointment')))
-const DocHealthTest = Loadable(lazy(() => import('./patient/records/HealthTest')))
-const DocPrescription = Loadable(lazy(() => import('./patient/records/Prescription')))
-const DocAccount = Loadable(lazy(() => import('./patient/profile/Account')))
-const DocResetPwd = Loadable(lazy(() => import('./patient/profile/ResetPwd')))
+const PendingAppointment = Loadable(lazy(() => import('./doctor/pending/PendingAppointment')))
+
+const DocAppointments = Loadable(lazy(() => import('./doctor/records/Appointment')))
+const DocHealthTest = Loadable(lazy(() => import('./doctor/records/HealthTest')))
+const DocPrescription = Loadable(lazy(() => import('./doctor/records/Prescription')))
+const DocAccount = Loadable(lazy(() => import('./doctor/profile/Account')))
+const DocResetPwd = Loadable(lazy(() => import('./doctor/profile/ResetPwd')))
 
 const Router = [
   {
@@ -54,6 +56,7 @@ const Router = [
     element: <FullLayout />,
     children: [
       { path: '/doctor', exact: true, element: <DocDashboard /> },
+      { path: '/doctor/pending/appointment', exact: true, element: <PendingAppointment /> },
       { path: '/doctor/records/appointment', exact: true, element: <DocAppointments /> },
       { path: '/doctor/records/healthtest', exact: true, element: <DocHealthTest /> },
       { path: '/doctor/records/prescription', exact: true, element: <DocPrescription /> },

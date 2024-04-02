@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {
     Avatar,
@@ -13,7 +13,10 @@ import {
 
 import {IconClipboardHeart, IconListCheck, IconMail, IconReport, IconUser} from '@tabler/icons-react';
 
-import ProfileImg from 'src/assets/images/profile/user-1.jpg';
+import PatientImg from 'src/assets/images/profile/patient.png';
+import DoctorImg from 'src/assets/images/profile/doctor.png';
+import AdminImg from 'src/assets/images/profile/admin.png';
+
 
 const Profile = () => {
     const [anchorEl2, setAnchorEl2] = useState(null);
@@ -23,6 +26,24 @@ const Profile = () => {
     const handleClose2 = () => {
         setAnchorEl2(null);
     };
+
+    const [userType, setUserType] = useState('');
+
+    useEffect(() => {
+        // 从 localStorage 中获取 userType
+        const userTypeFromStorage = localStorage.getItem('userType');
+        setUserType(userTypeFromStorage);
+    }, []);
+
+    let img = PatientImg;
+
+    if (userType === 'doctor') {
+        img = DoctorImg;
+    } else if (userType === 'patient') {
+        img = PatientImg;
+    } else if (userType === 'doctor') {
+        img = AdminImg;
+    }
 
     return (
         <Box>
@@ -40,8 +61,8 @@ const Profile = () => {
                 onClick={handleClick2}
             >
                 <Avatar
-                    src={ProfileImg}
-                    alt={ProfileImg}
+                    src={img}
+                    alt={img}
                     sx={{
                         width: 35,
                         height: 35,

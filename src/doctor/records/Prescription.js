@@ -30,7 +30,7 @@ const Prescription = () => {
             symptoms: 'Cough and fever',
             appointmentId: '123456',
             patientId: 'D1001',
-            patientName: 'Dr. Smith',
+            patientName: 'Smith',
             prescription: 'Paracetamol, Cough Syrup',
             time: '2024-04-11 11:00',
         },
@@ -39,7 +39,7 @@ const Prescription = () => {
             symptoms: 'Cough and fever',
             appointmentId: '123456',
             patientId: 'D1001',
-            patientName: 'Dr. Smith',
+            patientName: 'Smith',
             prescription: 'Paracetamol, Cough Syrup',
             time: '2024-04-11 11:00',
         },
@@ -48,7 +48,7 @@ const Prescription = () => {
             symptoms: 'Cough and fever',
             appointmentId: '123456',
             patientId: 'D1001',
-            patientName: 'Dr. Smith',
+            patientName: 'Smith',
             prescription: 'Paracetamol, Cough Syrup',
             time: '2024-04-11 11:00',
         },
@@ -57,7 +57,7 @@ const Prescription = () => {
             symptoms: 'Cough and fever',
             appointmentId: '123456',
             patientId: 'D1001',
-            patientName: 'Dr. Smith',
+            patientName: 'Smith',
             prescription: 'Paracetamol, Cough Syrup',
             time: '2024-04-11 11:00',
         },
@@ -66,7 +66,7 @@ const Prescription = () => {
             symptoms: 'Cough and fever',
             appointmentId: '123456',
             patientId: 'D1001',
-            patientName: 'Dr. Smith',
+            patientName: 'Smith',
             prescription: 'Paracetamol, Cough Syrup',
             time: '2024-04-11 11:00',
         },
@@ -75,7 +75,7 @@ const Prescription = () => {
             symptoms: 'Cough and fever',
             appointmentId: '123456',
             patientId: 'D1001',
-            patientName: 'Dr. Smith',
+            patientName: 'Smith',
             prescription: 'Paracetamol, Cough Syrup',
             time: '2024-04-11 11:00',
         },
@@ -110,7 +110,7 @@ const Prescription = () => {
                         <TableRow>
                             <HeaderCell>Prescription ID</HeaderCell>
                             <HeaderCell>Appointment ID</HeaderCell>
-                            <HeaderCell>patient</HeaderCell>
+                            <HeaderCell>Patient</HeaderCell>
                             <HeaderCell>Time</HeaderCell>
                             <HeaderCell>Symptoms Description</HeaderCell>
                             <HeaderCell>Prescription Details</HeaderCell>

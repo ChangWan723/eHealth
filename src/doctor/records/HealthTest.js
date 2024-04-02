@@ -40,7 +40,7 @@ const HealthTest = () => {
         {
             id: 'HT001',
             patientId: 'D2',
-            patientName: 'Dr. Johnson',
+            patientName: 'Johnson',
             appointmentId: 'AP001',
             testContent: 'Blood Work',
             time: '2024-04-11 11:00',
@@ -50,7 +50,7 @@ const HealthTest = () => {
         {
             id: 'HT002',
             patientId: 'D2',
-            patientName: 'Dr. Johnson',
+            patientName: 'Johnson',
             appointmentId: 'AP002',
             testContent: 'X-ray',
             time: '2024-04-11 11:00',
@@ -60,7 +60,7 @@ const HealthTest = () => {
         {
             id: 'HT003',
             patientId: 'D2',
-            patientName: 'Dr. Johnson',
+            patientName: 'Johnson',
             appointmentId: 'AP003',
             testContent: 'MRI',
             time: '2024-04-11 11:00',
@@ -70,7 +70,7 @@ const HealthTest = () => {
         {
             id: 'HT004',
             patientId: 'D2',
-            patientName: 'Dr. Johnson',
+            patientName: 'Johnson',
             appointmentId: 'AP002',
             testContent: 'X-ray',
             time: '2024-04-11 11:00',
@@ -80,7 +80,7 @@ const HealthTest = () => {
         {
             id: 'HT005',
             patientId: 'D2',
-            patientName: 'Dr. Johnson',
+            patientName: 'Johnson',
             appointmentId: 'AP002',
             testContent: 'X-ray',
             time: '2024-04-11 11:00',
@@ -90,7 +90,7 @@ const HealthTest = () => {
         {
             id: 'HT006',
             patientId: 'D2',
-            patientName: 'Dr. Johnson',
+            patientName: 'Johnson',
             appointmentId: 'AP002',
             testContent: 'X-ray',
             time: '2024-04-11 11:00',
@@ -126,7 +126,7 @@ const HealthTest = () => {
                         <TableRow>
                             <HeaderCell>Health Test ID</HeaderCell>
                             <HeaderCell>Appointment ID</HeaderCell>
-                            <HeaderCell>patient</HeaderCell>
+                            <HeaderCell>Patient</HeaderCell>
                             <HeaderCell>Test Content</HeaderCell>
                             <HeaderCell>Time</HeaderCell>
                             <HeaderCell>Status</HeaderCell>

@@ -33,7 +33,7 @@ const Account = () => {
 
     // State for form fields that can be edited
     const [accountInfo, setAccountInfo] = useState({
-        patientId: '123456789',
+        doctorId: '123456789',
         firstName: 'Jane',
         lastName: 'Doe',
         email: 'jane.doe@example.com',
@@ -142,8 +142,8 @@ const Account = () => {
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <TextField
-                        label="Patient ID"
-                        value={accountInfo.patientId}
+                        label="Doctor ID"
+                        value={accountInfo.doctorId}
                         margin="normal"
                         fullWidth
                         InputProps={{

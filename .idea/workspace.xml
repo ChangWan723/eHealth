@@ -5,32 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d754114-e960-4865-a4a0-716461d952cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/doctor/dashboard/Dashboard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/doctor/dashboard/components/DataOverview.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/doctor/dashboard/components/RecentAppointment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/doctor/dashboard/components/RecentHealthTest.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/doctor/profile/Account.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/doctor/profile/ResetPwd.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/doctor/records/Appointment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/doctor/records/HealthTest.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/doctor/records/Prescription.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/images/profile/admin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/images/profile/doctor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/images/profile/patient.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/doctor/pending/PendingAppointment.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layouts/full/sidebar/DocMenuItems.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/images/backgrounds/404-error-idea.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/images/backgrounds/login-bg.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/images/backgrounds/rocket.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/images/logos/dark-logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/images/products/empty-shopping-bag.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/images/products/s11.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/images/products/s4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/images/products/s5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/images/products/s7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/patient/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/dashboard/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/patient/dashboard/components/DataOverview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/dashboard/components/DataOverview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/patient/dashboard/components/RecentAppointment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/dashboard/components/RecentAppointment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/patient/dashboard/components/RecentHealthTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/dashboard/components/RecentHealthTest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/patient/records/HealthTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/records/HealthTest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/profile/user-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/doctor/profile/Account.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/profile/Account.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/doctor/records/Appointment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/records/Appointment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/doctor/records/HealthTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/records/HealthTest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/doctor/records/Prescription.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/records/Prescription.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/full/header/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/full/header/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/full/sidebar/SidebarItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/full/sidebar/SidebarItems.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,8 +32,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -67,7 +59,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "E:/front-end code/webCourseWork/e-health/src/doctor",
+    "last_opened_file_path": "E:/front-end code/webCourseWork/e-health/src/layouts/full/sidebar",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -80,18 +72,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\front-end code\webCourseWork\e-health\src\layouts\full\sidebar" />
       <recent name="E:\front-end code\webCourseWork\e-health\src\doctor" />
       <recent name="E:\front-end code\webCourseWork\e-health\src\doctor\dashboard" />
       <recent name="E:\front-end code\webCourseWork\e-health\src" />
       <recent name="E:\front-end code\webCourseWork\e-health\src\components" />
-      <recent name="E:\front-end code\webCourseWork\e-health\src\views" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\front-end code\webCourseWork\e-health" />
+      <recent name="E:\front-end code\webCourseWork\e-health\src\assets\images\profile" />
+      <recent name="E:\front-end code\webCourseWork\e-health\src\assets\images\doctor" />
+      <recent name="E:\front-end code\webCourseWork\e-health\public" />
       <recent name="E:\front-end code\webCourseWork\e-health\src\doctor" />
-      <recent name="E:\front-end code\webCourseWork\e-health\src\patient\profile" />
-      <recent name="E:\front-end code\webCourseWork\e-health\src\patient\records" />
-      <recent name="E:\front-end code\webCourseWork\e-health\src" />
-      <recent name="E:\front-end code\webCourseWork\e-health\src\components\dashboard" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -122,7 +114,7 @@
       <workItem from="1711827335912" duration="10088000" />
       <workItem from="1711839619764" duration="219000" />
       <workItem from="1711906597420" duration="7371000" />
-      <workItem from="1712074440472" duration="4621000" />
+      <workItem from="1712074440472" duration="12750000" />
     </task>
     <servers />
   </component>
