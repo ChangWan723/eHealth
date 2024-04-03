@@ -5,20 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d754114-e960-4865-a4a0-716461d952cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/doctor/pending/PendingTest.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/doctor/operation/MedicalHistory.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/doctor/operation/Prescribe.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/doctor/dashboard/components/RecentAppointment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/dashboard/components/RecentAppointment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/doctor/pending/PendingAppointment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/pending/PendingAppointment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/doctor/records/Appointment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/records/Appointment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/doctor/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/dashboard/Dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layouts/full/header/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/full/header/Profile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layouts/full/sidebar/DocMenuItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/full/sidebar/DocMenuItems.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/full/sidebar/SidebarItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/full/sidebar/SidebarItems.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/patient/appointment/Application.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/appointment/Application.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/patient/dashboard/components/RecentAppointment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/dashboard/components/RecentAppointment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/patient/records/Appointment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/records/Appointment.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +104,7 @@
       <workItem from="1711839619764" duration="219000" />
       <workItem from="1711906597420" duration="7371000" />
       <workItem from="1712074440472" duration="13983000" />
-      <workItem from="1712162103708" duration="6097000" />
+      <workItem from="1712162103708" duration="10519000" />
     </task>
     <servers />
   </component>

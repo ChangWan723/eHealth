@@ -7,6 +7,8 @@ import RecentAppointment from './components/RecentAppointment';
 
 
 const Dashboard = () => {
+    localStorage.setItem('userType', 'doctor');
+
     return (
         <PageContainer title="eHealth" description="eHealth">
             <Box>

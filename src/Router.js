@@ -19,6 +19,8 @@ const ResetPwd = Loadable(lazy(() => import('./patient/profile/ResetPwd')))
 const DocDashboard = Loadable(lazy(() => import('./doctor/dashboard/Dashboard')))
 const PendingAppointment = Loadable(lazy(() => import('./doctor/pending/PendingAppointment')))
 const PendingTest = Loadable(lazy(() => import('./doctor/pending/PendingTest')))
+const Prescribe = Loadable(lazy(() => import('./doctor/operation/Prescribe')))
+const DocMedical = Loadable(lazy(() => import('./doctor/operation/MedicalHistory')))
 
 
 const DocAppointments = Loadable(lazy(() => import('./doctor/records/Appointment')))
@@ -60,6 +62,8 @@ const Router = [
       { path: '/doctor', exact: true, element: <DocDashboard /> },
       { path: '/doctor/pending/appointment', exact: true, element: <PendingAppointment /> },
       { path: '/doctor/pending/test', exact: true, element: <PendingTest /> },
+      { path: '/doctor/operation/prescribe', exact: true, element: <Prescribe /> },
+      { path: '/doctor/operation/medical', exact: true, element: <DocMedical /> },
       { path: '/doctor/records/appointment', exact: true, element: <DocAppointments /> },
       { path: '/doctor/records/healthtest', exact: true, element: <DocHealthTest /> },
       { path: '/doctor/records/prescription', exact: true, element: <DocPrescription /> },

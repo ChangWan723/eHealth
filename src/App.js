@@ -8,8 +8,6 @@ function App() {
     const routing = useRoutes(Router);
     const theme = baselightTheme;
 
-    localStorage.setItem('userType', 'doctor');
-
     return (
         <ThemeProvider theme={theme}>
 

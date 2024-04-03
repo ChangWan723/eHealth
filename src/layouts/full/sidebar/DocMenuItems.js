@@ -48,13 +48,13 @@ const DocMenuitems = [
     id: uniqueId(),
     title: 'Prescribe',
     icon: IconFirstAidKit,
-    href: '/doctor/appointment/application',
+    href: '/doctor/operation/prescribe',
   },
   {
     id: uniqueId(),
     title: 'View / Modify Medical History',
     icon: IconHeartSearch,
-    href: '/doctor/appointment/application',
+    href: '/doctor/operation/medical',
   },
   {
     navlabel: true,

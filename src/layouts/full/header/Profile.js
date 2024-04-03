@@ -11,7 +11,15 @@ import {
     ListItemText
 } from '@mui/material';
 
-import {IconClipboardHeart, IconListCheck, IconMail, IconReport, IconUser} from '@tabler/icons-react';
+import {
+    IconClipboardHeart,
+    IconFirstAidKit,
+    IconHeartSearch,
+    IconListCheck,
+    IconMail,
+    IconReport,
+    IconUser
+} from '@tabler/icons-react';
 
 import PatientImg from 'src/assets/images/profile/patient.png';
 import DoctorImg from 'src/assets/images/profile/doctor.png';
@@ -85,25 +93,50 @@ const Profile = () => {
                     },
                 }}
             >
+                {userType === 'patient' && (
+                    <>
+                        <MenuItem button component={Link} to="/patient/records/appointment">
+                            <ListItemIcon>
+                                <IconReport width={20}/>
+                            </ListItemIcon>
+                            <ListItemText>My Appointments</ListItemText>
+                        </MenuItem>
+                        <MenuItem button component={Link} to="/patient/profile/medical">
+                            <ListItemIcon>
+                                <IconClipboardHeart width={20}/>
+                            </ListItemIcon>
+                            <ListItemText>My Medical History</ListItemText>
+                        </MenuItem>
+                        <MenuItem button component={Link} to="/patient/profile/account">
+                            <ListItemIcon>
+                                <IconMail width={20}/>
+                            </ListItemIcon>
+                            <ListItemText>My Account</ListItemText>
+                        </MenuItem>
+                    </>)}
+                {userType === 'doctor' && (
+                    <>
+                        <MenuItem button component={Link} to="/doctor/operation/prescribe">
+                            <ListItemIcon>
+                                <IconFirstAidKit width={20}/>
+                            </ListItemIcon>
+                            <ListItemText>Prescribe</ListItemText>
+                        </MenuItem>
+                        <MenuItem button component={Link} to="/doctor/operation/medical">
+                            <ListItemIcon>
+                                <IconHeartSearch width={20}/>
+                            </ListItemIcon>
+                            <ListItemText>Medical History</ListItemText>
+                        </MenuItem>
+                        <MenuItem button component={Link} to="/patient/profile/account">
+                            <ListItemIcon>
+                                <IconMail width={20}/>
+                            </ListItemIcon>
+                            <ListItemText>My Account</ListItemText>
+                        </MenuItem>
+                    </>
+                )}
 
-                <MenuItem button component={Link} to="/patient/records/appointment">
-                    <ListItemIcon>
-                        <IconReport width={20}/>
-                    </ListItemIcon>
-                    <ListItemText>My Appointments</ListItemText>
-                </MenuItem>
-                <MenuItem button component={Link} to="/patient/profile/medical">
-                    <ListItemIcon>
-                        <IconClipboardHeart width={20}/>
-                    </ListItemIcon>
-                    <ListItemText>My Medical History</ListItemText>
-                </MenuItem>
-                <MenuItem button component={Link} to="/patient/profile/account">
-                    <ListItemIcon>
-                        <IconMail width={20}/>
-                    </ListItemIcon>
-                    <ListItemText>My Account</ListItemText>
-                </MenuItem>
                 <Box mt={1} py={1} px={2}>
                     <Button to="/login" variant="outlined" color="primary" component={Link} fullWidth>
                         Logout
@@ -111,7 +144,8 @@ const Profile = () => {
                 </Box>
             </Menu>
         </Box>
-    );
+    )
+        ;
 };
 
 export default Profile;
