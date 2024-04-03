@@ -28,8 +28,8 @@ const appointmentRecords = [
         patientName: 'Johnson',
         appointmentTime: '2024-04-11 11:00',
         description: 'Regular vaccination',
-        status: 'Completed',
-        result: 'Vaccination completed successfully'
+        status: 'Accepted',
+        result: 'Vaccination Accepted successfully'
     },
     {
         id: 'A3',
@@ -48,8 +48,8 @@ const appointmentRecords = [
         patientName: 'Johnson',
         appointmentTime: '2024-04-11 11:00',
         description: 'Regular vaccination',
-        status: 'Completed',
-        result: 'Vaccination completed successfully'
+        status: 'Accepted',
+        result: 'Vaccination Accepted successfully'
     },
 ];
 
@@ -57,7 +57,7 @@ const getStatusStyle = (status) => {
     switch (status) {
         case 'Pending':
             return {backgroundColor: '#ffeb3b', borderRadius: '4px', padding: '3px 10px', display: 'inline-block'};
-        case 'Completed':
+        case 'Accepted':
             return {
                 backgroundColor: '#4caf50',
                 color: '#fff',

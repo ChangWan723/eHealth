@@ -38,7 +38,7 @@ const DocMenuitems = [
     id: uniqueId(),
     title: 'Pending Health Tests',
     icon: IconStethoscope,
-    href: '/doctor/appointment/application',
+    href: '/doctor/pending/test',
   },
   {
     navlabel: true,

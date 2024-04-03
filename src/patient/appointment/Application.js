@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Container, TextField, MenuItem, Button, Typography, Grid, Paper } from '@mui/material';
 
 const Application = () => {
-    // Dummy patient info
     const patientInfo = {
         id: "123456",
         name: "John Doe"

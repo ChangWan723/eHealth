@@ -5,24 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d754114-e960-4865-a4a0-716461d952cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/images/profile/admin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/images/profile/doctor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/images/profile/patient.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/doctor/pending/PendingAppointment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/layouts/full/sidebar/DocMenuItems.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/doctor/pending/PendingTest.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/images/profile/user-1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/doctor/profile/Account.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/profile/Account.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/doctor/dashboard/components/RecentAppointment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/dashboard/components/RecentAppointment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/doctor/pending/PendingAppointment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/pending/PendingAppointment.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/doctor/records/Appointment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/records/Appointment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/doctor/records/HealthTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/records/HealthTest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/doctor/records/Prescription.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/records/Prescription.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layouts/full/header/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/full/header/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/full/sidebar/DocMenuItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/full/sidebar/DocMenuItems.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layouts/full/sidebar/SidebarItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/full/sidebar/SidebarItems.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/patient/appointment/Application.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/appointment/Application.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/patient/dashboard/components/RecentAppointment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/dashboard/components/RecentAppointment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/patient/records/Appointment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/records/Appointment.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,22 +50,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "E:/front-end code/webCourseWork/e-health/src/layouts/full/sidebar",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "E:\\IDE\\JET Brains\\WebStorm 2023.1.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/front-end code/webCourseWork/e-health/src/layouts/full/sidebar&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;E:\\IDE\\JET Brains\\WebStorm 2023.1.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\front-end code\webCourseWork\e-health\src\layouts\full\sidebar" />
@@ -114,7 +110,8 @@
       <workItem from="1711827335912" duration="10088000" />
       <workItem from="1711839619764" duration="219000" />
       <workItem from="1711906597420" duration="7371000" />
-      <workItem from="1712074440472" duration="12750000" />
+      <workItem from="1712074440472" duration="13983000" />
+      <workItem from="1712162103708" duration="6097000" />
     </task>
     <servers />
   </component>

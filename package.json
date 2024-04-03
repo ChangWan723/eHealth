@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@date-io/date-fns": "^3.0.0",
     "@mui/joy": "^5.0.0-beta.32",
     "@mui/lab": "^5.0.0-alpha.169",
     "@mui/system": "^5.15.14",

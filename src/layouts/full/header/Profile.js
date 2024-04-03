@@ -30,7 +30,6 @@ const Profile = () => {
     const [userType, setUserType] = useState('');
 
     useEffect(() => {
-        // 从 localStorage 中获取 userType
         const userTypeFromStorage = localStorage.getItem('userType');
         setUserType(userTypeFromStorage);
     }, []);

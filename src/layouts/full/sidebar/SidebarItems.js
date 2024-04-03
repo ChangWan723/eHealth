@@ -12,7 +12,6 @@ const SidebarItems = () => {
     const [userType, setUserType] = useState('');
 
     useEffect(() => {
-        // 从 localStorage 中获取 userType
         const userTypeFromStorage = localStorage.getItem('userType');
         setUserType(userTypeFromStorage);
     }, []);
@@ -20,7 +19,6 @@ const SidebarItems = () => {
 
     let itemsToRender = Menuitems;
 
-    // 根据 userType 决定使用哪个菜单项
     if (userType === 'patient') {
         itemsToRender = Menuitems;
     } else if (userType === 'doctor') {

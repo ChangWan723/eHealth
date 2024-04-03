@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Box,
     Button,
@@ -9,10 +9,10 @@ import {
     TextField,
     Typography,
     Card,
+    Grid,
     CardContent,
-    Stack
+    Stack, MenuItem
 } from '@mui/material';
-import { CheckCircleOutline, HighlightOff, Schedule } from '@mui/icons-material';
 
 const mockAppointments = [
     {
@@ -22,7 +22,7 @@ const mockAppointments = [
         patientName: 'John Doe',
         appointmentTime: '2024-01-24 10:00',
         description: 'Routine heart checkup',
-    },{
+    }, {
         appointmentId: 'APPT002',
         department: 'Dermatology',
         patientId: 'PT002',
@@ -49,14 +49,36 @@ const mockAppointments = [
     // ... more appointments
 ];
 
+const doctorsByDepartment = {
+    'General': ['Dr. Smith', 'Dr. Brown'],
+    'Internal Medicine': ['Dr. Wilson'],
+    'Surgery': ['Dr. Taylor', 'Dr. Moore'],
+    'Obstetrics and Gynecology': ['Dr. Jones'],
+    'Pediatrics': ['Dr. Davis', 'Dr. Garcia'],
+};
+
+const departments = Object.keys(doctorsByDepartment);
+
 const PendingAppointment = () => {
     const [openDialog, setOpenDialog] = useState(false);
     const [dialogType, setDialogType] = useState('');
     const [selectedAppointment, setSelectedAppointment] = useState(null);
 
+    const minDateTime = new Date(new Date().getTime() + 60 * 60 * 1000).toISOString().slice(0, 16);
+    const maxDateTime = new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 16);
+
+
+    const [dialogDescription, setDialogDescription] = useState('');
+    const [reAppointment, setReAppointment] = useState({
+        department: '',
+        doctor: '',
+        appointmentTime: '',
+    });
+
     const handleOpenDialog = (type, appointment) => {
         setDialogType(type);
         setSelectedAppointment(appointment);
+        setDialogDescription('');
         setOpenDialog(true);
     };
 
@@ -65,58 +87,93 @@ const PendingAppointment = () => {
     };
 
     const handleDialogSubmit = () => {
-        // Submit logic goes here
-        console.log(`Submitted for ${dialogType}`);
+        if (dialogType === 'Reschedule') {
+            console.log(`Rescheduled appointment ID: ${selectedAppointment.appointmentId}, New: ${reAppointment.appointmentTime}, ${reAppointment.department},${reAppointment.doctor}`);
+        } else {
+            console.log(`Submitted for appointment ID: ${selectedAppointment.appointmentId}, Description: ${dialogDescription}`);
+        }
+
+        setDialogDescription('');
         handleCloseDialog();
     };
 
+    const [availableDoctors, setAvailableDoctors] = useState([]);
+
+    useEffect(() => {
+        setAvailableDoctors(doctorsByDepartment[reAppointment.department] || []);
+    }, [reAppointment.department]);
+
+    const handleChange = (event) => {
+        const {name, value} = event.target;
+        setReAppointment(prev => ({
+            ...prev,
+            [name]: value,
+        }));
+
+        if (name === 'department') {
+            setReAppointment(prev => ({...prev, doctor: ''}));
+        }
+    };
+
+    const isFormValid = () => {
+        return (reAppointment.department && reAppointment.doctor && reAppointment.appointmentTime) || dialogDescription;
+    };
+
     return (
-        <Box sx={{ padding: 3 }}>
+        <Box sx={{padding: 3}}>
             <Box>
                 <Typography variant="h4" gutterBottom>
                     Pending Appointments
                 </Typography>
             </Box>
             {mockAppointments.length > 0 ? (
-            <Stack spacing={2}>
-                {mockAppointments.map((appointment) => (
-                    <Card key={appointment.appointmentId} sx={{ boxShadow: 5 }}>
-                        <CardContent sx={{ p: 2 }}>
-                            <Typography variant="h6" fontWeight="bold" gutterBottom>
-                                {appointment.patientName}
-                            </Typography>
-                            <Typography color="textSecondary" variant="body2" gutterBottom>
-                                Patient ID: <Typography component="span" fontWeight="bold">{appointment.patientId}</Typography>
-                            </Typography>
-                            <Typography color="textSecondary" variant="body2" gutterBottom>
-                                Appointment ID: <Typography component="span" fontWeight="bold">{appointment.appointmentId}</Typography>
-                            </Typography>
-                            <Typography color="textSecondary" variant="body2" gutterBottom>
-                                Department: <Typography component="span" fontWeight="bold">{appointment.department}</Typography>
-                            </Typography>
-                            <Typography color="textSecondary" variant="body2" gutterBottom>
-                                Time: <Typography component="span" fontWeight="bold">{appointment.appointmentTime}</Typography>
-                            </Typography>
-                            <Typography color="textSecondary" variant="body2" gutterBottom>
-                                Description: <Typography component="span" fontWeight="bold">{appointment.description}</Typography>
-                            </Typography>
-                            <Stack direction="row" spacing={1} mt={2}>
-                                <Button variant="outlined" color="success" onClick={() => handleOpenDialog('Accept', appointment)}>
-                                    Accept
-                                </Button>
-                                <Button variant="outlined" color="error" onClick={() => handleOpenDialog('Reject', appointment)}>
-                                    Reject
-                                </Button>
-                                <Button variant="outlined" onClick={() => handleOpenDialog('Reschedule', appointment)}>
-                                    Reschedule
-                                </Button>
-                            </Stack>
-                        </CardContent>
-                    </Card>
-                ))}
-            </Stack>
+                <Stack spacing={2}>
+                    {mockAppointments.map((appointment) => (
+                        <Card key={appointment.appointmentId} sx={{boxShadow: 5}}>
+                            <CardContent sx={{p: 2}}>
+                                <Typography variant="h6" fontWeight="bold" gutterBottom>
+                                    {appointment.patientName}
+                                </Typography>
+                                <Typography color="textSecondary" variant="body2" gutterBottom>
+                                    Patient ID: <Typography component="span"
+                                                            fontWeight="bold">{appointment.patientId}</Typography>
+                                </Typography>
+                                <Typography color="textSecondary" variant="body2" gutterBottom>
+                                    Appointment ID: <Typography component="span"
+                                                                fontWeight="bold">{appointment.appointmentId}</Typography>
+                                </Typography>
+                                <Typography color="textSecondary" variant="body2" gutterBottom>
+                                    Department: <Typography component="span"
+                                                            fontWeight="bold">{appointment.department}</Typography>
+                                </Typography>
+                                <Typography color="textSecondary" variant="body2" gutterBottom>
+                                    Time: <Typography component="span"
+                                                      fontWeight="bold">{appointment.appointmentTime}</Typography>
+                                </Typography>
+                                <Typography color="textSecondary" variant="body2" gutterBottom>
+                                    Description: <Typography component="span"
+                                                             fontWeight="bold">{appointment.description}</Typography>
+                                </Typography>
+                                <Stack direction="row" spacing={1} mt={2}>
+                                    <Button variant="outlined" color="success"
+                                            onClick={() => handleOpenDialog('Accept', appointment)}>
+                                        Accept
+                                    </Button>
+                                    <Button variant="outlined" color="error"
+                                            onClick={() => handleOpenDialog('Reject', appointment)}>
+                                        Reject
+                                    </Button>
+                                    <Button variant="outlined"
+                                            onClick={() => handleOpenDialog('Reschedule', appointment)}>
+                                        Reschedule
+                                    </Button>
+                                </Stack>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </Stack>
             ) : (
-                <Typography variant="subtitle1"  sx={{
+                <Typography variant="subtitle1" sx={{
                     fontSize: "25px",
                     textAlign: 'center',
                     padding: '16px',
@@ -130,26 +187,83 @@ const PendingAppointment = () => {
                     There are currently no pending appointments.
                 </Typography>
             )}
-            <Dialog open={openDialog} onClose={handleCloseDialog}>
+            <Dialog open={openDialog} onClose={(event, reason) => {
+                if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
+                    handleCloseDialog();
+                }
+            }}>
                 <DialogTitle>{`${dialogType} Appointment`}</DialogTitle>
                 <DialogContent>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="description"
-                        label={dialogType === 'Reject' ? "Reason for Rejection" : "Description"}
-                        type="text"
-                        fullWidth
-                        variant="standard"
-                    />
+                    {dialogType === 'Reschedule' ? (
+                        <Grid>
+                            <TextField
+                                fullWidth
+                                select
+                                label="Department"
+                                name="department"
+                                value={reAppointment.department}
+                                onChange={handleChange}
+                                margin="normal"
+                                required
+                            >
+                                {departments.map((department) => (
+                                    <MenuItem key={department} value={department}>
+                                        {department}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <TextField
+                                fullWidth
+                                select
+                                label="Expected Doctor"
+                                name="doctor"
+                                value={reAppointment.doctor}
+                                onChange={handleChange}
+                                margin="normal"
+                                required
+                                disabled={!reAppointment.department}
+                            >
+                                {availableDoctors.map((doctor) => (
+                                    <MenuItem key={doctor} value={doctor}>
+                                        {doctor}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <TextField
+                                fullWidth
+                                type="datetime-local"
+                                label="Expected Appointment Time"
+                                name="appointmentTime"
+                                InputLabelProps={{shrink: true}}
+                                value={reAppointment.appointmentTime}
+                                onChange={handleChange}
+                                margin="normal"
+                                required
+                                inputProps={{min: minDateTime, max: maxDateTime}}
+                            />
+                        </Grid>
+                    ) : (
+                        <TextField
+                            inputProps={{ maxLength: 1000 }}
+                            autoFocus
+                            multiline
+                            rows={3}
+                            margin="normal"
+                            id="description"
+                            label={dialogType === 'Reject' ? "Reason for Rejection" : "Description"}
+                            type="text"
+                            fullWidth
+                            onChange={(e) => setDialogDescription(e.target.value)}
+                        />)}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseDialog}>Cancel</Button>
-                    <Button onClick={handleDialogSubmit}>Submit</Button>
+                    <Button onClick={handleDialogSubmit} disabled={!isFormValid()}>Submit</Button>
                 </DialogActions>
             </Dialog>
         </Box>
-    );
+    )
+        ;
 };
 
 export default PendingAppointment;
