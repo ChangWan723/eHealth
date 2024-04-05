@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Box } from '@mui/material';
-import PageContainer from 'src/components/container/PageContainer';
+import PageContainer from 'src/components/shared/PageContainer';
 import DataOverview from './components/DataOverview';
 import RecentHealthTest from './components/RecentHealthTest';
 import RecentAppointment from './components/RecentAppointment';

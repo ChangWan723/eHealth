@@ -21,7 +21,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import ErrorIcon from '@mui/icons-material/Error';
 import {red} from "@mui/material/colors";
 import CircularProgress from '@mui/material/CircularProgress';
-import Copyright from "./Copyright";
+import Copyright from "./shared/Copyright";
 
 export const Login = () => {
     const navigate = useNavigate();

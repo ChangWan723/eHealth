@@ -32,7 +32,7 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
 import ErrorIcon from '@mui/icons-material/Error';
 import {red} from "@mui/material/colors";
 import CircularProgress from '@mui/material/CircularProgress';
-import Copyright from "./Copyright";
+import Copyright from "./shared/Copyright";
 
 export const Register = () => {
     const [anchorEl, setAnchorEl] = useState(null);

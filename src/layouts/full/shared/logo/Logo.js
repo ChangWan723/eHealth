@@ -15,10 +15,13 @@ const StyledE = styled('span')(({theme}) => ({
     fontStyle: 'italic',
 }));
 
+const handleClick = () => {
+    window.scrollTo(0, 0); // 将页面滚动到顶部
+}
 const Logo = () => {
     return (
         <Box m={3}> {/* Adds margin around the Logo */}
-            <LinkStyled to="/">
+            <LinkStyled onClick={handleClick}>
                 <StyledE>e</StyledE>Health
             </LinkStyled>
         </Box>
