@@ -6,13 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9d754114-e960-4865-a4a0-716461d952cb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/home/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/HomePage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/home/components/AppAppBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/components/AppAppBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/home/components/Features.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/components/Features.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/home/components/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/components/Map.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/home/getLPTheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/getLPTheme.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/home/components/Doctor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/components/Doctor.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,11 +101,22 @@
       <workItem from="1711906597420" duration="7371000" />
       <workItem from="1712074440472" duration="13983000" />
       <workItem from="1712162103708" duration="10519000" />
-      <workItem from="1712425989666" duration="8023000" />
+      <workItem from="1712425989666" duration="9466000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
 </project>
