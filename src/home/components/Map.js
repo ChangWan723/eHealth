@@ -25,7 +25,7 @@ export default function Map() {
                 }}
             >
                 <Typography component="h2" variant="h4" color="text.primary">
-                    Nearby Pharmacies
+                    Nearby pharmacies
                 </Typography>
                 <Typography variant="body1" color="text.secondary">
                     eHealth guides you to the nearest pharmacy to ensure timely access to your medication.

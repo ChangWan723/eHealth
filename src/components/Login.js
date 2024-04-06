@@ -7,10 +7,9 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import {Fade, Popover, Stack} from "@mui/material";
 import Dialog from '@mui/material/Dialog';
@@ -22,6 +21,9 @@ import ErrorIcon from '@mui/icons-material/Error';
 import {red} from "@mui/material/colors";
 import CircularProgress from '@mui/material/CircularProgress';
 import Copyright from "./shared/Copyright";
+import {
+    IconHeartbeat
+} from '@tabler/icons-react';
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -109,24 +111,8 @@ export const Login = () => {
     };
 
     return (
-        <Grid container component="main" sx={{height: '100vh'}}>
+        <Container component="main" maxWidth="xs">
             <CssBaseline/>
-            <Grid
-                item
-                xs={false}
-                sm={4}
-                md={7}
-                sx={{
-                    backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundColor: (t) =>
-                        t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                }}
-            />
-            <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-
                 <Box
                     sx={{
                         my: 8,
@@ -137,7 +123,7 @@ export const Login = () => {
                     }}
                 >
                     <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
-                        <LockOutlinedIcon/>
+                        <IconHeartbeat/>
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Sign in
@@ -248,7 +234,6 @@ export const Login = () => {
                         <Copyright sx={{mt: 5}}/>
                     </Box>
                 </Box>
-            </Grid>
-        </Grid>
+        </Container>
     );
 }

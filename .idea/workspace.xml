@@ -6,15 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="9d754114-e960-4865-a4a0-716461d952cb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Register.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/home/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/HomePage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/home/components/AppAppBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/components/AppAppBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/home/components/FAQ.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/components/FAQ.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/home/components/Footer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/home/components/Highlights.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/home/components/LogoCollection.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/home/components/Features.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/components/Features.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/home/components/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/components/Map.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/home/components/Pricing.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/home/components/ToggleColorMode.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/home/getLPTheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/getLPTheme.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,11 +69,11 @@
       <recent name="E:\front-end code\webCourseWork\e-health\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\front-end code\webCourseWork\e-health\src\theme" />
       <recent name="E:\front-end code\webCourseWork\e-health\src\assets\images\home" />
       <recent name="E:\front-end code\webCourseWork\e-health\src\home" />
       <recent name="E:\front-end code\webCourseWork\e-health\src\home\components" />
       <recent name="E:\front-end code\webCourseWork\e-health\src\components\shared" />
-      <recent name="E:\front-end code\webCourseWork\e-health" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -108,7 +106,7 @@
       <workItem from="1711906597420" duration="7371000" />
       <workItem from="1712074440472" duration="13983000" />
       <workItem from="1712162103708" duration="10519000" />
-      <workItem from="1712425989666" duration="6604000" />
+      <workItem from="1712425989666" duration="8023000" />
     </task>
     <servers />
   </component>

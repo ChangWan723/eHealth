@@ -1,6 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,7 +9,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Logo from "../../layouts/full/shared/logo/Logo";
 
 function AppAppBar() {
-    const [open, setOpen] = React.useState(false);
 
     const scrollToSection = (sectionId) => {
         const sectionElement = document.getElementById(sectionId);
@@ -23,7 +20,6 @@ function AppAppBar() {
                 top: targetScroll,
                 behavior: 'smooth',
             });
-            setOpen(false);
         }
     };
 

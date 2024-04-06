@@ -13,7 +13,7 @@ import Hero from './components/Hero';
 import Features from './components/Features';
 import Doctor from './components/Doctor';
 import FAQ from './components/FAQ';
-import getLPTheme from './getLPTheme';
+import getLPTheme from '../theme/getLPTheme';
 import Copyright from "../components/shared/Copyright";
 import Map from "./components/Map";
 
@@ -60,17 +60,10 @@ ToggleCustomTheme.propTypes = {
 };
 
 export default function HomePage() {
-    const [mode, setMode] = React.useState('light');
-    const [showCustomTheme, setShowCustomTheme] = React.useState(true);
-    const LPtheme = createTheme(getLPTheme(mode));
-    const defaultTheme = createTheme({ palette: { mode } });
-
-    const toggleCustomTheme = () => {
-        setShowCustomTheme((prev) => !prev);
-    };
+    const LPtheme = createTheme(getLPTheme('light'));
 
     return (
-        <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
+        <ThemeProvider theme={LPtheme}>
             <CssBaseline />
             <AppAppBar/>
             <Hero />
