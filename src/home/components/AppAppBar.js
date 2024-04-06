@@ -81,27 +81,19 @@ function AppAppBar({mode, toggleColorMode}) {
                                     </Typography>
                                 </MenuItem>
                                 <MenuItem
-                                    onClick={() => scrollToSection('testimonials')}
+                                    onClick={() => scrollToSection('doctors')}
                                     sx={{py: '6px', px: '12px'}}
                                 >
                                     <Typography variant="body2" color="text.primary">
-                                        Testimonials
+                                        Doctors
                                     </Typography>
                                 </MenuItem>
                                 <MenuItem
-                                    onClick={() => scrollToSection('highlights')}
+                                    onClick={() => scrollToSection('map')}
                                     sx={{py: '6px', px: '12px'}}
                                 >
                                     <Typography variant="body2" color="text.primary">
-                                        Highlights
-                                    </Typography>
-                                </MenuItem>
-                                <MenuItem
-                                    onClick={() => scrollToSection('pricing')}
-                                    sx={{py: '6px', px: '12px'}}
-                                >
-                                    <Typography variant="body2" color="text.primary">
-                                        Pricing
+                                        Pharmacies
                                     </Typography>
                                 </MenuItem>
                                 <MenuItem

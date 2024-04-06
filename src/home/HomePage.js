@@ -14,11 +14,15 @@ import LogoCollection from './components/LogoCollection';
 import Highlights from './components/Highlights';
 import Pricing from './components/Pricing';
 import Features from './components/Features';
-import Testimonials from './components/Testimonials';
+import Doctor from './components/Doctor';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import getLPTheme from './getLPTheme';
 import Copyright from "../components/shared/Copyright";
+import HealthMap from "../patient/dashboard/components/HealthMap";
+import DashboardCard from "../components/shared/DashboardCard";
+import Typography from "@mui/material/Typography";
+import Map from "./components/Map";
 
 function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
     return (
@@ -82,9 +86,12 @@ export default function HomePage() {
             <AppAppBar toggleColorMode={toggleColorMode} />
             <Hero />
             <Box sx={{ bgcolor: 'background.default' }}>
+                <Divider />
                 <Features />
                 <Divider />
-                <Highlights />
+                <Doctor />
+                <Divider />
+                <Map />
                 <Divider />
                 <FAQ />
                 <Divider />

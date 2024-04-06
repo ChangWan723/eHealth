@@ -1,32 +1,79 @@
-import React, {useEffect, useState} from 'react';
-import {MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+import React, {useEffect, useRef} from 'react';
 
-const HealthMap = () => {
-    const [currentPosition, setCurrentPosition] = useState([51.505, -0.09]);
-
-    const [pharmacies, setPharmacies] = useState([]);
-
-
-    navigator.geolocation.getCurrentPosition(function (position) {
-        setCurrentPosition([position.coords.latitude, position.coords.longitude]);
-    }, function (error) {
-        console.error("Error Code = " + error.code + " - " + error.message);
+function locationSearch(mapRef, currentLocation) {
+    const map = new window.google.maps.Map(mapRef.current, {
+        center: currentLocation,
+        zoom: 15
     });
 
-    return (
-        <MapContainer center={currentPosition} zoom={10} style={{height: '100vh', width: '100%'}}>
-            <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            />
-            {pharmacies.map(pharmacy => (
-                <Marker key={pharmacy.id} position={currentPosition}>
-                    <Popup>{pharmacy.name}</Popup>
-                </Marker>
-            ))}
-        </MapContainer>
-    );
+    const service = new window.google.maps.places.PlacesService(map);
+    const request = {
+        location: currentLocation,
+        radius: '3000',
+        type: ['pharmacy']
+    };
+
+    service.nearbySearch(request, (results, status) => {
+        if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
+
+            results.forEach(place => {
+                const marker = new window.google.maps.Marker({
+                    position: place.geometry.location,
+                    map: map,
+                    title: place.name,
+                    icon: {
+                        url: place.icon,
+                        scaledSize: new window.google.maps.Size(40, 40),
+                    },
+                });
+
+                const infoWindow = new window.google.maps.InfoWindow({
+                    content: `
+                        <div style="font-family: Arial, sans-serif;">
+                            <h5 style="color: #4A90E2; margin-bottom: 5px;">${place.name}</h5>
+                            <p style="font-size: 15px; margin-bottom: 10px;">Status: <span style="${place.business_status === 'OPERATIONAL' ? 'color: green;' : 'color: red;'}">${place.business_status}</span></p>
+                        </div>`,
+                });
+
+                marker.addListener('click', () => {
+                    infoWindow.open(map, marker);
+                });
+            });
+            new window.google.maps.Marker({
+                position: currentLocation,
+                map: map,
+                title: 'Your location',
+            });
+        }
+    });
+}
+
+const HealthMap = () => {
+    const mapRef = useRef(null);
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            if (window.google) {
+                const currentLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                };
+
+                locationSearch(mapRef, currentLocation);
+            }
+        }, (error) => {
+            if (window.google) {
+                const currentLocation = {
+                    lat: 50.935745,
+                    lng: -1.399218,
+                };
+
+                locationSearch(mapRef, currentLocation);
+            }
+        });
+    }, []);
+
+    return <div ref={mapRef} style={{height: '700px', width: '100%'}}/>;
 };
 
 export default HealthMap;

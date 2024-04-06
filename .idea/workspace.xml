@@ -5,13 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d754114-e960-4865-a4a0-716461d952cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/doctor/operation/MedicalHistory.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/doctor/operation/Prescribe.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/images/home/analytics.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/images/home/pharmacy.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/images/home/record.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/home/components/Map.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/home/home.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/home/home.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/doctor/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/dashboard/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/full/header/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/full/header/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/full/sidebar/DocMenuItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/full/sidebar/DocMenuItems.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/home/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/HomePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/home/components/AppAppBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/components/AppAppBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/home/components/FAQ.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/components/FAQ.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/home/components/Features.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/components/Features.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/home/components/Testimonials.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/components/Doctor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/patient/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/dashboard/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/patient/dashboard/components/HealthMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/dashboard/components/HealthMap.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +56,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/front-end code/webCourseWork/e-health/src/layouts/full/sidebar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/front-end code/webCourseWork/e-health/src/assets/images/home&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -61,18 +69,18 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\front-end code\webCourseWork\e-health\src\assets\images\home" />
       <recent name="E:\front-end code\webCourseWork\e-health\src\layouts\full\sidebar" />
       <recent name="E:\front-end code\webCourseWork\e-health\src\doctor" />
       <recent name="E:\front-end code\webCourseWork\e-health\src\doctor\dashboard" />
       <recent name="E:\front-end code\webCourseWork\e-health\src" />
-      <recent name="E:\front-end code\webCourseWork\e-health\src\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\front-end code\webCourseWork\e-health\src\assets\images\home" />
+      <recent name="E:\front-end code\webCourseWork\e-health\src\home" />
+      <recent name="E:\front-end code\webCourseWork\e-health\src\home\components" />
+      <recent name="E:\front-end code\webCourseWork\e-health\src\components\shared" />
       <recent name="E:\front-end code\webCourseWork\e-health" />
-      <recent name="E:\front-end code\webCourseWork\e-health\src\assets\images\profile" />
-      <recent name="E:\front-end code\webCourseWork\e-health\src\assets\images\doctor" />
-      <recent name="E:\front-end code\webCourseWork\e-health\public" />
-      <recent name="E:\front-end code\webCourseWork\e-health\src\doctor" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -105,6 +113,7 @@
       <workItem from="1711906597420" duration="7371000" />
       <workItem from="1712074440472" duration="13983000" />
       <workItem from="1712162103708" duration="10519000" />
+      <workItem from="1712425989666" duration="5987000" />
     </task>
     <servers />
   </component>

@@ -4,6 +4,8 @@ import PageContainer from 'src/components/shared/PageContainer';
 import DataOverview from './components/DataOverview';
 import RecentHealthTest from './components/RecentHealthTest';
 import RecentAppointment from './components/RecentAppointment';
+import DashboardCard from "../../components/shared/DashboardCard";
+import HealthMap from "../../patient/dashboard/components/HealthMap";
 
 
 const Dashboard = () => {
@@ -21,6 +23,12 @@ const Dashboard = () => {
                     </Grid>
                     <Grid item xs={12} lg={7}>
                         <RecentAppointment />
+                    </Grid>
+
+                    <Grid item xs={12} lg={12} >
+                        <DashboardCard title="Nearby Pharmacies">
+                            <HealthMap/>
+                        </DashboardCard>
                     </Grid>
                 </Grid>
             </Box>
