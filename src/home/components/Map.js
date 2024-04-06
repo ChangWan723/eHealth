@@ -2,7 +2,6 @@ import React from 'react';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import HealthMap from "../../patient/dashboard/components/HealthMap";
-import DashboardCard from "../../components/shared/DashboardCard";
 import Container from "@mui/material/Container";
 
 export default function Map() {

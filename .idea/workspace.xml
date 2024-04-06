@@ -5,21 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d754114-e960-4865-a4a0-716461d952cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/images/home/analytics.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/images/home/pharmacy.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/images/home/record.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/home/components/Map.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/images/home/home.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/home/home.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/doctor/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/dashboard/Dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/home/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/HomePage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/home/components/AppAppBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/components/AppAppBar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/home/components/FAQ.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/components/FAQ.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/home/components/Features.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/components/Features.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/home/components/Testimonials.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/components/Doctor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/patient/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/dashboard/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/patient/dashboard/components/HealthMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/dashboard/components/HealthMap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/home/components/Footer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/home/components/Highlights.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/home/components/LogoCollection.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/home/components/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/components/Map.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/home/components/Pricing.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/home/components/ToggleColorMode.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +108,7 @@
       <workItem from="1711906597420" duration="7371000" />
       <workItem from="1712074440472" duration="13983000" />
       <workItem from="1712162103708" duration="10519000" />
-      <workItem from="1712425989666" duration="5987000" />
+      <workItem from="1712425989666" duration="6604000" />
     </task>
     <servers />
   </component>
