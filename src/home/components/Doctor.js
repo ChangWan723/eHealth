@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import { useTheme } from '@mui/system';
 
 const doctorInformation = [
       {
@@ -48,14 +47,7 @@ const doctorInformation = [
       },
     ];
 
-const logoStyle = {
-  width: '64px',
-  opacity: 0.3,
-};
-
 export default function Doctor() {
-  const theme = useTheme();
-
   return (
     <Container
       id="doctors"

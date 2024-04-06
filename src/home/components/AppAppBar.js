@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
@@ -12,12 +11,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import Logo from "../../layouts/full/shared/logo/Logo";
-
-const logoStyle = {
-    width: '140px',
-    height: 'auto',
-    cursor: 'pointer',
-};
 
 function AppAppBar() {
     const [open, setOpen] = React.useState(false);
