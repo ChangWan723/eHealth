@@ -40,7 +40,6 @@ const MedicalHistory = () => {
         }));
     };
 
-    // 模拟API调用获取病历信息
     const fetchMedicalHistory = async (patientId) => {
         const mockResponse = {
             patientId: '123456789',
@@ -143,38 +142,61 @@ const MedicalHistory = () => {
 
             {/* Editable fields */}
             <TextField
-                label="Symptoms you are currently experiencing"
+                label="Current or past symptoms"
                 name="symptoms"
                 value={medicalHistory.symptoms}
                 onChange={handleInputChange}
                 margin="normal"
                 fullWidth
                 multiline
+                inputProps={{ maxLength: 1000 }}
+                rows={3}
             />
             <TextField
-                label="Medications you are currently taking"
+                label="Medications currently being taken"
                 name="currentMedication"
                 value={medicalHistory.currentMedication}
                 onChange={handleInputChange}
                 margin="normal"
                 fullWidth
+                multiline
+                inputProps={{ maxLength: 1000 }}
+                rows={3}
             />
             <TextField
-                label="Medication allergies you have"
+                label="Medication allergies"
                 name="medicationAllergies"
                 value={medicalHistory.medicationAllergies}
                 onChange={handleInputChange}
                 margin="normal"
                 fullWidth
+                multiline
+                inputProps={{ maxLength: 1000 }}
+                rows={3}
+            />
+
+            <TextField
+                label="History of Health Test Results"
+                name="testHistory"
+                value={medicalHistory.otherNotes}
+                onChange={handleInputChange}
+                margin="normal"
+                fullWidth
+                multiline
+                inputProps={{ maxLength: 1000 }}
+                rows={3}
             />
 
             <TextField
                 label="Other description"
                 name="otherNotes"
-                value={medicalHistory.otherNotes}
+                value={medicalHistory.testHistory}
                 onChange={handleInputChange}
                 margin="normal"
                 fullWidth
+                multiline
+                inputProps={{ maxLength: 1000 }}
+                rows={3}
             />
 
             {/* Binary questions */}

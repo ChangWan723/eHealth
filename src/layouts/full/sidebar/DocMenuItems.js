@@ -52,6 +52,12 @@ const DocMenuitems = [
   },
   {
     id: uniqueId(),
+    title: 'Book a Health Test',
+    icon: IconStethoscope,
+    href: '/doctor/operation/healthtest',
+  },
+  {
+    id: uniqueId(),
     title: 'View / Modify Medical History',
     icon: IconHeartSearch,
     href: '/doctor/operation/medical',

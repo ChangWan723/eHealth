@@ -57,7 +57,7 @@ const Application = () => {
     };
 
     // Current time + 1 hour and 1 month for min and max appointment time
-    const minDateTime = new Date(new Date().getTime() + 60 * 60 * 1000).toISOString().slice(0,16);
+    const minDateTime = new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().slice(0,16);
     const maxDateTime = new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000).toISOString().slice(0,16);
 
     const handleSubmit = (event) => {

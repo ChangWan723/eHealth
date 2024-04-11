@@ -34,6 +34,7 @@ const Account = () => {
     // State for form fields that can be edited
     const [accountInfo, setAccountInfo] = useState({
         doctorId: '123456789',
+        department: 'Obstetrics and Gynecology',
         firstName: 'Jane',
         lastName: 'Doe',
         email: 'jane.doe@example.com',
@@ -144,6 +145,16 @@ const Account = () => {
                     <TextField
                         label="Doctor ID"
                         value={accountInfo.doctorId}
+                        margin="normal"
+                        fullWidth
+                        InputProps={{
+                            readOnly: true,
+                        }}
+                        variant="filled"
+                    />
+                    <TextField
+                        label="Department"
+                        value={accountInfo.department}
                         margin="normal"
                         fullWidth
                         InputProps={{

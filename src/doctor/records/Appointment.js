@@ -13,6 +13,8 @@ import {
     TablePagination
 } from '@mui/material';
 import {styled} from '@mui/material/styles';
+import Button from "@mui/material/Button";
+import { useNavigate } from 'react-router-dom';
 
 // Customized TableCell for the header
 const HeaderCell = styled(TableCell)(({theme}) => ({
@@ -51,7 +53,6 @@ const Appointment = () => {
     const appointmentRecords = [
         {
             id: 'A1',
-            department: 'General',
             patientId: 'D1',
             patientName: 'Smith',
             appointmentTime: '2024-04-10 14:00',
@@ -61,7 +62,6 @@ const Appointment = () => {
         },
         {
             id: 'A2',
-            department: 'Pediatrics',
             patientId: 'D2',
             patientName: 'Johnson',
             appointmentTime: '2024-04-11 11:00',
@@ -71,7 +71,6 @@ const Appointment = () => {
         },
         {
             id: 'A3',
-            department: 'Obstetrics and Gynecology',
             patientId: 'D3',
             patientName: 'Williams',
             appointmentTime: '2024-04-15 09:30',
@@ -81,7 +80,6 @@ const Appointment = () => {
         },
         {
             id: 'A4',
-            department: 'Pediatrics',
             patientId: 'D2',
             patientName: 'Johnson',
             appointmentTime: '2024-04-11 11:00',
@@ -91,7 +89,6 @@ const Appointment = () => {
         },
         {
             id: 'A5',
-            department: 'Pediatrics',
             patientId: 'D2',
             patientName: 'Johnson',
             appointmentTime: '2024-04-11 11:00',
@@ -101,7 +98,6 @@ const Appointment = () => {
         },
         {
             id: 'A6',
-            department: 'Pediatrics',
             patientId: 'D2',
             patientName: 'Johnson',
             appointmentTime: '2024-04-11 11:00',
@@ -113,6 +109,7 @@ const Appointment = () => {
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+    const navigate = useNavigate();
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -126,6 +123,16 @@ const Appointment = () => {
     const filteredRecords = appointmentRecords.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
 
+
+    const handleIssuePrescription = (id, patientId) => {
+        navigate(`/doctor/operation/prescribe?id=${id}&patientId=${patientId}`);
+    }
+
+
+    const handleScheduleHealthTest = (id, patientId) => {
+        navigate(`/doctor/operation/healthtest?id=${id}&patientId=${patientId}`);
+    }
+
     return (
         <Container maxWidth="md" sx={{mt: 4}}>
             <Box>
@@ -138,19 +145,22 @@ const Appointment = () => {
                     <TableHead>
                         <TableRow>
                             <HeaderCell>Appointment ID</HeaderCell>
-                            <HeaderCell align="left">Department</HeaderCell>
                             <HeaderCell align="left">Patient</HeaderCell>
                             <HeaderCell align="left">Appointment Time</HeaderCell>
                             <HeaderCell align="left">Description</HeaderCell>
                             <HeaderCell align="left">Status</HeaderCell>
                             <HeaderCell align="left">Result Description</HeaderCell>
+                            <HeaderCell align="left">Actions</HeaderCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {filteredRecords.map((row) => (
-                            <TableRow key={row.id} sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                            <TableRow key={row.id}  sx={{
+                                '&:last-child td, &:last-child th': { border: 0 },
+                                // Adding a border to each row, except the last one
+                                '&:not(:last-child) td, &:not(:last-child) th': { borderBottom: '1px solid #000' }, // Use a darker color and thicker line for emphasis
+                            }}>
                                 <TableCell sx={{ width: '60px' }}>{row.id}</TableCell>
-                                <TableCell align="left">{row.department}</TableCell>
                                 <TableCell align="left" sx={{ width: '120px' }}>
                                     <Box
                                         sx={{
@@ -181,6 +191,23 @@ const Appointment = () => {
                                     </Box>
                                 </TableCell>
                                 <TableCell align="left">{row.result}</TableCell>
+                                <TableCell align="left">
+                                    <Button
+                                        variant="contained"
+                                        disabled={row.status !== 'Accepted'}
+                                        onClick={() => handleIssuePrescription(row.id, row.patientId)}
+                                    >
+                                        Prescribe
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        disabled={row.status !== 'Accepted'}
+                                        onClick={() => handleScheduleHealthTest(row.id, row.patientId)}
+                                        sx={{ mt: 2 }}
+                                    >
+                                        Book Test
+                                    </Button>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -189,11 +216,11 @@ const Appointment = () => {
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
-                count={appointmentRecords.length} // The total number of records
-                rowsPerPage={rowsPerPage} // The number of records per page
-                page={page} // The current page
-                onPageChange={handleChangePage} // Handler for page change
-                onRowsPerPageChange={handleChangeRowsPerPage} // Handler for rows per page change
+                count={appointmentRecords.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
             />
         </Container>
     );

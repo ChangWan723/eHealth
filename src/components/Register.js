@@ -44,6 +44,7 @@ export const Register = () => {
     const [openSuccessDialog, setSuccessDialog] = useState(false);
     const [accountErrors, setAccountErrors] = useState('');
     const [apiError, setApiError] = useState('');
+    const [isFormValid, setIsFormValid] = useState(false);
 
     const [values, setValues] = useState({
         firstName: '',
@@ -56,6 +57,15 @@ export const Register = () => {
         password: '',
         repassword: ''
     });
+
+    const checkFormValidity = () => {
+        const { firstName, lastName, email, password, birthday, address, gender, postcode, repassword } = values;
+        return firstName && lastName && email && password && birthday && address && gender && postcode && repassword;
+    };
+
+    React.useEffect(() => {
+        setIsFormValid(checkFormValidity());
+    }, [values]);
 
     const errorApiMessages = new Map([
         ['serviceUnavailable', 'Service is currently unavailable. Please try again later.'],
@@ -77,7 +87,8 @@ export const Register = () => {
     };
 
     const handleInput = (event) => {
-        setValues(prev => ({...prev, [event.target.name]: [event.target.value]}))
+        const { name, value } = event.target;
+        setValues(prev => ({...prev, [name]: value}));
     }
 
     const handleBirthday = (newBirthday) => {
@@ -268,6 +279,7 @@ export const Register = () => {
                         fullWidth
                         variant="contained"
                         sx={{mt: 3, mb: 2}}
+                        disabled={!isFormValid}
                     >
                         Sign Up
                     </Button>

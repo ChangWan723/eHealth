@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
     Container,
     TextField,
@@ -24,9 +24,10 @@ const Medical = () => {
 
     // State for form fields that can be edited
     const [medicalHistory, setMedicalHistory] = useState({
-        symptoms: 'no',
-        currentMedication: 'no',
-        medicationAllergies: 'no',
+        symptoms: 'N/A',
+        currentMedication: 'N/A',
+        medicationAllergies: 'N/A',
+        testHistory: 'N/A',
         tobaccoUse: 'yes',
         illegalDrugUse: 'no',
         alcoholConsumption: 'Occasionally',
@@ -140,29 +141,49 @@ const Medical = () => {
 
             {/* Editable fields */}
             <TextField
-                label="Symptoms you are currently experiencing"
+                label="Current or past symptoms"
                 name="symptoms"
                 value={medicalHistory.symptoms}
                 onChange={handleInputChange}
                 margin="normal"
                 fullWidth
                 multiline
+                inputProps={{ maxLength: 1000 }}
+                rows={3}
             />
             <TextField
-                label="Medications you are currently taking"
+                label="Medications currently being taken"
                 name="currentMedication"
                 value={medicalHistory.currentMedication}
                 onChange={handleInputChange}
                 margin="normal"
                 fullWidth
+                multiline
+                inputProps={{ maxLength: 1000 }}
+                rows={3}
             />
             <TextField
-                label="Medication allergies you have"
+                label="Medication allergies"
                 name="medicationAllergies"
                 value={medicalHistory.medicationAllergies}
                 onChange={handleInputChange}
                 margin="normal"
                 fullWidth
+                multiline
+                inputProps={{ maxLength: 1000 }}
+                rows={3}
+            />
+
+            <TextField
+                label="History of Health Test Results"
+                name="testHistory"
+                value={medicalHistory.testHistory}
+                onChange={handleInputChange}
+                margin="normal"
+                fullWidth
+                multiline
+                inputProps={{ maxLength: 1000 }}
+                rows={3}
             />
 
             <TextField
@@ -172,6 +193,9 @@ const Medical = () => {
                 onChange={handleInputChange}
                 margin="normal"
                 fullWidth
+                multiline
+                inputProps={{ maxLength: 1000 }}
+                rows={3}
             />
 
             {/* Binary questions */}

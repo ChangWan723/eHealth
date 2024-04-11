@@ -4,14 +4,11 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import {Popover} from "@mui/material";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -27,13 +24,11 @@ import {
 
 export const Login = () => {
     const navigate = useNavigate();
-    const [anchorEl, setAnchorEl] = useState(null);
-    const openPopUp = Boolean(anchorEl);
-    const id = openPopUp ? 'simple-popover' : undefined;
     const [openProgress, setProgress] = useState(false);
     const [openFailDialog, setFailDialog] = useState(false);
     const [accountErrors, setAccountErrors] = useState('');
     const [apiError, setApiError] = useState('');
+    const [isFormValid, setIsFormValid] = useState(false);
     const [values, setValues] = useState({
         email: '',
         password: ''
@@ -45,20 +40,27 @@ export const Login = () => {
         ['unknownError', 'An unknown error occurred. Please contact the administrator.']
     ]);
 
+    const checkFormValidity = () => {
+        const { email, password} = values;
+        return email && password;
+    };
+
+    React.useEffect(() => {
+        setIsFormValid(checkFormValidity());
+    }, [values]);
     const handleFailDialogClose = () => {
         setFailDialog(false);
     };
 
     const handleInput = (event) => {
-        setValues(prev => ({...prev, [event.target.name]: [event.target.value]}))
+        const { name, value } = event.target;
+        setValues(prev => ({...prev, [name]: value}));
     }
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
 
     const handleLogin = () => {
         setProgress(true);
+
+        console.log(values);
 
         const stringValues = Object.fromEntries(
             Object.entries(values).map(([key, value]) => [key, String(value)])
@@ -86,28 +88,9 @@ export const Login = () => {
         });
     }
 
-    function validation() {
-        let errorMessage = '';
-        if (!(String(values.email).trim())) {
-            errorMessage += '・Email is required.\n';
-        }
-
-        if (!(String(values.password).trim())) {
-            errorMessage += '・Password is required.\n';
-        }
-        return errorMessage;
-    }
-
     const handleSubmit = (event) => {
         event.preventDefault();
-        let errorMessage = validation();
-
-        if (!String(errorMessage).trim()) {
-            handleLogin();
-        } else {
-            setAccountErrors(errorMessage);
-            setAnchorEl(event.currentTarget);
-        }
+        handleLogin();
     };
 
     return (
@@ -148,45 +131,15 @@ export const Login = () => {
                             id="password"
                             onChange={handleInput}
                         />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary"/>}
-                            label="Remember me"
-                        />
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
                             sx={{mt: 3, mb: 2}}
+                            disabled={!isFormValid}
                         >
                             Sign In
                         </Button>
-                        <Popover
-                            id={id}
-                            open={openPopUp}
-                            anchorEl={anchorEl}
-                            onClose={handleClose}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'center',
-                            }}
-                            transformOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                        >
-                            <div style={{
-                                whiteSpace: 'pre-wrap',
-                                border: '1px solid #ff0000',
-                                backgroundColor: '#ffe6e6',
-                                padding: '10px',
-                                borderRadius: '5px',
-                                fontFamily: 'Arial, sans-serif',
-                                fontSize: '14px',
-                                color: '#ff0000',
-                            }}>
-                                {accountErrors}
-                            </div>
-                        </Popover>
                         <React.Fragment>
                             <Dialog open={openProgress}>
                                 <div style={{
