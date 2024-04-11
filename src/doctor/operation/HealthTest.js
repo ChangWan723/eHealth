@@ -38,6 +38,7 @@ const HealthTest = () => {
             setError('Please select a time between 08:00 and 20:00.');
             return;
         }
+        setError('');
         console.log(formData);
     };
 

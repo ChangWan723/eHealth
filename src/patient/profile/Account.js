@@ -10,7 +10,7 @@ import {LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFnsV3";
 import {enGB} from "date-fns/locale/en-GB";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
-import RegisterValidation from "../../components/RegisterValidation";
+import RegisterValidation from "../../components/shared/RegisterValidation";
 import Dialog from "@mui/material/Dialog";
 import CircularProgress from "@mui/material/CircularProgress";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -229,6 +229,7 @@ const Account = () => {
                     <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enGB}>
                         <DatePicker
                             label="Birthday *"
+                            maxDate={new Date()}
                             renderInput={(params) => <TextField {...params} />}
                             defaultValue={new Date(accountInfo.birthday)}
                             onChange={(newValue) => handleBirthday(newValue.toDateString())}

@@ -61,18 +61,6 @@ function RegisterValidation(values) {
         errorMessage += '・Gender is required.\n';
     }
 
-/*    if (!(String(values.password).trim())) {
-        errorMessage += '・Password is required.\n';
-    } else if (!passwordRegex.test(String(values.password))) {
-        errorMessage += '・Password must contain at least 8 characters, including 1 uppercase letter, 1 lowercase letter, and 1 number. You only can use the following special characters . _ #\n';
-    }*/
-
-    if (!(String(values.repassword).trim())) {
-        errorMessage += '・Repeat Password is required.\n';
-    } else if (String(values.repassword) !== String(values.password)) {
-        errorMessage += '・Repeat Password must match Password.\n';
-    }
-
     return errorMessage;
 }
 

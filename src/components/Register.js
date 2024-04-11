@@ -10,18 +10,11 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import {
-    FormControl,
-    InputLabel,
-    MenuItem,
-    Popover,
-    Select,
-} from "@mui/material";
+import {FormControl, InputLabel, MenuItem, Select,} from "@mui/material";
 import {LocalizationProvider} from '@mui/x-date-pickers';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFnsV3";
 import {enGB} from "date-fns/locale/en-GB";
-import RegisterValidation from './RegisterValidation'
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -32,19 +25,22 @@ import ErrorIcon from '@mui/icons-material/Error';
 import {red} from "@mui/material/colors";
 import CircularProgress from '@mui/material/CircularProgress';
 import Copyright from "./shared/Copyright";
-import {
-    IconHeartbeat
-} from '@tabler/icons-react';
+import {IconHeartbeat} from '@tabler/icons-react';
+
 export const Register = () => {
-    const [anchorEl, setAnchorEl] = useState(null);
-    const openPopUp = Boolean(anchorEl);
-    const id = openPopUp ? 'simple-popover' : undefined;
     const [openProgress, setProgress] = useState(false);
     const [openFailDialog, setFailDialog] = useState(false);
     const [openSuccessDialog, setSuccessDialog] = useState(false);
     const [accountErrors, setAccountErrors] = useState('');
     const [apiError, setApiError] = useState('');
     const [isFormValid, setIsFormValid] = useState(false);
+
+    const [errors, setErrors] = useState({
+        email: '',
+        postcode: '',
+        password: '',
+        repassword: ''
+    });
 
     const [values, setValues] = useState({
         firstName: '',
@@ -82,10 +78,6 @@ export const Register = () => {
         setSuccessDialog(false);
     };
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
     const handleInput = (event) => {
         const { name, value } = event.target;
         setValues(prev => ({...prev, [name]: value}));
@@ -98,56 +90,58 @@ export const Register = () => {
         }));
     }
 
-    const handleRegister = () => {
-        setProgress(true);
+    function validation() {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9._#]{8,}$/;
+        const postcodeRegex = /^[A-Z]{1,2}[0-9][0-9A-Z]? [0-9][A-Z]{2}$/i;
 
-        const {repassword, ...filteredValues} = values;
-        const stringValues = Object.fromEntries(
-            Object.entries(filteredValues).map(([key, value]) => [key, String(value)])
-        );
+        let isValid = true;
 
-        const url = process.env.REACT_APP_API_PATH + "/users/signup";
-        fetch(url, {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(stringValues)
-        }).then(response => {
-            setProgress(false);
-            if (response.status === 201) {
-                setSuccessDialog(true);
-                return;
-            }
-            if (response.status === 409) {
-                setApiError(errorApiMessages.get('accountExists'));
-            } else if (response.status === 400) {
-                response.json().then(data => {
-                    setApiError(errorApiMessages.get('InputsError') + '\n\n' + data.message);
-                }).catch(error => {
-                    setApiError(errorApiMessages.get('InputsError'));
-                });
-            } else {
-                setApiError(errorApiMessages.get('unknownError'));
-            }
-            setFailDialog(true);
-        }).catch(() => {
-            setProgress(false);
-            setApiError(errorApiMessages.get('serviceUnavailable'));
-            setFailDialog(true);
-        });
+        if (!emailRegex.test(String(values.email))) {
+            setErrors(prev => ({...prev, email: 'Invalid email format.'}));
+            isValid = false;
+        } else {
+            setErrors(prev => ({...prev, email: ''}));
+        }
+
+        if (!postcodeRegex.test(String(values.postcode))) {
+            setErrors(prev => ({...prev, postcode: 'Invalid postcode format.'}));
+            isValid = false;
+        } else {
+            setErrors(prev => ({...prev, postcode: ''}));
+        }
+
+        if (!passwordRegex.test(String(values.password))) {
+            setErrors(prev => ({
+                ...prev, password: '・The password must contain at least 8 characters\n' +
+                    '・The password must contain 1 uppercase letter\n' +
+                    '・The password must contain 1 lowercase letter\n' +
+                    '・The password must contain 1 number\n' +
+                    '・If you want to use special characters, use . _ #\n'
+            }));
+            isValid = false;
+        } else {
+            setErrors(prev => ({...prev, password: ''}));
+        }
+
+        if (String(values.repassword) !== String(values.password)) {
+            setErrors(prev => ({...prev, repassword: 'Repeat Password must match Password.'}));
+            isValid = false;
+        } else {
+            setErrors(prev => ({...prev, repassword: ''}));
+        }
+        return isValid;
     }
-
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        let errorMessage = RegisterValidation(values);
-
-        if (!String(errorMessage).trim()) {
-            handleRegister();
+        if (validation()) {
+            console.log('Form is valid, submitting:', values);
         } else {
-            setAccountErrors(errorMessage);
-            setAnchorEl(event.currentTarget);
+            console.log('Form is invalid, fix errors:', errors);
         }
     };
+
 
     return (
         <Container component="main" maxWidth="xs">
@@ -170,6 +164,7 @@ export const Register = () => {
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                inputProps={{ maxLength: 50 }}
                                 name="firstName"
                                 required
                                 fullWidth
@@ -180,6 +175,7 @@ export const Register = () => {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                inputProps={{ maxLength: 50 }}
                                 required
                                 fullWidth
                                 id="lastName"
@@ -190,26 +186,33 @@ export const Register = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
+                                inputProps={{ maxLength: 50 }}
                                 required
                                 fullWidth
                                 id="email"
                                 label="Email Address"
                                 name="email"
                                 onChange={handleInput}
+                                helperText={errors.email}
+                                error={!!errors.email}
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
+                                inputProps={{ maxLength: 50 }}
                                 required
                                 fullWidth
                                 id="postcode"
                                 label="Postcode"
                                 name="postcode"
                                 onChange={handleInput}
+                                helperText={errors.postcode}
+                                error={!!errors.postcode}
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
+                                inputProps={{ maxLength: 300 }}
                                 required
                                 fullWidth
                                 id="address"
@@ -222,6 +225,7 @@ export const Register = () => {
                             <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enGB}>
                                 <DatePicker
                                     label="Birthday *"
+                                    maxDate={new Date()}
                                     renderInput={(params) => <TextField {...params} />}
                                     onChange={(newValue) => handleBirthday(newValue.toDateString())}
                                 />
@@ -254,6 +258,9 @@ export const Register = () => {
                                 type="password"
                                 id="password"
                                 onChange={handleInput}
+                                helperText={errors.password}
+                                error={!!errors.password}
+                                sx={{ whiteSpace: 'pre-wrap' }}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -265,6 +272,8 @@ export const Register = () => {
                                 type="password"
                                 id="password"
                                 onChange={handleInput}
+                                helperText={errors.repassword}
+                                error={!!errors.repassword}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -283,29 +292,6 @@ export const Register = () => {
                     >
                         Sign Up
                     </Button>
-                    <Popover
-                        id={id}
-                        open={openPopUp}
-                        anchorEl={anchorEl}
-                        onClose={handleClose}
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'center',
-                        }}
-                    >
-                        <div style={{
-                            whiteSpace: 'pre-wrap',
-                            border: '1px solid #ff0000',
-                            backgroundColor: '#ffe6e6',
-                            padding: '10px',
-                            borderRadius: '5px',
-                            fontFamily: 'Arial, sans-serif',
-                            fontSize: '14px',
-                            color: '#ff0000',
-                        }}>
-                            {accountErrors}
-                        </div>
-                    </Popover>
                     <React.Fragment>
                         <Dialog open={openProgress}>
                             <div style={{
