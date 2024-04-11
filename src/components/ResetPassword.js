@@ -5,8 +5,10 @@ const ResetPassword = () => {
     const [email, setEmail] = useState('');
     const [code, setCode] = useState('');
     const [password, setPassword] = useState('');
+    const [rePassword, setRePassword] = useState('');
     const [isEmailValid, setIsEmailValid] = useState(false);
     const [error, setError] = useState('');
+    const [reError, setReError] = useState('');
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9._#]{8,}$/;
 
     const handleEmailChange = (event) => {
@@ -39,10 +41,16 @@ const ResetPassword = () => {
         }
         setError('');
 
+        if (String(rePassword) !== String(password)) {
+            setReError('Repeat Password must match Password.');
+            return;
+        }
+        setReError('');
+
         console.log('Code:', code, 'New Password:', password, 'Email:', email);
     };
 
-    const canSubmit = code.trim() !== '' && password.trim() && isEmailValid;
+    const canSubmit = code.trim() !== '' && password.trim() && rePassword.trim() && isEmailValid;
 
     return (
         <Container component="main" maxWidth="xs">
@@ -99,6 +107,20 @@ const ResetPassword = () => {
                         helperText={error}
                         error={!!error}
                         sx={{ whiteSpace: 'pre-wrap' }}
+                    />
+                    <TextField
+                        inputProps={{maxLength: 50}}
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="repassword"
+                        label="Repeat Password"
+                        type="password"
+                        id="repassword"
+                        onChange={(e) => setRePassword(e.target.value)}
+                        value={rePassword}
+                        helperText={reError}
+                        error={!!reError}
                     />
                     <Button
                         type="submit"
