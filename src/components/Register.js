@@ -26,8 +26,9 @@ import {red} from "@mui/material/colors";
 import CircularProgress from '@mui/material/CircularProgress';
 import Copyright from "./shared/Copyright";
 import {IconHeartbeat} from '@tabler/icons-react';
+import ResetPassword from "./ResetPassword";
 
-export const Register = () => {
+const Register = () => {
     const [openProgress, setProgress] = useState(false);
     const [openFailDialog, setFailDialog] = useState(false);
     const [openSuccessDialog, setSuccessDialog] = useState(false);
@@ -136,11 +137,47 @@ export const Register = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (validation()) {
-            console.log('Form is valid, submitting:', values);
-        } else {
-            console.log('Form is invalid, fix errors:', errors);
+            handleRegister();
         }
     };
+
+    const handleRegister = () => {
+        setProgress(true);
+
+        const {repassword, ...filteredValues} = values;
+        const stringValues = Object.fromEntries(
+            Object.entries(filteredValues).map(([key, value]) => [key, String(value)])
+        );
+
+        const url = process.env.REACT_APP_API_PATH + "/users/signup";
+        fetch(url, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(stringValues)
+        }).then(response => {
+            setProgress(false);
+            if (response.status === 201) {
+                setSuccessDialog(true);
+                return;
+            }
+            if (response.status === 409) {
+                setApiError(errorApiMessages.get('accountExists'));
+            } else if (response.status === 400) {
+                response.json().then(data => {
+                    setApiError(errorApiMessages.get('InputsError') + '\n\n' + data.message);
+                }).catch(error => {
+                    setApiError(errorApiMessages.get('InputsError'));
+                });
+            } else {
+                setApiError(errorApiMessages.get('unknownError'));
+            }
+            setFailDialog(true);
+        }).catch(() => {
+            setProgress(false);
+            setApiError(errorApiMessages.get('serviceUnavailable'));
+            setFailDialog(true);
+        });
+    }
 
 
     return (
@@ -251,6 +288,7 @@ export const Register = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
+                                inputProps={{ maxLength: 50 }}
                                 required
                                 fullWidth
                                 name="password"
@@ -265,6 +303,7 @@ export const Register = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
+                                inputProps={{ maxLength: 50 }}
                                 required
                                 fullWidth
                                 name="repassword"
@@ -357,3 +396,5 @@ export const Register = () => {
         </Container>
     );
 }
+
+export default Register;

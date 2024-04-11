@@ -21,8 +21,9 @@ import Copyright from "./shared/Copyright";
 import {
     IconHeartbeat
 } from '@tabler/icons-react';
+import Register from "./Register";
 
-export const Login = () => {
+const Login = () => {
     const navigate = useNavigate();
     const [openProgress, setProgress] = useState(false);
     const [openFailDialog, setFailDialog] = useState(false);
@@ -174,7 +175,7 @@ export const Login = () => {
                         </React.Fragment>
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2">
+                                <Link href="/reset" variant="body2">
                                     Forgot password?
                                 </Link>
                             </Grid>
@@ -190,3 +191,5 @@ export const Login = () => {
         </Container>
     );
 }
+
+export default Login;

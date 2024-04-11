@@ -1,13 +1,15 @@
 import React, {lazy} from 'react';
 import {Navigate} from 'react-router-dom';
 import Loadable from './layouts/full/shared/loadable/Loadable';
-import {Register} from "./components/Register";
-import {Login} from "./components/Login";
 
 const FullLayout = Loadable(lazy(() => import('./layouts/full/FullLayout')));
 const BlankLayout = Loadable(lazy(() => import('./layouts/blank/BlankLayout')));
 
 const HomePage = Loadable(lazy(() => import('./home/HomePage')));
+const Login = Loadable(lazy(() => import('./components/Login')))
+const Register = Loadable(lazy(() => import('./components/Register')))
+const RestPassword = Loadable(lazy(() => import('./components/ResetPassword')))
+
 
 const Dashboard = Loadable(lazy(() => import('./patient/dashboard/Dashboard')))
 const Application = Loadable(lazy(() => import('./patient/appointment/Application')))
@@ -39,6 +41,7 @@ const Router = [
             {path: '/home', element: <HomePage/>},
             {path: '/register', element: <Register/>},
             {path: '/login', element: <Login/>},
+            {path: '/reset', element: <RestPassword/>},
             {path: '*', element: <Navigate to="/404"/>},
         ],
     },
