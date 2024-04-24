@@ -21,7 +21,6 @@ import Copyright from "./shared/Copyright";
 import {
     IconHeartbeat
 } from '@tabler/icons-react';
-import Register from "./Register";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -75,7 +74,26 @@ const Login = () => {
         }).then(response => {
             setProgress(false);
             if (response.status === 200) {
-                navigate('/dashboard');
+                response.json().then(data => {
+                    let userType = data.userType;
+                    let token = data.token;
+                    if (userType === 'Patient') {
+                        localStorage.setItem('patientEmail', values.email);
+                        localStorage.setItem('userType', 'patient');
+                        localStorage.setItem('token', token);
+                        navigate('/patient');
+                    } else if (userType === 'Doctor') {
+                        localStorage.setItem('doctorEmail', values.email);
+                        localStorage.setItem('userType', 'doctor');
+                        localStorage.setItem('token', token);
+                        navigate('/doctor');
+                    } else if (userType === 'Admin') {
+                        localStorage.setItem('adminEmail', values.email);
+                        localStorage.setItem('userType', 'doctor');
+                        localStorage.setItem('token', token);
+                        navigate('/admin');
+                    }
+                });
             } else if (response.status === 401) {
                 setApiError(errorApiMessages.get('infoIncorrect'));
             } else {

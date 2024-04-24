@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {Box, Button, TextField, Typography, Container} from '@mui/material';
+import {IconHeartbeat} from "@tabler/icons-react";
+import Avatar from "@mui/material/Avatar";
 
 const ResetPassword = () => {
     const [email, setEmail] = useState('');
@@ -55,6 +57,9 @@ const ResetPassword = () => {
     return (
         <Container component="main" maxWidth="xs">
             <Box sx={{marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+                    <IconHeartbeat/>
+                </Avatar>
                 <Typography component="h1" variant="h5">
                     Reset Password
                 </Typography>

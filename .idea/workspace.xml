@@ -5,7 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d754114-e960-4865-a4a0-716461d952cb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/admin/Approval.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin/ResetPwd.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layouts/full/sidebar/AdmMenuItems.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ResetPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ResetPassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/full/header/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/full/header/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/full/sidebar/SidebarItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/full/sidebar/SidebarItems.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/patient/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/dashboard/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/patient/profile/Account.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/profile/Account.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,11 +74,11 @@
       <recent name="E:\front-end code\webCourseWork\e-health\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\front-end code\webCourseWork\e-health\src\layouts\full\sidebar" />
+      <recent name="E:\front-end code\webCourseWork\e-health\src\components\shared" />
       <recent name="E:\front-end code\webCourseWork\e-health\src\theme" />
       <recent name="E:\front-end code\webCourseWork\e-health\src\assets\images\home" />
       <recent name="E:\front-end code\webCourseWork\e-health\src\home" />
-      <recent name="E:\front-end code\webCourseWork\e-health\src\home\components" />
-      <recent name="E:\front-end code\webCourseWork\e-health\src\components\shared" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -102,6 +114,13 @@
       <workItem from="1712425989666" duration="9785000" />
       <workItem from="1712513940920" duration="25000" />
       <workItem from="1712762021131" duration="1279000" />
+      <workItem from="1712848972415" duration="18564000" />
+      <workItem from="1712876240084" duration="25000" />
+      <workItem from="1713817546095" duration="3350000" />
+      <workItem from="1713822611844" duration="598000" />
+      <workItem from="1713876933669" duration="832000" />
+      <workItem from="1713898012966" duration="3761000" />
+      <workItem from="1713976382447" duration="2612000" />
     </task>
     <servers />
   </component>

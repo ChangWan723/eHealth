@@ -32,6 +32,9 @@ const DocPrescription = Loadable(lazy(() => import('./doctor/records/Prescriptio
 const DocAccount = Loadable(lazy(() => import('./doctor/profile/Account')))
 const DocResetPwd = Loadable(lazy(() => import('./doctor/profile/ResetPwd')))
 
+const Approval = Loadable(lazy(() => import('./admin/Approval')))
+const AdmResetPwd = Loadable(lazy(() => import('./admin/ResetPwd')))
+
 const Router = [
     {
         path: '/',
@@ -76,6 +79,15 @@ const Router = [
             {path: '/doctor/profile/account', exact: true, element: <DocAccount/>},
             {path: '/doctor/profile/resetpwd', exact: true, element: <DocResetPwd/>},
             {path: '*', element: <Navigate to="/doctor/404"/>},
+        ],
+    },
+    {
+        path: '/admin',
+        element: <FullLayout/>,
+        children: [
+            {path: '/admin', exact: true, element: <Approval/>},
+            {path: '/admin/resetpwd', exact: true, element: <ResetPwd/>},
+            {path: '*', element: <Navigate to="/patient/404"/>},
         ],
     }
 ];

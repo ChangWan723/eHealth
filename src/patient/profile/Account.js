@@ -20,6 +20,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
 const Account = () => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -28,6 +29,8 @@ const Account = () => {
     const [openProgress, setProgress] = useState(false);
     const [openFailDialog, setFailDialog] = useState(false);
     const [openSuccessDialog, setSuccessDialog] = useState(false);
+    const [openCancelDialog, setCancelDialog] = useState(false);
+    const [deleteRegister, setDeleteRegister] = useState('');
     const [accountErrors, setAccountErrors] = useState('');
     const [apiError, setApiError] = useState('');
 
@@ -131,6 +134,25 @@ const Account = () => {
             setAccountErrors(errorMessage);
             setAnchorEl(event.currentTarget);
         }
+    }
+
+    function handleCancel() {
+        setCancelDialog(true);
+    }
+
+    function handleCancelDialogClose() {
+        setCancelDialog(false);
+    }
+
+    function isFormValid() {
+        return deleteRegister === 'delete';
+    }
+
+    function deleteAccount() {
+        setDeleteRegister('');
+        setCancelDialog(false);
+
+
     }
 
     return (
@@ -247,6 +269,15 @@ const Account = () => {
             >
                 Update
             </Button>
+            <Button
+                fullWidth
+                variant="contained"
+                color="error"
+                sx={{mt: 3, mb: 2}}
+                onClick={handleCancel}
+            >
+                Cancel Registration
+            </Button>
             <Popover
                 id={id}
                 open={openPopUp}
@@ -318,6 +349,50 @@ const Account = () => {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleSuccessDialogClose}>OK</Button>
+                    </DialogActions>
+                </Dialog>
+                <Dialog
+                    open={openCancelDialog}
+                    onClose={handleCancelDialogClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        <WarningAmberIcon color="error"/>
+                        {"   Note: This is a Dangerous Operation!"}
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            This action will delete your account. In accordance with GDPR principles, we will delete all information about you, so please proceed with caution.
+                        </DialogContentText>
+
+                        <br/>
+
+                        <DialogContentText id="alert-dialog-description2">
+                            If you are sure you want to delete your account and information, please enter "delete" below and click Confirm.
+                        </DialogContentText>
+
+                        <br/>
+
+                        <DialogContentText id="alert-dialog-description2">
+                            Note: The act is irrevocable!
+                        </DialogContentText>
+
+                        <br/>
+
+                        <TextField
+                            inputProps={{ maxLength: 50 }}
+                            autoFocus
+                            margin="normal"
+                            id="description"
+                            label="Cancel"
+                            type="text"
+                            fullWidth
+                            onChange={(e) => setDeleteRegister(e.target.value)}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={deleteAccount} disabled={!isFormValid()}>Confirm</Button>
                     </DialogActions>
                 </Dialog>
             </React.Fragment>

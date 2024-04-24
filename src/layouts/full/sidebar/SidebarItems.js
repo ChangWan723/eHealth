@@ -5,6 +5,7 @@ import {Box, List} from '@mui/material';
 import NavItem from './NavItem';
 import NavGroup from './NavGroup/NavGroup';
 import DocMenuitems from "./DocMenuItems";
+import AdmMenuitems from "./AdmMenuItems";
 
 const SidebarItems = () => {
     const {pathname} = useLocation();
@@ -23,6 +24,8 @@ const SidebarItems = () => {
         itemsToRender = Menuitems;
     } else if (userType === 'doctor') {
         itemsToRender = DocMenuitems;
+    } else if (userType === 'admin') {
+        itemsToRender = AdmMenuitems;
     }
     return (
         <Box sx={{px: 3}}>

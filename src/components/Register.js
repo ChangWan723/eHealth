@@ -378,7 +378,7 @@ const Register = () => {
                                 </DialogContentText>
                             </DialogContent>
                             <DialogActions>
-                                <Button href="/auth/login">Sign in</Button>
+                                <Button href="/login">Sign in</Button>
                                 <Button onClick={handleSuccessDialogClose}>OK</Button>
                             </DialogActions>
                         </Dialog>

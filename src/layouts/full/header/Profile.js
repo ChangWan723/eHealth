@@ -48,7 +48,7 @@ const Profile = () => {
         img = DoctorImg;
     } else if (userType === 'patient') {
         img = PatientImg;
-    } else if (userType === 'doctor') {
+    } else if (userType === 'admin') {
         img = AdminImg;
     }
 
@@ -138,7 +138,7 @@ const Profile = () => {
                 )}
 
                 <Box mt={1} py={1} px={2}>
-                    <Button to="/login" variant="outlined" color="primary" component={Link} fullWidth>
+                    <Button to="/home" variant="outlined" color="primary" component={Link} fullWidth>
                         Logout
                     </Button>
                 </Box>
