@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Table,
     TableBody,
@@ -48,71 +48,38 @@ const getStatusStyle = (status) => {
 
 const Appointment = () => {
 
-    const appointmentRecords = [
-        {
-            id: 'A1',
-            department: 'General',
-            doctorId: 'D1',
-            doctorName: 'Dr. Smith',
-            appointmentTime: '2024-04-10 14:00',
-            description: 'Routine check-up',
-            status: 'Pending',
-            result: 'N/A'
-        },
-        {
-            id: 'A2',
-            department: 'Pediatrics',
-            doctorId: 'D2',
-            doctorName: 'Dr. Johnson',
-            appointmentTime: '2024-04-11 11:00',
-            description: 'Regular vaccination',
-            status: 'Accepted',
-            result: 'Vaccination Accepted successfully'
-        },
-        {
-            id: 'A3',
-            department: 'Obstetrics and Gynecology',
-            doctorId: 'D3',
-            doctorName: 'Dr. Williams',
-            appointmentTime: '2024-04-15 09:30',
-            description: 'Consultation',
-            status: 'Rejected',
-            result: 'Appointment rescheduled'
-        },
-        {
-            id: 'A4',
-            department: 'Pediatrics',
-            doctorId: 'D2',
-            doctorName: 'Dr. Johnson',
-            appointmentTime: '2024-04-11 11:00',
-            description: 'Regular vaccination',
-            status: 'Accepted',
-            result: 'Vaccination Accepted successfully'
-        },
-        {
-            id: 'A5',
-            department: 'Pediatrics',
-            doctorId: 'D2',
-            doctorName: 'Dr. Johnson',
-            appointmentTime: '2024-04-11 11:00',
-            description: 'Regular vaccination',
-            status: 'Accepted',
-            result: 'Vaccination Accepted successfully'
-        },
-        {
-            id: 'A6',
-            department: 'Pediatrics',
-            doctorId: 'D2',
-            doctorName: 'Dr. Johnson',
-            appointmentTime: '2024-04-11 11:00',
-            description: 'Regular vaccination',
-            status: 'Accepted',
-            result: 'Vaccination Accepted successfully'
-        },
-    ];
+    const [appointmentRecords, setAppointmentRecords] = useState([]);
+
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+
+    useEffect(() => {
+        const url = process.env.REACT_APP_API_PATH + "/patients/appointments";
+
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                const formattedAppointments = data.appointments.map(appointment => ({
+                    id: appointment._id,
+                    department: appointment.doctor.department,
+                    doctorId: appointment.doctor._id,
+                    doctorName: `${appointment.doctor.firstName} ${appointment.doctor.lastName}`,
+                    appointmentTime: appointment.appointmentTime,
+                    description: appointment.description,
+                    status: appointment.status,
+                    result: appointment.processingInstruction
+                }));
+                setAppointmentRecords(formattedAppointments);
+            })
+            .catch(error => console.error('Error fetching appointments:', error));
+    }, []);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
