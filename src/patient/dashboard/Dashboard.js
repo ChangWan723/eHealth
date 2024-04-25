@@ -9,6 +9,8 @@ import DashboardCard from "../../components/shared/DashboardCard";
 
 
 const Dashboard = () => {
+    localStorage.setItem('userType', 'patient');
+
     return (
         <PageContainer title="eHealth" description="eHealth">
             <Box>

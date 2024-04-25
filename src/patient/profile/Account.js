@@ -1,9 +1,14 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
+    Button,
     Container,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Popover,
+    Select,
     TextField,
-    Typography,
-    Button, FormControl, InputLabel, Select, MenuItem, Popover
+    Typography
 } from '@mui/material';
 import Grid from "@mui/material/Grid";
 import {LocalizationProvider} from "@mui/x-date-pickers";
@@ -34,16 +39,15 @@ const Account = () => {
     const [accountErrors, setAccountErrors] = useState('');
     const [apiError, setApiError] = useState('');
 
-    // State for form fields that can be edited
     const [accountInfo, setAccountInfo] = useState({
-        patientId: '123456789',
-        firstName: 'Jane',
-        lastName: 'Doe',
-        email: 'jane.doe@example.com',
-        postcode: 'SO15 1DP',
-        address: 'Mayflower Halls of Residence, West Park Road',
-        birthday: 'Fri Mar 22 2001',
-        gender: 'Female',
+        patientId: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        postcode: '',
+        address: '',
+        birthday: '',
+        gender: '',
     });
 
     const errorApiMessages = new Map([
@@ -51,6 +55,36 @@ const Account = () => {
         ['InputsError', 'Some of the information you input may be out of specification.'],
         ['unknownError', 'An unknown error occurred. ']
     ]);
+
+
+
+    useEffect(() => {
+        const url = process.env.REACT_APP_API_PATH + "/patients/info?patientId=" + localStorage.getItem('patientId');
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.count > 0) {
+                    const patient = data.patients[0];
+                    setAccountInfo({
+                        patientId: patient._id,
+                        firstName: patient.firstName,
+                        lastName: patient.lastName,
+                        email: patient.email,
+                        postcode: patient.postcode,
+                        address: patient.address,
+                        birthday: patient.birthday,
+                        gender: patient.gender,
+                    });
+                }
+            })
+            .catch(error => console.error('Error fetching patient info:', error));
+    }, []);
 
     const handleFailDialogClose = () => {
         setFailDialog(false);
@@ -253,7 +287,7 @@ const Account = () => {
                             label="Birthday *"
                             maxDate={new Date()}
                             renderInput={(params) => <TextField {...params} />}
-                            defaultValue={new Date(accountInfo.birthday)}
+                            value={new Date(accountInfo.birthday)}
                             onChange={(newValue) => handleBirthday(newValue.toDateString())}
                         />
                     </LocalizationProvider>

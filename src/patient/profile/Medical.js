@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Container,
     TextField,
@@ -15,11 +15,11 @@ import {
 const Medical = () => {
     // Assume this state is fetched from an API
     const [patientData, setPatientData] = useState({
-        patientId: '123456789',
-        firstName: 'Jane',
-        lastName: 'Doe',
-        email: 'jane.doe@example.com',
-        gender: 'Female',
+        patientId: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        gender: '',
     });
 
     // State for form fields that can be edited
@@ -33,6 +33,31 @@ const Medical = () => {
         alcoholConsumption: 'Occasionally',
         otherNotes: '',
     });
+
+    useEffect(() => {
+        const url = process.env.REACT_APP_API_PATH + "/patients/info?patientId=" + localStorage.getItem('patientId');
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.count > 0) {
+                    const patient = data.patients[0];
+                    setPatientData({
+                        patientId: patient._id,
+                        firstName: patient.firstName,
+                        lastName: patient.lastName,
+                        email: patient.email,
+                        gender: patient.gender,
+                    });
+                }
+            })
+            .catch(error => console.error('Error fetching patient info:', error));
+    }, []);
 
     // Handle changes in the editable form fields
     const handleInputChange = (event) => {

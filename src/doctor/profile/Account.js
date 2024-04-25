@@ -242,7 +242,7 @@ const Account = () => {
                             label="Birthday *"
                             maxDate={new Date()}
                             renderInput={(params) => <TextField {...params} />}
-                            defaultValue={new Date(accountInfo.birthday)}
+                            value={new Date(accountInfo.birthday)}
                             onChange={(newValue) => handleBirthday(newValue.toDateString())}
                         />
                     </LocalizationProvider>

@@ -5,19 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d754114-e960-4865-a4a0-716461d952cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/admin/Approval.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin/ResetPwd.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/layouts/full/sidebar/AdmMenuItems.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ResetPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ResetPassword.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/full/header/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/full/header/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/full/sidebar/SidebarItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/full/sidebar/SidebarItems.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/patient/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/dashboard/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/patient/profile/Account.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/profile/Account.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +109,8 @@
       <workItem from="1713822611844" duration="598000" />
       <workItem from="1713876933669" duration="832000" />
       <workItem from="1713898012966" duration="3761000" />
-      <workItem from="1713976382447" duration="2612000" />
+      <workItem from="1713976382447" duration="3562000" />
+      <workItem from="1713980016548" duration="1652000" />
     </task>
     <servers />
   </component>

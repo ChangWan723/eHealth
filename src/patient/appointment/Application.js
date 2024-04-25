@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Container, TextField, MenuItem, Button, Typography, Grid, Paper } from '@mui/material';
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
 
 const Application = () => {
-    const patientInfo = {
-        id: "123456",
-        name: "John Doe"
+    const [responseMessage, setResponseMessage] = useState('');
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
     };
 
     const departments = [
@@ -16,22 +23,45 @@ const Application = () => {
     ];
 
     // Dummy data for doctors by department
-    const doctorsByDepartment = {
-        'General': ['Dr. Smith', 'Dr. Brown'],
-        'Internal Medicine': ['Dr. Wilson'],
-        'Surgery': ['Dr. Taylor', 'Dr. Moore'],
-        'Obstetrics and Gynecology': ['Dr. Jones'],
-        'Pediatrics': ['Dr. Davis', 'Dr. Garcia'],
-    };
+    const [doctorsByDepartment, setDoctorsByDepartment] = useState({
+        'General': [],
+        'Internal Medicine': [],
+        'Surgery': [],
+        'Obstetrics and Gynecology': [],
+        'Pediatrics': [],
+    });
 
     const [appointment, setAppointment] = useState({
-        patientId: patientInfo.id,
-        patientName: patientInfo.name,
+        patientId: '',
+        patientName: '',
         department: '',
         doctor: '',
         appointmentTime: '',
         description: '',
     });
+
+    useEffect(() => {
+        appointment.patientId = localStorage.getItem('patientId');
+        appointment.patientName = localStorage.getItem('patientName');
+
+        const url = process.env.REACT_APP_API_PATH + "/doctors/info";
+        fetch(url, {
+            method: "GET",
+            headers: {"Content-Type": "application/json"},
+        }) .then(response => response.json())
+            .then(data => {
+                const newDoctorsByDepartment = {};
+                data.doctors.forEach(doctor => {
+                    const fullName = `Dr. ${doctor.firstName.trim()} ${doctor.lastName.trim()} (${doctor._id})`;
+                    if (!newDoctorsByDepartment[doctor.department]) {
+                        newDoctorsByDepartment[doctor.department] = [];
+                    }
+                    newDoctorsByDepartment[doctor.department].push(fullName);
+                });
+                setDoctorsByDepartment(prev => ({ ...prev, ...newDoctorsByDepartment }));
+            })
+            .catch(error => console.error('Failed to fetch doctors:', error));
+    }, []);
 
     // Fetch doctors based on selected department
     const [availableDoctors, setAvailableDoctors] = useState([]);
@@ -64,23 +94,51 @@ const Application = () => {
         event.preventDefault();
         if (!isFormValid()) return;
 
-        try {
-            const response = fetch('/users/appointments', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // Add authentication headers here if needed
-                },
-                body: JSON.stringify(appointment),
+        const extractDoctorId = (doctorString) => {
+            const match = doctorString.match(/\(([^)]+)\)/);
+            return match ? match[1] : null;
+        };
+
+        const doctorId = extractDoctorId(appointment.doctor);
+
+        const appointmentDetails = {
+            patientId: appointment.patientId,
+            doctorId: doctorId,
+            appointmentTime: appointment.appointmentTime,
+            description: appointment.description
+        };
+
+        const url = process.env.REACT_APP_API_PATH + "/patients/appointments";
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            body: JSON.stringify(appointmentDetails)
+        })
+            .then(response => {
+                if (response.status === 201) {
+                    return response.json();
+                } else if (response.status === 401 || response.status === 404 || response.status === 500) {
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong');
+                }
+            })
+            .then(data => {
+                if (data.message) {
+                    setResponseMessage(data.message);
+                } else if (data.error) {
+                    setResponseMessage(data.error.message);
+                }
+                setOpenDialog(true);
+            })
+            .catch(error => {
+                setResponseMessage(error.message);
+                setOpenDialog(true);
             });
-            if (!response.ok) throw new Error('Failed to create appointment');
-            // Handle response data here
-            alert('Appointment booked successfully');
-        } catch (err) {
-
-        } finally {
-
-        }
     };
 
     return (
@@ -196,6 +254,19 @@ const Application = () => {
                     </Grid>
                 </Grid>
             </form>
+            <Dialog open={openDialog} onClose={handleCloseDialog}>
+                <DialogTitle>{"Response"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        {responseMessage}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseDialog} autoFocus>
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Container>
     );
 };

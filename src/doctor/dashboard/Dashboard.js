@@ -18,17 +18,16 @@ const Dashboard = () => {
                     <Grid item xs={12} lg={12}>
                         <DataOverview />
                     </Grid>
+                    <Grid item xs={12} lg={12} >
+                        <DashboardCard title="Nearby Pharmacies">
+                            <HealthMap/>
+                        </DashboardCard>
+                    </Grid>
                     <Grid item xs={12} lg={5}>
                         <RecentHealthTest />
                     </Grid>
                     <Grid item xs={12} lg={7}>
                         <RecentAppointment />
-                    </Grid>
-
-                    <Grid item xs={12} lg={12} >
-                        <DashboardCard title="Nearby Pharmacies">
-                            <HealthMap/>
-                        </DashboardCard>
                     </Grid>
                 </Grid>
             </Box>

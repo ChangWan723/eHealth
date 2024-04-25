@@ -132,6 +132,29 @@ export default function FAQ() {
             </Typography>
           </AccordionDetails>
         </Accordion>
+        <Accordion
+            expanded={expanded === 'panel5'}
+            onChange={handleChange('panel5')}
+        >
+          <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel5d-content"
+              id="panel5d-header"
+          >
+            <Typography component="h3" variant="subtitle2">
+              Who should I contact if I want to consult services?
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography
+                variant="body2"
+                gutterBottom
+                sx={{ maxWidth: { sm: '100%', md: '70%' } }}
+            >
+              If you would like to consult about the services provided by the practice or have any other questions, you can contact us by email at consult@ehealth.com.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
       </Box>
     </Container>
   );

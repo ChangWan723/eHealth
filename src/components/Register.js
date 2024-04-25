@@ -26,7 +26,6 @@ import {red} from "@mui/material/colors";
 import CircularProgress from '@mui/material/CircularProgress';
 import Copyright from "./shared/Copyright";
 import {IconHeartbeat} from '@tabler/icons-react';
-import ResetPassword from "./ResetPassword";
 
 const Register = () => {
     const [openProgress, setProgress] = useState(false);
@@ -370,11 +369,11 @@ const Register = () => {
                         >
                             <DialogTitle id="alert-dialog-title">
                                 <DoneAllIcon color="success"/>
-                                {"   Sign Up Successfully!"}
+                                {"   Successfully!"}
                             </DialogTitle>
                             <DialogContent>
                                 <DialogContentText id="alert-dialog-description">
-                                    This account has been successfully registered, you can sign in now!
+                                    A registration request has been successfully sent for this account. However, your registration needs to be approved by an administrator before you can sign in. Please wait patiently. Thank you!
                                 </DialogContentText>
                             </DialogContent>
                             <DialogActions>

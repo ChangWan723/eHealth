@@ -77,19 +77,27 @@ const Login = () => {
                 response.json().then(data => {
                     let userType = data.userType;
                     let token = data.token;
+                    let name = data.userName;
+                    let id = data.id;
                     if (userType === 'Patient') {
                         localStorage.setItem('patientEmail', values.email);
                         localStorage.setItem('userType', 'patient');
+                        localStorage.setItem('patientId', id);
+                        localStorage.setItem('patientName', name);
                         localStorage.setItem('token', token);
                         navigate('/patient');
                     } else if (userType === 'Doctor') {
                         localStorage.setItem('doctorEmail', values.email);
                         localStorage.setItem('userType', 'doctor');
+                        localStorage.setItem('doctorId', id);
+                        localStorage.setItem('doctorName', name);
                         localStorage.setItem('token', token);
                         navigate('/doctor');
                     } else if (userType === 'Admin') {
                         localStorage.setItem('adminEmail', values.email);
                         localStorage.setItem('userType', 'doctor');
+                        localStorage.setItem('adminId', id);
+                        localStorage.setItem('adminName', name);
                         localStorage.setItem('token', token);
                         navigate('/admin');
                     }
