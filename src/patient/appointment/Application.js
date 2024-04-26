@@ -104,12 +104,11 @@ const Application = () => {
         const appointmentDetails = {
             patientId: appointment.patientId,
             doctorId: doctorId,
-            appointmentTime: appointment.appointmentTime,
+            appointmentTime: appointment.appointmentTime.replace('T', ' '),
             description: appointment.description
         };
 
         const url = process.env.REACT_APP_API_PATH + "/patients/appointments";
-
         fetch(url, {
             method: 'POST',
             headers: {
@@ -119,9 +118,7 @@ const Application = () => {
             body: JSON.stringify(appointmentDetails)
         })
             .then(response => {
-                if (response.status === 201) {
-                    return response.json();
-                } else if (response.status === 401 || response.status === 404 || response.status === 500) {
+                if (response.status === 201 || response.status === 401 || response.status === 404 || response.status === 500) {
                     return response.json();
                 } else {
                     throw new Error('Something went wrong');

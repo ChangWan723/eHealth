@@ -14,52 +14,10 @@ import {
     Stack, MenuItem
 } from '@mui/material';
 
-const mockAppointments = [
-    {
-        appointmentId: 'APPT001',
-        department: 'Cardiology',
-        patientId: 'PT001',
-        patientName: 'John Doe',
-        appointmentTime: '2024-01-24 10:00',
-        description: 'Routine heart checkup',
-    }, {
-        appointmentId: 'APPT002',
-        department: 'Dermatology',
-        patientId: 'PT002',
-        patientName: 'Jane Smith',
-        appointmentTime: '2024-02-15 09:30',
-        description: 'Annual skin check',
-    },
-    {
-        appointmentId: 'APPT003',
-        department: 'Orthopedics',
-        patientId: 'PT003',
-        patientName: 'Michael Johnson',
-        appointmentTime: '2024-03-20 14:00',
-        description: 'Follow-up on knee surgery',
-    },
-    {
-        appointmentId: 'APPT004',
-        department: 'Pediatrics',
-        patientId: 'PT004',
-        patientName: 'Lucy Brown',
-        appointmentTime: '2024-04-10 11:00',
-        description: 'Regular child examination',
-    }
-    // ... more appointments
-];
-
-const doctorsByDepartment = {
-    'General': ['Dr. Smith', 'Dr. Brown'],
-    'Internal Medicine': ['Dr. Wilson'],
-    'Surgery': ['Dr. Taylor', 'Dr. Moore'],
-    'Obstetrics and Gynecology': ['Dr. Jones'],
-    'Pediatrics': ['Dr. Davis', 'Dr. Garcia'],
-};
-
-const departments = Object.keys(doctorsByDepartment);
-
 const PendingAppointment = () => {
+    const [pendingAppointments, setPendingAppointments] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [dialogContent, setDialogContent] = useState('');
     const [openDialog, setOpenDialog] = useState(false);
     const [dialogType, setDialogType] = useState('');
     const [selectedAppointment, setSelectedAppointment] = useState(null);
@@ -67,6 +25,15 @@ const PendingAppointment = () => {
     const minDateTime = new Date(new Date().getTime() + 60 * 60 * 1000).toISOString().slice(0, 16);
     const maxDateTime = new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 16);
 
+    const [doctorsByDepartment, setDoctorsByDepartment] = useState({
+        'General': [],
+        'Internal Medicine': [],
+        'Surgery': [],
+        'Obstetrics and Gynecology': [],
+        'Pediatrics': [],
+    });
+
+    const departments = Object.keys(doctorsByDepartment);
 
     const [dialogDescription, setDialogDescription] = useState('');
     const [reAppointment, setReAppointment] = useState({
@@ -74,6 +41,55 @@ const PendingAppointment = () => {
         doctor: '',
         appointmentTime: '',
     });
+
+    useEffect(() => {
+        const url = process.env.REACT_APP_API_PATH + "/doctors/appointments";
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                const formattedAppointments = data.appointments
+                    .filter(appointment => appointment.status === "Pending")
+                    .map(appointment => ({
+                        appointmentId: appointment._id,
+                        department: appointment.doctor.department,
+                        patientId: appointment.patient._id,
+                        patientName: `${appointment.patient.firstName} ${appointment.patient.lastName}`,
+                        appointmentTime: appointment.appointmentTime,
+                        description: appointment.description
+                }));
+                setPendingAppointments(formattedAppointments);
+            })
+            .catch(error => console.error('Error fetching appointments:', error));
+
+        const urlInfo = process.env.REACT_APP_API_PATH + "/doctors/info";
+        fetch(urlInfo, {
+            method: "GET",
+            headers: {"Content-Type": "application/json"},
+        }) .then(response => response.json())
+            .then(data => {
+                const newDoctorsByDepartment = {};
+                data.doctors.forEach(doctor => {
+                    const fullName = `Dr. ${doctor.firstName.trim()} ${doctor.lastName.trim()} (${doctor._id})`;
+                    if (!newDoctorsByDepartment[doctor.department]) {
+                        newDoctorsByDepartment[doctor.department] = [];
+                    }
+                    newDoctorsByDepartment[doctor.department].push(fullName);
+                });
+                setDoctorsByDepartment(prev => ({ ...prev, ...newDoctorsByDepartment }));
+            })
+            .catch(error => console.error('Failed to fetch doctors:', error));
+    }, []);
+
+    const handleClose = () => {
+        setOpen(false);
+        window.location.reload();
+    };
 
     const handleOpenDialog = (type, appointment) => {
         setDialogType(type);
@@ -86,12 +102,64 @@ const PendingAppointment = () => {
         setOpenDialog(false);
     };
 
+    const extractDoctorId = (doctorString) => {
+        const match = doctorString.match(/\(([^)]+)\)/);
+        return match ? match[1] : null;
+    };
+
     const handleDialogSubmit = () => {
-        if (dialogType === 'Reschedule') {
-            console.log(`Rescheduled appointment ID: ${selectedAppointment.appointmentId}, New: ${reAppointment.appointmentTime}, ${reAppointment.department},${reAppointment.doctor}`);
+        const url = process.env.REACT_APP_API_PATH + "/doctors/handleAppointment";
+
+        let requestBody;
+
+        if (dialogType === 'Accept') {
+            requestBody = {
+                appointmentId: selectedAppointment.appointmentId,
+                accept: dialogDescription
+            };
+        } else if (dialogType === 'Reject') {
+            requestBody = {
+                appointmentId: selectedAppointment.appointmentId,
+                reject: dialogDescription
+            };
         } else {
-            console.log(`Submitted for appointment ID: ${selectedAppointment.appointmentId}, Description: ${dialogDescription}`);
+            requestBody = {
+                appointmentId: selectedAppointment.appointmentId,
+                reschedule: {
+                    appointmentTime: reAppointment.appointmentTime.replace('T', ' '),
+                    doctor: extractDoctorId(reAppointment.doctor)
+                }
+            };
         }
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            body: JSON.stringify(requestBody)
+        })
+            .then(response => {
+                if (response.status === 201 || response.status === 401 || response.status === 404 || response.status === 500) {
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong');
+                }
+            })
+            .then(data => {
+                if (data.message) {
+                    setDialogContent(data.message);
+                } else {
+                    setDialogContent(data.error);
+                }
+                setOpen(true);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                setDialogContent('An error occurred while processing the request.');
+                setOpen(true);
+            });
 
         setDialogDescription('');
         handleCloseDialog();
@@ -126,9 +194,9 @@ const PendingAppointment = () => {
                     Pending Appointments
                 </Typography>
             </Box>
-            {mockAppointments.length > 0 ? (
+            {pendingAppointments.length > 0 ? (
                 <Stack spacing={2}>
-                    {mockAppointments.map((appointment) => (
+                    {pendingAppointments.map((appointment) => (
                         <Card key={appointment.appointmentId} sx={{boxShadow: 5}}>
                             <CardContent sx={{p: 2}}>
                                 <Typography variant="h6" fontWeight="bold" gutterBottom>
@@ -259,6 +327,15 @@ const PendingAppointment = () => {
                 <DialogActions>
                     <Button onClick={handleCloseDialog}>Cancel</Button>
                     <Button onClick={handleDialogSubmit} disabled={!isFormValid()}>Submit</Button>
+                </DialogActions>
+            </Dialog>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Appointment Status</DialogTitle>
+                <DialogContent>
+                    <Typography>{dialogContent}</Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Close</Button>
                 </DialogActions>
             </Dialog>
         </Box>
