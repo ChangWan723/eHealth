@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import DashboardCard from 'src/components/shared/DashboardCard';
 import {
   Timeline,
@@ -10,36 +10,6 @@ import {
   TimelineContent,
 } from '@mui/lab';
 import {Typography, Link, Box} from '@mui/material';
-
-// 模拟的健康测试数据
-const healthTests = [
-  {
-    time: '2024-03-02 09:30',
-    content: 'Blood Pressure Measurement',
-    status: 'Pending',
-  },
-  {
-    time: '2024-03-01 09:30',
-    content: 'Routine Blood Test',
-    status: 'Completed',
-  },
-  {
-    time: '2024-02-05 09:30',
-    content: 'X-Ray',
-    status: 'Not Attended',
-  },
-  {
-    time: '2024-02-01 09:30',
-    content: 'Routine Blood Test',
-    status: 'Completed',
-  },
-  {
-    time: '2024-01-01 09:30',
-    content: 'Routine Blood Test',
-    status: 'Completed',
-  },
-  // 更多测试数据...
-];
 
 // 根据测试状态返回不同颜色
 const getColorForStatus = (status) => {
@@ -69,6 +39,30 @@ const getStatusStyle = (status) => {
 };
 
 const RecentHealthTest = () => {
+  const [healthTests, setHealthTests] = useState([]);
+
+  useEffect(() => {
+    const url = process.env.REACT_APP_API_PATH + "/patients/tests";
+
+
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    })
+        .then(response => response.json())
+        .then(data => {
+          const formatted = data.tests.slice(0, 5).map(test => ({
+            content: test.testContent,
+            time: test.testTime,
+            status: test.status,
+          }));
+          setHealthTests(formatted);
+        })
+        .catch(error => console.error('Error fetching appointments:', error));
+  }, []);
+
   return (
       <DashboardCard title="Recent Health Test">
         <Timeline sx={{
@@ -97,9 +91,6 @@ const RecentHealthTest = () => {
               </TimelineItem>
           ))}
         </Timeline>
-        <Link color="primary" href="/patient/records/healthtest">
-          See More Health Test
-        </Link>
       </DashboardCard>
   );
 };

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Paper,
     Table,
@@ -22,65 +22,33 @@ const HeaderCell = styled(TableCell)(({theme}) => ({
 }));
 
 const Prescription = () => {
-    // Dummy data for prescription history
-    const prescriptions = [
-        // Add more records as needed for pagination
-        {
-            id: 'RX123',
-            symptoms: 'Cough and fever',
-            appointmentId: '123456',
-            doctorId: 'D1001',
-            doctorName: 'Dr. Smith',
-            prescription: 'Paracetamol, Cough Syrup',
-            time: '2024-04-11 11:00',
-        },
-        {
-            id: 'RX124',
-            symptoms: 'Cough and fever',
-            appointmentId: '123456',
-            doctorId: 'D1001',
-            doctorName: 'Dr. Smith',
-            prescription: 'Paracetamol, Cough Syrup',
-            time: '2024-04-11 11:00',
-        },
-        {
-            id: 'RX125',
-            symptoms: 'Cough and fever',
-            appointmentId: '123456',
-            doctorId: 'D1001',
-            doctorName: 'Dr. Smith',
-            prescription: 'Paracetamol, Cough Syrup',
-            time: '2024-04-11 11:00',
-        },
-        {
-            id: 'RX126',
-            symptoms: 'Cough and fever',
-            appointmentId: '123456',
-            doctorId: 'D1001',
-            doctorName: 'Dr. Smith',
-            prescription: 'Paracetamol, Cough Syrup',
-            time: '2024-04-11 11:00',
-        },
-        {
-            id: 'RX127',
-            symptoms: 'Cough and fever',
-            appointmentId: '123456',
-            doctorId: 'D1001',
-            doctorName: 'Dr. Smith',
-            prescription: 'Paracetamol, Cough Syrup',
-            time: '2024-04-11 11:00',
-        },
-        {
-            id: 'RX128',
-            symptoms: 'Cough and fever',
-            appointmentId: '123456',
-            doctorId: 'D1001',
-            doctorName: 'Dr. Smith',
-            prescription: 'Paracetamol, Cough Syrup',
-            time: '2024-04-11 11:00',
-        },
-        // ... more records
-    ];
+    const [prescriptions, setPrescriptions] = useState([]);
+
+    useEffect(() => {
+        const url = process.env.REACT_APP_API_PATH + "/patients/prescriptions";
+
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                const formatted = data.prescriptions.map(prescriptions => ({
+                    id: prescriptions._id,
+                    doctorId: prescriptions.appointment.doctor._id,
+                    doctorName: `${prescriptions.appointment.doctor.firstName} ${prescriptions.appointment.doctor.lastName}`,
+                    time: "",
+                    appointmentId: prescriptions.appointment.description,
+                    prescription: prescriptions.prescriptionDetails,
+                    symptoms: prescriptions.symptomDescription
+                }));
+                setPrescriptions(formatted);
+            })
+            .catch(error => console.error('Error fetching appointments:', error));
+    }, []);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);

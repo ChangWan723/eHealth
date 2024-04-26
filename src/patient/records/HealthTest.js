@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Container,
     Paper,
@@ -35,70 +35,34 @@ const getStatusStyle = (status) => {
 };
 
 const HealthTest = () => {
-    // Dummy data for health tests
-    const healthTests = [
-        {
-            id: 'HT001',
-            doctorId: 'D2',
-            doctorName: 'Dr. Johnson',
-            appointmentId: 'AP001',
-            testContent: 'Blood Work',
-            time: '2024-04-11 11:00',
-            status: 'Pending',
-            result: 'N/A',
-        },
-        {
-            id: 'HT002',
-            doctorId: 'D2',
-            doctorName: 'Dr. Johnson',
-            appointmentId: 'AP002',
-            testContent: 'X-ray',
-            time: '2024-04-11 11:00',
-            status: 'Completed',
-            result: 'No issues found',
-        },
-        {
-            id: 'HT003',
-            doctorId: 'D2',
-            doctorName: 'Dr. Johnson',
-            appointmentId: 'AP003',
-            testContent: 'MRI',
-            time: '2024-04-11 11:00',
-            status: 'Not Attended',
-            result: 'N/A',
-        },
-        {
-            id: 'HT004',
-            doctorId: 'D2',
-            doctorName: 'Dr. Johnson',
-            appointmentId: 'AP002',
-            testContent: 'X-ray',
-            time: '2024-04-11 11:00',
-            status: 'Completed',
-            result: 'No issues found ',
-        },
-        {
-            id: 'HT005',
-            doctorId: 'D2',
-            doctorName: 'Dr. Johnson',
-            appointmentId: 'AP002',
-            testContent: 'X-ray',
-            time: '2024-04-11 11:00',
-            status: 'Completed',
-            result: 'No issues found',
-        },
-        {
-            id: 'HT006',
-            doctorId: 'D2',
-            doctorName: 'Dr. Johnson',
-            appointmentId: 'AP002',
-            testContent: 'X-ray',
-            time: '2024-04-11 11:00',
-            status: 'Completed',
-            result: 'No issues found',
-        },
-        // More health test records...
-    ];
+    const [healthTests, setHealthTests] = useState([]);
+
+    useEffect(() => {
+        const url = process.env.REACT_APP_API_PATH + "/patients/tests";
+
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                const formatted = data.tests.map(test => ({
+                    id: test._id,
+                    doctorId: test.conductedBy._id,
+                    doctorName: `${test.conductedBy.firstName} ${test.conductedBy.lastName}`,
+                    appointmentId: test.appointment._id,
+                    testContent: test.testContent,
+                    time: test.testTime,
+                    status: test.status,
+                    result: test.processingInstruction
+                }));
+                setHealthTests(formatted);
+            })
+            .catch(error => console.error('Error fetching appointments:', error));
+    }, []);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);

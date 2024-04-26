@@ -47,12 +47,7 @@ const getStatusStyle = (status) => {
 };
 
 const Appointment = () => {
-
     const [appointmentRecords, setAppointmentRecords] = useState([]);
-
-
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
 
     useEffect(() => {
         const url = process.env.REACT_APP_API_PATH + "/patients/appointments";
@@ -80,6 +75,9 @@ const Appointment = () => {
             })
             .catch(error => console.error('Error fetching appointments:', error));
     }, []);
+
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Typography, Box,
     Table,
@@ -9,49 +9,6 @@ import {
     Link
 } from '@mui/material';
 import DashboardCard from 'src/components/shared/DashboardCard';
-
-const appointmentRecords = [
-    {
-        id: 'A1',
-        department: 'General',
-        doctorId: 'D1',
-        doctorName: 'Dr. Smith',
-        appointmentTime: '2024-04-10 14:00',
-        description: 'Routine check-up',
-        status: 'Pending',
-        result: 'N/A'
-    },
-    {
-        id: 'A2',
-        department: 'Pediatrics',
-        doctorId: 'D2',
-        doctorName: 'Dr. Johnson',
-        appointmentTime: '2024-04-11 11:00',
-        description: 'Regular vaccination',
-        status: 'Accepted',
-        result: 'Vaccination completed successfully'
-    },
-    {
-        id: 'A3',
-        department: 'Obstetrics and Gynecology',
-        doctorId: 'D3',
-        doctorName: 'Dr. Williams',
-        appointmentTime: '2024-04-15 09:30',
-        description: 'Consultation',
-        status: 'Rejected',
-        result: 'Appointment rescheduled'
-    },
-    {
-        id: 'A4',
-        department: 'Pediatrics',
-        doctorId: 'D2',
-        doctorName: 'Dr. Johnson',
-        appointmentTime: '2024-04-11 11:00',
-        description: 'Regular vaccination',
-        status: 'Accepted',
-        result: 'Vaccination completed successfully'
-    },
-];
 
 const getStatusStyle = (status) => {
     switch (status) {
@@ -79,6 +36,32 @@ const getStatusStyle = (status) => {
 };
 
 const RecentAppointment = () => {
+    const [appointmentRecords, setAppointmentRecords] = useState([]);
+
+    useEffect(() => {
+        const url = process.env.REACT_APP_API_PATH + "/patients/appointments";
+
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                const formattedAppointments = data.appointments.slice(0, 5).map(appointment => ({
+                    id: appointment._id,
+                    doctorId: appointment.doctor._id,
+                    doctorName: `${appointment.doctor.firstName} ${appointment.doctor.lastName}`,
+                    description: appointment.description,
+                    status: appointment.status,
+                }));
+                setAppointmentRecords(formattedAppointments);
+            })
+            .catch(error => console.error('Error fetching appointments:', error));
+    }, []);
+
     return (
         <DashboardCard title="Recent Appointment">
             <Box sx={{ overflow: 'auto', width: { xs: '380px', sm: 'auto' }}}>
@@ -90,11 +73,6 @@ const RecentAppointment = () => {
                 >
                     <TableHead>
                         <TableRow>
-                            <TableCell>
-                                <Typography variant="subtitle2" fontWeight={600}>
-                                    ID
-                                </Typography>
-                            </TableCell>
                             <TableCell>
                                 <Typography variant="subtitle2" fontWeight={600}>
                                     Doctor
@@ -115,12 +93,6 @@ const RecentAppointment = () => {
                     <TableBody>
                         {appointmentRecords.map((record) => (
                             <TableRow key={record.id}>
-                                <TableCell sx={{width: '60px'}}>
-                                    <Typography
-                                    >
-                                        {record.id}
-                                    </Typography>
-                                </TableCell>
                                 <TableCell>
                                     <Box
                                         sx={{
@@ -158,11 +130,6 @@ const RecentAppointment = () => {
                     </TableBody>
                 </Table>
             </Box>
-            <box>
-                <Link color="primary" href="/patient/records/appointment">
-                    See More Appointment
-                </Link>
-            </box>
         </DashboardCard>
     );
 };
