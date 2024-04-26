@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { alpha } from '@mui/material';
+import {alpha, styled} from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
@@ -7,6 +7,11 @@ import Typography from '@mui/material/Typography';
 import homeImage from 'src/assets/images/home/home.jpg';
 
 export default function Hero() {
+    const StyledE = styled('span')(({theme}) => ({
+        color: theme.palette.secondary.main,
+        fontStyle: 'italic',
+    }));
+
   return (
     <Box
       id="hero"
@@ -37,7 +42,8 @@ export default function Hero() {
               fontSize: 'clamp(3.5rem, 10vw, 4rem)',
             }}
           >
-              Care for&nbsp;
+              <StyledE>e</StyledE>
+              nthusiasm for&nbsp;
             <Typography
               component="span"
               variant="h1"
