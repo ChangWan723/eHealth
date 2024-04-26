@@ -19,6 +19,7 @@ const PendingAppointment = () => {
     const [open, setOpen] = useState(false);
     const [dialogContent, setDialogContent] = useState('');
     const [openDialog, setOpenDialog] = useState(false);
+    const [isVisible, setIsVisible ] = useState(false);
     const [dialogType, setDialogType] = useState('');
     const [selectedAppointment, setSelectedAppointment] = useState(null);
 
@@ -64,6 +65,7 @@ const PendingAppointment = () => {
                         description: appointment.description
                 }));
                 setPendingAppointments(formattedAppointments);
+                setIsVisible(true);
             })
             .catch(error => console.error('Error fetching appointments:', error));
 
@@ -241,19 +243,22 @@ const PendingAppointment = () => {
                     ))}
                 </Stack>
             ) : (
-                <Typography variant="subtitle1" sx={{
-                    fontSize: "25px",
-                    textAlign: 'center',
-                    padding: '16px',
-                    margin: '16px',
-                    border: '1px solid #d0d0d0',
-                    borderRadius: '4px',
-                    display: 'inline-block',
-                    bgcolor: 'background.paper',
-                    boxShadow: 1,
-                }}>
-                    There are currently no pending appointments.
-                </Typography>
+                <div>
+                    {isVisible &&
+                        <Typography variant="subtitle1" sx={{
+                            fontSize: "25px",
+                            textAlign: 'center',
+                            padding: '16px',
+                            margin: '16px',
+                            border: '1px solid #d0d0d0',
+                            borderRadius: '4px',
+                            display: 'inline-block',
+                            bgcolor: 'background.paper',
+                            boxShadow: 1,
+                        }}>
+                            There are currently no pending appointments.
+                        </Typography>}
+                </div>
             )}
             <Dialog open={openDialog} onClose={(event, reason) => {
                 if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {

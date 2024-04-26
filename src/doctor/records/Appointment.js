@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Table,
     TableBody,
@@ -49,63 +49,33 @@ const getStatusStyle = (status) => {
 };
 
 const Appointment = () => {
+    const [appointmentRecords, setAppointmentRecords] = useState([]);
 
-    const appointmentRecords = [
-        {
-            id: 'A1',
-            patientId: 'D1',
-            patientName: 'Smith',
-            appointmentTime: '2024-04-10 14:00',
-            description: 'Routine check-up',
-            status: 'Pending',
-            result: 'N/A'
-        },
-        {
-            id: 'A2',
-            patientId: 'D2',
-            patientName: 'Johnson',
-            appointmentTime: '2024-04-11 11:00',
-            description: 'Regular vaccination',
-            status: 'Accepted',
-            result: 'Vaccination Accepted successfully'
-        },
-        {
-            id: 'A3',
-            patientId: 'D3',
-            patientName: 'Williams',
-            appointmentTime: '2024-04-15 09:30',
-            description: 'Consultation',
-            status: 'Rejected',
-            result: 'Appointment rescheduled'
-        },
-        {
-            id: 'A4',
-            patientId: 'D2',
-            patientName: 'Johnson',
-            appointmentTime: '2024-04-11 11:00',
-            description: 'Regular vaccination',
-            status: 'Accepted',
-            result: 'Vaccination Accepted successfully'
-        },
-        {
-            id: 'A5',
-            patientId: 'D2',
-            patientName: 'Johnson',
-            appointmentTime: '2024-04-11 11:00',
-            description: 'Regular vaccination',
-            status: 'Accepted',
-            result: 'Vaccination Accepted successfully'
-        },
-        {
-            id: 'A6',
-            patientId: 'D2',
-            patientName: 'Johnson',
-            appointmentTime: '2024-04-11 11:00',
-            description: 'Regular vaccination',
-            status: 'Accepted',
-            result: 'Vaccination Accepted successfully'
-        },
-    ];
+    useEffect(() => {
+        const url = process.env.REACT_APP_API_PATH + "/doctors/appointments";
+
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                const formattedAppointments = data.appointments.map(appointment => ({
+                    id: appointment._id,
+                    patientId: appointment.patient._id,
+                    patientName: `${appointment.patient.firstName} ${appointment.patient.lastName}`,
+                    appointmentTime: appointment.appointmentTime,
+                    description: appointment.description,
+                    status: appointment.status,
+                    result: appointment.processingInstruction
+                }));
+                setAppointmentRecords(formattedAppointments);
+            })
+            .catch(error => console.error('Error fetching appointments:', error));
+    }, []);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -205,7 +175,7 @@ const Appointment = () => {
                                         onClick={() => handleScheduleHealthTest(row.id, row.patientId)}
                                         sx={{ mt: 2 }}
                                     >
-                                        Book Test
+                                        BookTest
                                     </Button>
                                 </TableCell>
                             </TableRow>

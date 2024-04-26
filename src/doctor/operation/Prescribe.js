@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import {Box, Button, Grid, Paper, TextField, Typography} from '@mui/material';
 import {useSearchParams} from 'react-router-dom';
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
 
 const Prescribe = () => {
     const [searchParams] = useSearchParams();
     const [formData, setFormData] = useState({
         appointmentId: searchParams.get('id'),
-        patientId: searchParams.get('patientId'),
         symptoms: '',
         prescription: '',
     });
     const [isFormValid, setIsFormValid] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [dialogContent, setDialogContent] = useState('');
 
     const checkFormValidity = () => {
-        const { appointmentId, patientId, symptoms, prescription } = formData;
-        return appointmentId && patientId && symptoms && prescription;
+        const { appointmentId, symptoms, prescription } = formData;
+        return appointmentId && symptoms && prescription;
     };
 
     const handleChange = (event) => {
@@ -31,7 +36,37 @@ const Prescribe = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(formData);
+
+        const url = process.env.REACT_APP_API_PATH + "/doctors/prescribe";
+        const requestBody = {
+            appointmentId: formData.appointmentId,
+            symptomDescription: formData.symptoms,
+            prescriptionDetails: formData.prescription
+        };
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            body: JSON.stringify(requestBody)
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                setDialogContent(data.message || data.error.message);
+                setOpen(true);
+            })
+            .catch(() => {
+                setDialogContent("An error occurred while issuing the prescription.");
+                setOpen(true);
+            });
+    };
+
+    const handleClose = () => {
+        setOpen(false);
     };
 
     return (
@@ -49,17 +84,6 @@ const Prescribe = () => {
                     name="appointmentId"
                     margin="normal"
                     value={formData.appointmentId}
-                    onChange={handleChange}
-                />
-                <TextField
-                    inputProps={{ maxLength: 50 }}
-                    required
-                    fullWidth
-                    id="patientId"
-                    label="Patient ID"
-                    name="patientId"
-                    margin="normal"
-                    value={formData.patientId}
                     onChange={handleChange}
                 />
                 <TextField
@@ -105,6 +129,15 @@ const Prescribe = () => {
                     Submit Prescription
                 </Button>
             </Box>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Prescription Status</DialogTitle>
+                <DialogContent>
+                    <Typography>{dialogContent}</Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Close</Button>
+                </DialogActions>
+            </Dialog>
         </Box>
     );
 };

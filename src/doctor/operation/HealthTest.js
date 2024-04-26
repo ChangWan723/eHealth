@@ -1,21 +1,27 @@
 import React, {useState} from 'react';
 import {Box, Button, Grid, Paper, TextField, Typography} from '@mui/material';
 import {useSearchParams} from 'react-router-dom';
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import Dialog from "@mui/material/Dialog";
 
 const HealthTest = () => {
     const [searchParams] = useSearchParams();
     const [formData, setFormData] = useState({
         appointmentId: searchParams.get('id'),
-        patientId: searchParams.get('patientId'),
+        doctorId:  localStorage.getItem('doctorId'),
         description: '',
         testTime: '',
     });
     const [isFormValid, setIsFormValid] = useState(false);
     const [error, setError] = useState('');
+    const [open, setOpen] = useState(false);
+    const [dialogContent, setDialogContent] = useState('');
 
     const checkFormValidity = () => {
-        const { appointmentId, patientId, description, testTime } = formData;
-        return appointmentId && patientId && description && testTime;
+        const { appointmentId, doctorId, description, testTime } = formData;
+        return appointmentId && doctorId && description && testTime;
     };
 
     const handleChange = (event) => {
@@ -38,9 +44,44 @@ const HealthTest = () => {
             setError('Please select a time between 08:00 and 20:00.');
             return;
         }
+
+        const url = process.env.REACT_APP_API_PATH + "/doctors/sheduleTest";
+        const requestBody = {
+            appointmentId: formData.appointmentId,
+            doctorId: formData.doctorId,
+            testTime: formData.testTime.replace('T', ' '),
+            testContent: formData.description,
+            prescriptionDetails: formData.prescription
+        };
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            body: JSON.stringify(requestBody)
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                setDialogContent(data.message || data.error.message);
+                setOpen(true);
+            })
+            .catch(() => {
+                setDialogContent("An error occurred while issuing the prescription.");
+                setOpen(true);
+            });
+
         setError('');
         console.log(formData);
     };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
 
     const minDateTime = new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().slice(0,16);
     const maxDateTime = new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000).toISOString().slice(0,16);
@@ -66,11 +107,11 @@ const HealthTest = () => {
                     inputProps={{ maxLength: 50 }}
                     required
                     fullWidth
-                    id="patientId"
+                    id="doctorId"
                     label="Patient ID"
-                    name="patientId"
+                    name="doctorId"
                     margin="normal"
-                    value={formData.patientId}
+                    value={formData.doctorId}
                     onChange={handleChange}
                 />
 
@@ -121,6 +162,15 @@ const HealthTest = () => {
                     Submit
                 </Button>
             </Box>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Health Test Status</DialogTitle>
+                <DialogContent>
+                    <Typography>{dialogContent}</Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Close</Button>
+                </DialogActions>
+            </Dialog>
         </Box>
     );
 };

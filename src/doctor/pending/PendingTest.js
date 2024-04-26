@@ -9,52 +9,18 @@ import {
     TextField,
     Typography,
     Card,
-    Grid,
     CardContent,
-    Stack, MenuItem
+    Stack,
 } from '@mui/material';
 import DialogContentText from "@mui/material/DialogContentText";
 
-const mockTests = [
-    {
-        id: 'HT001',
-        patientId: 'D2',
-        patientName: 'Johnson',
-        appointmentId: 'AP001',
-        testContent: 'Blood Work',
-        time: '2024-04-11 11:00',
-    },
-    {
-        id: 'HT002',
-        patientId: 'D2',
-        patientName: 'Johnson',
-        appointmentId: 'AP002',
-        testContent: 'X-ray',
-        time: '2024-04-11 11:00',
-    },
-    {
-        id: 'HT003',
-        patientId: 'D2',
-        patientName: 'Johnson',
-        appointmentId: 'AP003',
-        testContent: 'MRI',
-        time: '2024-04-11 11:00',
-    },
-    {
-        id: 'HT004',
-        patientId: 'D2',
-        patientName: 'Johnson',
-        appointmentId: 'AP002',
-        testContent: 'X-ray',
-        time: '2024-04-11 11:00',
-    },
-    // ... more appointments
-];
-
 const PendingTest = () => {
     const [openDialog, setOpenDialog] = useState(false);
+    const [isVisible, setIsVisible ] = useState(false);
     const [dialogType, setDialogType] = useState('');
     const [selectedTest, setSelectedTest] = useState(null);
+    const [open, setOpen] = useState(false);
+    const [dialogContent, setDialogContent] = useState('');
 
     const minDateTime = new Date(new Date().getTime() + 60 * 60 * 1000).toISOString().slice(0, 16);
     const maxDateTime = new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 16);
@@ -75,8 +41,83 @@ const PendingTest = () => {
 
     const handleDialogSubmit = () => {
         console.log(`Submitted for test ID: ${selectedTest.id}, Description: ${dialogDescription}`);
+
+        let requestBody;
+
+        if (dialogType === 'Complete') {
+            requestBody = {
+                testId: selectedTest.id,
+                complete: dialogDescription
+            };
+        } else if (dialogType === 'Not Attend') {
+            requestBody = {
+                testId: selectedTest.id,
+                notAttend: "true"
+            };
+        }
+
+        const url = process.env.REACT_APP_API_PATH + "/doctors/handleTest";
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            body: JSON.stringify(requestBody)
+        })
+            .then(response => {
+                if (response.status === 201 || response.status === 401 || response.status === 400 || response.status === 404 || response.status === 500) {
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong');
+                }
+            })
+            .then(data => {
+                setDialogContent(data.message || data.error.message);
+                setOpen(true);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                setDialogContent('An error occurred while processing the request.');
+                setOpen(true);
+            });
+
         setDialogDescription('');
         handleCloseDialog();
+    };
+
+    const [pendingTests, setPendingTests] = useState([]);
+
+    useEffect(() => {
+        const url = process.env.REACT_APP_API_PATH + "/doctors/tests/consultedByMe";
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                const formattedTests = data.tests
+                    .filter(test => test.status === "Pending")
+                    .map(test => ({
+                        id: test._id,
+                        appointmentId: test.appointment._id,
+                        patientId: test.appointment.patient._id,
+                        patientName: `${test.appointment.patient.firstName} ${test.appointment.patient.lastName}`,
+                        time: test.testTime,
+                        testContent: test.testContent
+                    }));
+                setPendingTests(formattedTests);
+                setIsVisible(true);
+            })
+            .catch(error => console.error('Error fetching appointments:', error));
+    }, []);
+
+    const handleClose = () => {
+        setOpen(false);
+        window.location.reload();
     };
 
     return (
@@ -86,9 +127,9 @@ const PendingTest = () => {
                     Pending Tests
                 </Typography>
             </Box>
-            {mockTests.length > 0 ? (
+            {pendingTests.length > 0 ? (
                 <Stack spacing={2}>
-                    {mockTests.map((test) => (
+                    {pendingTests.map((test) => (
                         <Card key={test.id} sx={{boxShadow: 5}}>
                             <CardContent sx={{p: 2}}>
                                 <Typography variant="h6" fontWeight="bold" gutterBottom>
@@ -125,19 +166,22 @@ const PendingTest = () => {
                     ))}
                 </Stack>
             ) : (
-                <Typography variant="subtitle1" sx={{
-                    fontSize: "25px",
-                    textAlign: 'center',
-                    padding: '16px',
-                    margin: '16px',
-                    border: '1px solid #d0d0d0',
-                    borderRadius: '4px',
-                    display: 'inline-block',
-                    bgcolor: 'background.paper',
-                    boxShadow: 1,
-                }}>
-                    There are currently no pending tests.
-                </Typography>
+                <div>
+                    {isVisible &&
+                        <Typography variant="subtitle1" sx={{
+                            fontSize: "25px",
+                            textAlign: 'center',
+                            padding: '16px',
+                            margin: '16px',
+                            border: '1px solid #d0d0d0',
+                            borderRadius: '4px',
+                            display: 'inline-block',
+                            bgcolor: 'background.paper',
+                            boxShadow: 1,
+                        }}>
+                            There are currently no pending tests.
+                        </Typography>}
+                </div>
             )}
             <Dialog open={openDialog} onClose={(event, reason) => {
                 if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
@@ -167,6 +211,15 @@ const PendingTest = () => {
                 <DialogActions>
                     <Button onClick={handleCloseDialog}>Cancel</Button>
                     <Button onClick={handleDialogSubmit}>Submit</Button>
+                </DialogActions>
+            </Dialog>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Health Test Status</DialogTitle>
+                <DialogContent>
+                    <Typography>{dialogContent}</Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Close</Button>
                 </DialogActions>
             </Dialog>
         </Box>

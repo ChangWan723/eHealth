@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Paper,
     Table,
@@ -22,65 +22,33 @@ const HeaderCell = styled(TableCell)(({theme}) => ({
 }));
 
 const Prescription = () => {
-    // Dummy data for prescription history
-    const prescriptions = [
-        // Add more records as needed for pagination
-        {
-            id: 'RX123',
-            symptoms: 'Cough and fever',
-            appointmentId: '123456',
-            patientId: 'D1001',
-            patientName: 'Smith',
-            prescription: 'Paracetamol, Cough Syrup',
-            time: '2024-04-11 11:00',
-        },
-        {
-            id: 'RX124',
-            symptoms: 'Cough and fever',
-            appointmentId: '123456',
-            patientId: 'D1001',
-            patientName: 'Smith',
-            prescription: 'Paracetamol, Cough Syrup',
-            time: '2024-04-11 11:00',
-        },
-        {
-            id: 'RX125',
-            symptoms: 'Cough and fever',
-            appointmentId: '123456',
-            patientId: 'D1001',
-            patientName: 'Smith',
-            prescription: 'Paracetamol, Cough Syrup',
-            time: '2024-04-11 11:00',
-        },
-        {
-            id: 'RX126',
-            symptoms: 'Cough and fever',
-            appointmentId: '123456',
-            patientId: 'D1001',
-            patientName: 'Smith',
-            prescription: 'Paracetamol, Cough Syrup',
-            time: '2024-04-11 11:00',
-        },
-        {
-            id: 'RX127',
-            symptoms: 'Cough and fever',
-            appointmentId: '123456',
-            patientId: 'D1001',
-            patientName: 'Smith',
-            prescription: 'Paracetamol, Cough Syrup',
-            time: '2024-04-11 11:00',
-        },
-        {
-            id: 'RX128',
-            symptoms: 'Cough and fever',
-            appointmentId: '123456',
-            patientId: 'D1001',
-            patientName: 'Smith',
-            prescription: 'Paracetamol, Cough Syrup',
-            time: '2024-04-11 11:00',
-        },
-        // ... more records
-    ];
+    const [presRecords, setPresRecords] = useState([]);
+
+    useEffect(() => {
+        const url = process.env.REACT_APP_API_PATH + "/doctors/prescriptions";
+
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                const formatted = data.prescriptions.map(prescriptions => ({
+                    id: prescriptions._id,
+                    patientId: prescriptions.appointment.patient._id,
+                    patientName: `${prescriptions.appointment.patient.firstName} ${prescriptions.appointment.patient.lastName}`,
+                    time: "",
+                    appointmentId: prescriptions.appointment.description,
+                    prescription: prescriptions.prescriptionDetails,
+                    symptoms: prescriptions.symptomDescription
+                }));
+                setPresRecords(formatted);
+            })
+            .catch(error => console.error('Error fetching appointments:', error));
+    }, []);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -95,7 +63,7 @@ const Prescription = () => {
     };
 
     // Only show the rows for the current page
-    const currentRows = prescriptions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+    const currentRows = presRecords.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
     return (
         <Container maxWidth="md" sx={{mt: 4}}>
@@ -154,7 +122,7 @@ const Prescription = () => {
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="box"
-                count={prescriptions.length}
+                count={presRecords.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
