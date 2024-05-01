@@ -26,6 +26,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import {useNavigate} from "react-router-dom";
 
 const Account = () => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -38,6 +39,10 @@ const Account = () => {
     const [deleteRegister, setDeleteRegister] = useState('');
     const [accountErrors, setAccountErrors] = useState('');
     const [apiError, setApiError] = useState('');
+    const [open, setOpen] = useState(false);
+    const [dialogContent, setDialogContent] = useState('');
+    const navigate = useNavigate();
+    const [deleteInfo, setDeleteInfo] = useState(false);
 
     const [accountInfo, setAccountInfo] = useState({
         patientId: '',
@@ -188,9 +193,49 @@ const Account = () => {
     function deleteAccount() {
         setDeleteRegister('');
         setCancelDialog(false);
+        setProgress(true);
 
-
+        const url = process.env.REACT_APP_API_PATH + "/patients/closure";
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
+            .then(response => {
+                if (response.status === 201 || response.status === 401 || response.status === 404 || response.status === 500) {
+                    if (response.status === 201) {
+                        setDeleteInfo(true);
+                    }
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong');
+                }
+            })
+            .then(data => {
+                if (data.message) {
+                    setDialogContent(data.message);
+                } else {
+                    setDialogContent(data.error.message);
+                }
+                setOpen(true);
+                setProgress(true);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                setDialogContent('An error occurred while processing the request.');
+                setOpen(true);
+                setProgress(true);
+            });
     }
+
+    const handleDiaClose = () => {
+        setOpen(false);
+        if (deleteInfo) {
+            navigate('/home');
+        }
+    };
 
     return (
         <Container maxWidth="sm" sx={{mt: 4}}>
@@ -433,6 +478,15 @@ const Account = () => {
                     </DialogActions>
                 </Dialog>
             </React.Fragment>
+            <Dialog open={open} onClose={handleDiaClose}>
+                <DialogTitle>Appointment Status</DialogTitle>
+                <DialogContent>
+                    <Typography>{dialogContent}</Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleDiaClose}>Close</Button>
+                </DialogActions>
+            </Dialog>
         </Container>
     );
 };

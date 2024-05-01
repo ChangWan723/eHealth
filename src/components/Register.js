@@ -66,7 +66,7 @@ const Register = () => {
     const errorApiMessages = new Map([
         ['serviceUnavailable', 'Service is currently unavailable. Please try again later.'],
         ['InputsError', 'Some of the information you input may be out of specification.'],
-        ['accountExists', 'Account already exists. Please login directly.'],
+        ['accountExists', 'Account already exists.'],
         ['unknownError', 'An unknown error occurred. ']
     ]);
 
