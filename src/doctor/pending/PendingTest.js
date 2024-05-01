@@ -40,8 +40,6 @@ const PendingTest = () => {
     };
 
     const handleDialogSubmit = () => {
-        console.log(`Submitted for test ID: ${selectedTest.id}, Description: ${dialogDescription}`);
-
         let requestBody;
 
         if (dialogType === 'Complete') {

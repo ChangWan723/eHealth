@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import { Container, Typography, Box, Button, FormControl, InputLabel, Input, FormHelperText } from '@mui/material';
+import Dialog from "@mui/material/Dialog";
+import CircularProgress from "@mui/material/CircularProgress";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
 
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9._#]{8,}$/;
 
@@ -11,6 +17,13 @@ const ResetPwd = () => {
     });
     const [showError, setShowError] = useState(false);
     const [passwordError, setPasswordError] = useState('');
+    const [openProgress, setProgress] = useState(false);
+    const [responseMessage, setResponseMessage] = useState('');
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+    };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -38,9 +51,40 @@ const ResetPwd = () => {
             return;
         }
 
-        // Proceed with the password reset logic here
-        console.log('Password reset logic goes here.');
-        // Optionally, reset form state here
+        const body = {
+            email: localStorage.getItem('doctorEmail'),
+            oldPassword: passwords.currentPassword,
+            newPassword: passwords.newPassword
+        };
+
+        setProgress(true);
+        const url = process.env.REACT_APP_API_PATH + "/users/resetPassword";
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        })
+            .then(response => {
+                if (response.status === 201 || response.status === 401 || response.status === 404 || response.status === 500) {
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong');
+                }
+            })
+            .then(data => {
+                if (data.message) {
+                    setResponseMessage(data.message);
+                } else if (data.error) {
+                    setResponseMessage(data.error.message);
+                }
+                setProgress(false);
+                setOpenDialog(true);
+            })
+            .catch(error => {
+                setResponseMessage(error.message);
+                setProgress(false);
+                setOpenDialog(true);
+            });
     };
 
     const isDisabled = !passwords.currentPassword || !passwords.newPassword || !passwords.repeatNewPassword || showError || passwordError;
@@ -75,6 +119,30 @@ const ResetPwd = () => {
                     Reset Password
                 </Button>
             </Box>
+            <Dialog open={openProgress}>
+                <div style={{
+                    height: "60px",
+                    width: "60px",
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <CircularProgress/>
+                </div>
+            </Dialog>
+            <Dialog open={openDialog} onClose={handleCloseDialog}>
+                <DialogTitle>{"Response"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        {responseMessage}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseDialog} autoFocus>
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Container>
     );
 };

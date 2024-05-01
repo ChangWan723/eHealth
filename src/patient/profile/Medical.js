@@ -9,7 +9,7 @@ import {
     Checkbox,
     FormGroup,
     Box,
-    Button, FormLabel, FormControl
+    Button, FormLabel, FormControl, Dialog, DialogTitle, DialogContent, DialogActions
 } from '@mui/material';
 
 const Medical = () => {
@@ -25,38 +25,62 @@ const Medical = () => {
     // State for form fields that can be edited
     const [medicalHistory, setMedicalHistory] = useState({
         symptoms: 'N/A',
-        currentMedication: 'N/A',
+        currentMedications: 'N/A',
         medicationAllergies: 'N/A',
         testHistory: 'N/A',
-        tobaccoUse: 'yes',
+        tobaccoUse: 'no',
         illegalDrugUse: 'no',
-        alcoholConsumption: 'Occasionally',
-        otherNotes: '',
+        alcoholConsumption: 'Never',
+        otherDescription: 'N/A',
     });
 
-    useEffect(() => {
-        const url = process.env.REACT_APP_API_PATH + "/patients/info?patientId=" + localStorage.getItem('patientId');
+    const [open, setOpen] = useState(false);
+    const [dialogContent, setDialogContent] = useState('');
 
-        fetch(url, {
+    useEffect(() => {
+        const medicalUrl = process.env.REACT_APP_API_PATH + "/patients/medicalHistory";
+
+        fetch(medicalUrl, {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data.count > 0) {
-                    const patient = data.patients[0];
-                    setPatientData({
-                        patientId: patient._id,
-                        firstName: patient.firstName,
-                        lastName: patient.lastName,
-                        email: patient.email,
-                        gender: patient.gender,
-                    });
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
                 }
+                throw new Error('Network response was not ok.');
             })
-            .catch(error => console.error('Error fetching patient info:', error));
+            .then(data => {
+                const history = data.medicalHistory;
+                setPatientData({
+                    patientId: history.patient._id,
+                    firstName: history.patient.firstName,
+                    lastName: history.patient.lastName,
+                    email: history.patient.email,
+                    gender: history.patient.gender,
+                });
+
+                setMedicalHistory(prevState => ({
+                    symptoms: history.symptoms || prevState.symptoms,
+                    currentMedications: history.currentMedications || prevState.currentMedications,
+                    medicationAllergies: history.medicationAllergies || prevState.medicationAllergies,
+                    tobaccoUse: history.tobaccoUse || prevState.tobaccoUse,
+                    testHistory: history.healthTestResults
+                        .filter(test => test.status === 'Pending') // TODO
+                        .map(test => `${test.testContent} on ${test.testTime}, Result: ${test.result}`)
+                        .join('\n') || prevState.testHistory,
+                    illegalDrugUse: history.illegalDrugUse || prevState.illegalDrugUse,
+                    alcoholConsumption: history.alcoholConsumption || prevState.alcoholConsumption,
+                    otherDescription: history.otherDescription || prevState.otherDescription,
+                }));
+
+
+            })
+            .catch(error => {
+                console.error('Failed to fetch medical history:', error);
+            });
     }, []);
 
     // Handle changes in the editable form fields
@@ -78,32 +102,40 @@ const Medical = () => {
 
     // Placeholder function to simulate updating data
     const handleUpdate = async () => {
-        const dataToSend = {
-            ...medicalHistory,
-            patientId: patientData.patientId, // Add the patientId to the medicalHistory object
-        };
+        const url = process.env.REACT_APP_API_PATH + "/patients/medicalHistory";
 
-        try {
-            const response = await fetch('/users/history/medical', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // Include other headers such as authentication tokens if necessary
-                },
-                body: JSON.stringify(dataToSend),
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            body: JSON.stringify(medicalHistory)
+        })
+            .then(response => {
+                if (response.status === 201 || response.status === 401 || response.status === 404 || response.status === 500) {
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong');
+                }
+            })
+            .then(data => {
+                if (data.message) {
+                    setDialogContent(data.message);
+                } else {
+                    setDialogContent(data.error);
+                }
+                setOpen(true);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                setDialogContent('An error occurred while processing the request.');
+                setOpen(true);
             });
+    };
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            // Handle the successful response here
-            const responseData = await response.json();
-            console.log('Successfully updated medical history:', responseData);
-        } catch (error) {
-            // Handle the error here
-            console.error('There was a problem with the fetch operation:', error);
-        }
+    const handleClose = () => {
+        setOpen(false);
     };
 
     return (
@@ -164,6 +196,22 @@ const Medical = () => {
                 variant="filled"
             />
 
+            <TextField
+                label="History of Health Test Results"
+                name="testHistory"
+                value={medicalHistory.testHistory}
+                onChange={handleInputChange}
+                margin="normal"
+                fullWidth
+                multiline
+                inputProps={{ maxLength: 1000 }}
+                rows={3}
+                InputProps={{
+                    readOnly: true,
+                }}
+                variant="filled"
+            />
+
             {/* Editable fields */}
             <TextField
                 label="Current or past symptoms"
@@ -178,8 +226,8 @@ const Medical = () => {
             />
             <TextField
                 label="Medications currently being taken"
-                name="currentMedication"
-                value={medicalHistory.currentMedication}
+                name="currentMedications"
+                value={medicalHistory.currentMedications}
                 onChange={handleInputChange}
                 margin="normal"
                 fullWidth
@@ -200,21 +248,9 @@ const Medical = () => {
             />
 
             <TextField
-                label="History of Health Test Results"
-                name="testHistory"
-                value={medicalHistory.testHistory}
-                onChange={handleInputChange}
-                margin="normal"
-                fullWidth
-                multiline
-                inputProps={{ maxLength: 1000 }}
-                rows={3}
-            />
-
-            <TextField
                 label="Other description"
-                name="otherNotes"
-                value={medicalHistory.otherNotes}
+                name="otherDescription"
+                value={medicalHistory.otherDescription}
                 onChange={handleInputChange}
                 margin="normal"
                 fullWidth
@@ -268,6 +304,15 @@ const Medical = () => {
                     Update
                 </Button>
             </Box>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Appointment Status</DialogTitle>
+                <DialogContent>
+                    <Typography>{dialogContent}</Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Close</Button>
+                </DialogActions>
+            </Dialog>
         </Container>
     );
 };

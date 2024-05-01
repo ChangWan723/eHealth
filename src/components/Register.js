@@ -314,12 +314,6 @@ const Register = () => {
                                 error={!!errors.repassword}
                             />
                         </Grid>
-                        <Grid item xs={12}>
-                            <FormControlLabel
-                                control={<Checkbox value="allowExtraEmails" color="primary"/>}
-                                label="I want to receive inspiration, marketing promotions and updates via email."
-                            />
-                        </Grid>
                     </Grid>
                     <Button
                         type="submit"
@@ -373,7 +367,7 @@ const Register = () => {
                             </DialogTitle>
                             <DialogContent>
                                 <DialogContentText id="alert-dialog-description">
-                                    A registration request has been successfully sent for this account. However, your registration needs to be approved by an administrator before you can sign in. Please wait patiently. Thank you!
+                                    A registration request has been successfully sent for this account. However, <strong>your registration needs to be approved by an administrator before you can sign in</strong>. Please wait patiently. Thank you!
                                 </DialogContentText>
                             </DialogContent>
                             <DialogActions>

@@ -130,10 +130,13 @@ const Account = () => {
             Object.entries(accountInfo).map(([key, value]) => [key, String(value)])
         );
 
-        const url = process.env.REACT_APP_API_PATH + "/users/info";
+        const url = process.env.REACT_APP_API_PATH + "/patients/profile";
         fetch(url, {
             method: "PUT",
-            headers: {"Content-Type": "application/json"},
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
             body: JSON.stringify(stringValues)
         }).then(response => {
             setProgress(false);
@@ -141,7 +144,7 @@ const Account = () => {
                 setSuccessDialog(true);
                 return;
             }
-            if (response.status === 400) {
+            if (response.status === 401) {
                 response.json().then(data => {
                     setApiError(errorApiMessages.get('InputsError') + '\n\n' + data.message);
                 }).catch(error => {

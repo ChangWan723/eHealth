@@ -86,7 +86,7 @@ const Router = [
         element: <FullLayout/>,
         children: [
             {path: '/admin', exact: true, element: <Approval/>},
-            {path: '/admin/resetpwd', exact: true, element: <ResetPwd/>},
+            {path: '/admin/resetpwd', exact: true, element: <AdmResetPwd/>},
             {path: '*', element: <Navigate to="/patient/404"/>},
         ],
     }

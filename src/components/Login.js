@@ -36,7 +36,7 @@ const Login = () => {
 
     const errorApiMessages = new Map([
         ['serviceUnavailable', 'Service is currently unavailable. Please try again later.'],
-        ['infoIncorrect', 'Incorrect account or password.'],
+        ['infoIncorrect', 'Incorrect account or password. Or the account is pending approval.'],
         ['unknownError', 'An unknown error occurred. Please contact the administrator.']
     ]);
 
@@ -95,7 +95,7 @@ const Login = () => {
                         navigate('/doctor');
                     } else if (userType === 'Admin') {
                         localStorage.setItem('adminEmail', values.email);
-                        localStorage.setItem('userType', 'doctor');
+                        localStorage.setItem('userType', 'admin');
                         localStorage.setItem('adminId', id);
                         localStorage.setItem('adminName', name);
                         localStorage.setItem('token', token);
