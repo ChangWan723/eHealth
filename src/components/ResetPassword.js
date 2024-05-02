@@ -1,7 +1,18 @@
 import React, {useState} from 'react';
-import {Box, Button, TextField, Typography, Container} from '@mui/material';
+import {
+    Box,
+    Button,
+    TextField,
+    Typography,
+    Container,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions
+} from '@mui/material';
 import {IconHeartbeat} from "@tabler/icons-react";
 import Avatar from "@mui/material/Avatar";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const ResetPassword = () => {
     const [email, setEmail] = useState('');
@@ -12,6 +23,9 @@ const ResetPassword = () => {
     const [error, setError] = useState('');
     const [reError, setReError] = useState('');
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9._#]{8,}$/;
+    const [open, setOpen] = useState(false);
+    const [dialogContent, setDialogContent] = useState('');
+    const [openProgress, setProgress] = useState(false);
 
     const handleEmailChange = (event) => {
         const value = event.target.value;
@@ -20,14 +34,44 @@ const ResetPassword = () => {
     };
 
     const handleSendCode = () => {
-        // Example API call for sending code
-        fetch('/users/sendcode', {
+        const userEmail={
+            email: email,
+        };
+
+        const url = process.env.REACT_APP_API_PATH + "/users/sendVerificationCode";
+        setProgress(true);
+        fetch(url, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({email})
-        }).then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            body: JSON.stringify(userEmail)
+        })
+            .then(response => {
+                if (response.status === 201 || response.status === 401 || response.status === 404 || response.status === 429) {
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong');
+                }
+            })
+            .then(data => {
+                if (data.message) {
+                    setDialogContent(data.message);
+                }
+                setProgress(false);
+                setOpen(true);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                setDialogContent('An error occurred while processing the request.');
+                setProgress(false);
+                setOpen(true);
+            });
+    };
+
+    const handleClose = () => {
+        setOpen(false);
     };
 
     const handleSubmit = (event) => {
@@ -49,7 +93,39 @@ const ResetPassword = () => {
         }
         setReError('');
 
-        console.log('Code:', code, 'New Password:', password, 'Email:', email);
+        const body = {
+            email: email,
+            code: code,
+            newPassword: password
+        };
+
+        setProgress(true);
+        const url = process.env.REACT_APP_API_PATH + "/users/resetPassword";
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        })
+            .then(response => {
+                if (response.status === 201 || response.status === 401 || response.status === 404 || response.status === 400) {
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong');
+                }
+            })
+            .then(data => {
+                if (data.message) {
+                    setDialogContent(data.message);
+                }
+                setProgress(false);
+                setOpen(true);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                setDialogContent('An error occurred while processing the request.');
+                setProgress(false);
+                setOpen(true);
+            });
     };
 
     const canSubmit = code.trim() !== '' && password.trim() && rePassword.trim() && isEmailValid;
@@ -138,6 +214,26 @@ const ResetPassword = () => {
                     </Button>
                 </Box>
             </Box>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Status</DialogTitle>
+                <DialogContent>
+                    <Typography>{dialogContent}</Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Close</Button>
+                </DialogActions>
+            </Dialog>
+            <Dialog open={openProgress}>
+                <div style={{
+                    height: "60px",
+                    width: "60px",
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <CircularProgress/>
+                </div>
+            </Dialog>
         </Container>
     );
 };

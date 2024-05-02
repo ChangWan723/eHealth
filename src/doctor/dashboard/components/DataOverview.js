@@ -11,23 +11,22 @@ const DataOverview = () => {
     };
 
     // Prepare mock data for different years
-    const dataByYear = {
+    const [dataByYear, setDataByYear] = useState({
         '2024': {
-            appointments: [5, 2, 3],
-            healthTests: [5, 3, 6],
-            prescription: [5, 3, 6],
+            appointments: [],
+            healthTests: [],
+            prescription: [],
         },
         '2023': {
-            appointments: [3, 2, 1, 4, 5, 2, 1, 4, 5, 2, 3, 4],
-            healthTests: [2, 3, 1, 5, 3, 2, 3, 1, 2, 3, 4, 5],
-            prescription: [3, 1, 4, 2, 1, 5, 3, 4, 2, 1, 2, 3],
+            appointments: [],
+            healthTests: [],
+            prescription: [],
         },
         '2022': {
-            appointments: [1, 4, 5, 2, 3, 4, 5, 3, 2, 1, 4, 5],
-            healthTests: [3, 1, 4, 2, 1, 5, 3, 4, 2, 1, 2, 3],
-            prescription: [2, 3, 1, 5, 3, 2, 3, 1, 2, 3, 4, 5],
-        },
-    };
+            appointments: [],
+            healthTests: [],
+            prescription: [],
+        },});
 
     // Dynamic chart options remain unchanged
     const optionscolumnchart = {
@@ -100,7 +99,31 @@ const DataOverview = () => {
                 data: newData.prescription,
             },
         ]);
-    }, [year]); // This effect depends on the year state
+    }, [year, dataByYear]); // This effect depends on the year state
+
+    useEffect(() => {
+        const url = process.env.REACT_APP_API_PATH + "/doctors/annualData";
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        }).then(response => response.json())
+            .then(result => {
+                const formattedData = {};
+                for (const year in result.dataByYear) {
+                    formattedData[year] = {
+                        appointments: result.dataByYear[year].appointments,
+                        healthTests: result.dataByYear[year].healthTests,
+                        prescription: result.dataByYear[year].prescription
+                    };
+                }
+
+                setDataByYear(formattedData);
+            })
+            .catch(error => console.error('Error fetching patient info:', error));
+    }, []);
 
     return (
         <DashboardCard title="Annual Data Overview" action={

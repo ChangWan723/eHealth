@@ -89,7 +89,7 @@ const HealthTest = () => {
     return (
         <Box sx={{ maxWidth: 500, mx: 'auto', mt: 4 }}>
             <Typography variant="h6" gutterBottom>
-                Book a Health Test for Patients
+                Book a Health Test
             </Typography>
             <Box component="form" noValidate autoComplete="off" onSubmit={handleSubmit}>
                 <TextField
@@ -108,7 +108,7 @@ const HealthTest = () => {
                     required
                     fullWidth
                     id="doctorId"
-                    label="Patient ID"
+                    label="Doctor ID"
                     name="doctorId"
                     margin="normal"
                     value={formData.doctorId}
@@ -148,7 +148,7 @@ const HealthTest = () => {
                 <Grid item xs={12}>
                     <Paper style={{ padding: '20px', backgroundColor: '#f5f5f5' }}>
                         <Typography variant="body2">
-                            Note: Please double check the Related Appointment ID, Patient ID before submitting. If the above information is incorrect, the test may be scheduled for the wrong patient.
+                            Note: Please double check the Related Appointment ID, Doctor ID before submitting. If the above information is incorrect, the test may be scheduled for the wrong person.
                         </Typography>
                     </Paper>
                 </Grid>

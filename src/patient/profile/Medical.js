@@ -13,7 +13,6 @@ import {
 } from '@mui/material';
 
 const Medical = () => {
-    // Assume this state is fetched from an API
     const [patientData, setPatientData] = useState({
         patientId: '',
         firstName: '',
@@ -22,7 +21,6 @@ const Medical = () => {
         gender: '',
     });
 
-    // State for form fields that can be edited
     const [medicalHistory, setMedicalHistory] = useState({
         symptoms: 'N/A',
         currentMedications: 'N/A',
@@ -68,7 +66,7 @@ const Medical = () => {
                     medicationAllergies: history.medicationAllergies || prevState.medicationAllergies,
                     tobaccoUse: history.tobaccoUse || prevState.tobaccoUse,
                     testHistory: history.healthTestResults
-                        .filter(test => test.status === 'Pending') // TODO
+                        .filter(test => test.status === 'Completed')
                         .map(test => `${test.testContent} on ${test.testTime}, Result: ${test.result}`)
                         .join('\n') || prevState.testHistory,
                     illegalDrugUse: history.illegalDrugUse || prevState.illegalDrugUse,
@@ -83,7 +81,6 @@ const Medical = () => {
             });
     }, []);
 
-    // Handle changes in the editable form fields
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setMedicalHistory(prevState => ({
@@ -100,7 +97,6 @@ const Medical = () => {
         }));
     };
 
-    // Placeholder function to simulate updating data
     const handleUpdate = async () => {
         const url = process.env.REACT_APP_API_PATH + "/patients/medicalHistory";
 
@@ -122,8 +118,6 @@ const Medical = () => {
             .then(data => {
                 if (data.message) {
                     setDialogContent(data.message);
-                } else {
-                    setDialogContent(data.error);
                 }
                 setOpen(true);
             })
@@ -305,7 +299,7 @@ const Medical = () => {
                 </Button>
             </Box>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Appointment Status</DialogTitle>
+                <DialogTitle>Status</DialogTitle>
                 <DialogContent>
                     <Typography>{dialogContent}</Typography>
                 </DialogContent>

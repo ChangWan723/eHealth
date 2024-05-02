@@ -87,7 +87,7 @@ const PendingTest = () => {
     const [pendingTests, setPendingTests] = useState([]);
 
     useEffect(() => {
-        const url = process.env.REACT_APP_API_PATH + "/doctors/tests/consultedByMe";
+        const url = process.env.REACT_APP_API_PATH + "/doctors/tests/conductedByMe";
 
         fetch(url, {
             method: 'GET',

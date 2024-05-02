@@ -152,8 +152,6 @@ const PendingAppointment = () => {
             .then(data => {
                 if (data.message) {
                     setDialogContent(data.message);
-                } else {
-                    setDialogContent(data.error);
                 }
                 setOpen(true);
             })

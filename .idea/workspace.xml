@@ -6,6 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="9d754114-e960-4865-a4a0-716461d952cb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ResetPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ResetPassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/doctor/dashboard/components/DataOverview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/dashboard/components/DataOverview.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/doctor/dashboard/components/RecentHealthTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/dashboard/components/RecentHealthTest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/doctor/operation/HealthTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/operation/HealthTest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/doctor/operation/MedicalHistory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/operation/MedicalHistory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/doctor/pending/PendingAppointment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/pending/PendingAppointment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/doctor/pending/PendingTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/pending/PendingTest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/doctor/records/HealthTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/records/HealthTest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/patient/profile/Medical.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/patient/profile/Medical.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,6 +124,9 @@
       <workItem from="1714175848942" duration="26000" />
       <workItem from="1714395668403" duration="1747000" />
       <workItem from="1714438897488" duration="207000" />
+      <workItem from="1714583607661" duration="17224000" />
+      <workItem from="1714601364562" duration="2344000" />
+      <workItem from="1714657715997" duration="6574000" />
     </task>
     <servers />
   </component>

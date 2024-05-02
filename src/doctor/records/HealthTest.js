@@ -14,7 +14,6 @@ import {
 } from '@mui/material';
 import {styled} from '@mui/material/styles';
 
-// Customized TableCell for the header
 const HeaderCell = styled(TableCell)(({theme}) => ({
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.common.white,
@@ -38,7 +37,7 @@ const HealthTest = () => {
     const [healthTests, setHealthTests] = useState([]);
 
     useEffect(() => {
-        const url = process.env.REACT_APP_API_PATH + "/doctors/tests/consultedByMe";
+        const url = process.env.REACT_APP_API_PATH + "/doctors/tests/conductedByMe";
 
 
         fetch(url, {
