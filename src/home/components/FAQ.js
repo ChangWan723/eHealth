@@ -155,6 +155,29 @@ export default function FAQ() {
             </Typography>
           </AccordionDetails>
         </Accordion>
+        <Accordion
+            expanded={expanded === 'panel6'}
+            onChange={handleChange('panel6')}
+        >
+          <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel6d-content"
+              id="panel6d-header"
+          >
+            <Typography component="h3" variant="subtitle2">
+              Do I need to be approved after registration?
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography
+                variant="body2"
+                gutterBottom
+                sx={{ maxWidth: { sm: '100%', md: '70%' } }}
+            >
+              Yes. Your account registration needs to be approved by an administrator and you can log in only after successful approval. If your approval is denied, you can initiate registration again.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
       </Box>
     </Container>
   );

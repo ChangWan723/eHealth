@@ -7,11 +7,6 @@ import Typography from '@mui/material/Typography';
 import homeImage from 'src/assets/images/home/home.jpg';
 
 export default function Hero() {
-    const StyledE = styled('span')(({theme}) => ({
-        color: theme.palette.secondary.main,
-        fontStyle: 'italic',
-    }));
-
   return (
     <Box
       id="hero"
@@ -42,8 +37,7 @@ export default function Hero() {
               fontSize: 'clamp(3.5rem, 10vw, 4rem)',
             }}
           >
-              <StyledE>e</StyledE>
-              nthusiasm for&nbsp;
+              enthusiasm for&nbsp;
             <Typography
               component="span"
               variant="h1"
