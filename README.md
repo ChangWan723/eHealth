@@ -1,7 +1,9 @@
 # Health Practice Web App
 
 ## Introduction
-This project was one of my coursework assignments at university. The aim of this project is to design and build a web application for capturing and maintaining electronic health records for a network of health practices. The application is built using React and relevant JavaScript-based frameworks and is intended to help patients, doctors, and practitioners access relevant information and services offered by the practices. This is just the front-end code for this project. The back-end code is in another code base.
+This project was one of my coursework assignments at university. The aim of this project is to design and build a web application for capturing and maintaining electronic health records for a network of health practices. The application is built using React and relevant JavaScript-based frameworks and is intended to help patients, doctors, and practitioners access relevant information and services offered by the practices. 
+
+This is just the front-end code for this project. The back-end code is in another code base. Due to the time constraints of the coursework, the project is not good enough. And there are still a lot of things that need to be improved, for example, the code is not clean enough.
 
 ## Features
 - **Patient Registration:** New patients can self-register by providing their name, date of birth, address, email, and password.

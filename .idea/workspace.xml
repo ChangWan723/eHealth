@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d754114-e960-4865-a4a0-716461d952cb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/doctor/dashboard/components/DataOverview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/doctor/dashboard/components/DataOverview.js" afterDir="false" />
-    </list>
+    <list default="true" id="9d754114-e960-4865-a4a0-716461d952cb" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -128,6 +125,7 @@
       <workItem from="1715543048713" duration="267000" />
       <workItem from="1715613797928" duration="736000" />
       <workItem from="1715994400555" duration="24000" />
+      <workItem from="1720379158528" duration="315000" />
     </task>
     <servers />
   </component>
