@@ -4,7 +4,7 @@ import DashboardCard from 'src/components/shared/DashboardCard';
 import Chart from 'react-apexcharts';
 
 const DataOverview = () => {
-    const [year, setYear] = useState('2023');
+    const [year, setYear] = useState('2024');
 
     const handleChange = (event) => {
         setYear(event.target.value);
